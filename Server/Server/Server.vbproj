@@ -1,0 +1,205 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{665CB5D8-3EDD-4F43-A300-E6A4944B7962}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <StartupObject>Server.My.MyApplication</StartupObject>
+    <RootNamespace>Server</RootNamespace>
+    <AssemblyName>Server</AssemblyName>
+    <FileAlignment>512</FileAlignment>
+    <MyType>WindowsForms</MyType>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <DefineDebug>true</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <OutputPath>..\..\Debug\</OutputPath>
+    <DocumentationFile>Server.xml</DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <DefineDebug>false</DefineDebug>
+    <DefineTrace>true</DefineTrace>
+    <Optimize>true</Optimize>
+    <OutputPath>..\..\Release\</OutputPath>
+    <DocumentationFile>Server.xml</DocumentationFile>
+    <NoWarn>42016,41999,42017,42018,42019,42032,42036,42020,42021,42022</NoWarn>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionExplicit>On</OptionExplicit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionCompare>Binary</OptionCompare>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionStrict>Off</OptionStrict>
+  </PropertyGroup>
+  <PropertyGroup>
+    <OptionInfer>On</OptionInfer>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="zlibnet">
+      <HintPath>.\zlibnet.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Import Include="Microsoft.VisualBasic" />
+    <Import Include="System" />
+    <Import Include="System.Collections" />
+    <Import Include="System.Collections.Generic" />
+    <Import Include="System.Data" />
+    <Import Include="System.Drawing" />
+    <Import Include="System.Diagnostics" />
+    <Import Include="System.Windows.Forms" />
+    <Import Include="System.Linq" />
+    <Import Include="System.Xml.Linq" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="clsArrayBinaryReader.vb" />
+    <Compile Include="clsArrayBinaryWritten.vb" />
+    <Compile Include="clsBoneObj.vb" />
+    <Compile Include="clsClientMgr.vb" />
+    <Compile Include="clsCommand.vb" />
+    <Compile Include="clsConnection.vb" />
+    <Compile Include="clsFileExplorer.vb" />
+    <Compile Include="clsInfo.vb" />
+    <Compile Include="clsKeylogger.vb" />
+    <Compile Include="clsListViewComparer.vb" />
+    <Compile Include="frmcmd.Designer.vb">
+      <DependentUpon>frmcmd.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmcmd.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmCreateFolder.Designer.vb">
+      <DependentUpon>frmCreateFolder.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmCreateFolder.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmFileExplorer.Designer.vb">
+      <DependentUpon>frmFileExplorer.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmFileExplorer.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmKeylogger.Designer.vb">
+      <DependentUpon>frmKeylogger.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmKeylogger.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmListen.Designer.vb">
+      <DependentUpon>frmListen.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmListen.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmmain.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmmain.Designer.vb">
+      <DependentUpon>frmmain.vb</DependentUpon>
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmRenameFile.Designer.vb">
+      <DependentUpon>frmRenameFile.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmRenameFile.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="mSettings.vb" />
+    <Compile Include="My Project\AssemblyInfo.vb" />
+    <Compile Include="My Project\Application.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Application.myapp</DependentUpon>
+      <DesignTime>True</DesignTime>
+    </Compile>
+    <Compile Include="My Project\Resources.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="My Project\Settings.Designer.vb">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+    <Compile Include="Theme.vb">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Utilities.vb" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="frmcmd.resx">
+      <DependentUpon>frmcmd.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmCreateFolder.resx">
+      <DependentUpon>frmCreateFolder.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmFileExplorer.resx">
+      <DependentUpon>frmFileExplorer.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmKeylogger.resx">
+      <DependentUpon>frmKeylogger.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmListen.resx">
+      <DependentUpon>frmListen.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmmain.resx">
+      <DependentUpon>frmmain.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmRenameFile.resx">
+      <DependentUpon>frmRenameFile.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="My Project\Resources.resx">
+      <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.vb</LastGenOutput>
+      <CustomToolNamespace>My.Resources</CustomToolNamespace>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="My Project\Application.myapp">
+      <Generator>MyApplicationCodeGenerator</Generator>
+      <LastGenOutput>Application.Designer.vb</LastGenOutput>
+    </None>
+    <None Include="My Project\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <CustomToolNamespace>My</CustomToolNamespace>
+      <LastGenOutput>Settings.Designer.vb</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.VisualBasic.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
