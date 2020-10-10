@@ -75,6 +75,7 @@ Public Class clsFileExplorer
             BinWriter.BufferAddDword(packet, 2)
             BinWriter.BufferAddDword(packet, Attr.Session)
             fileExplorerObj.SendPacket(packet)
+            Return True
         End Function
 
         Private Sub SendUploadChunk()
@@ -179,9 +180,9 @@ Public Class clsFileExplorer
                 If i <> -1 Then
                     If ID = 5 Then 'File download begin
                         downloadList(i).OnDownloadPacketStart(packet)
-                    ElseIf ID = 6 Then
+                    ElseIf ID = 6 Then ' File download on progress
                         downloadList(i).OnDownloadPacketProgress(packet)
-                    ElseIf ID = 7 Then
+                    ElseIf ID = 7 Then 'File download end
                         downloadList(i).OnDownloadPacketEnd(packet)
                     End If
                 End If

@@ -188,18 +188,6 @@ Public Class frmmain
         End If
     End Sub
 
-    Private Sub lvClient_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles lvClient.SelectedIndexChanged
-        'Try
-        'If lvClient.SelectedItems.Count > 0 Then
-        'SelectedItemComName = lvClient.FocusedItem.SubItems(4).Text
-        'Else
-        'SelectedItemComName = ""
-        'End If
-        'Catch
-        'SelectedItemComName = ""
-        'End Try
-    End Sub
-
     Private Function GetSelectedClient() As clsClientObj
         Dim ClientList As List(Of clsClientObj) = clientMgr.GetClientList()
         For Each ClientObj As clsClientObj In ClientList
