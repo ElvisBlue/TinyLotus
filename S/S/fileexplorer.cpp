@@ -34,7 +34,7 @@ void CALLBACK DownloadThread(DownloadInfo* downloadInfoPtr)
 	while (chunk == NULL)
 	{
 		chunk = (BYTE*)malloc(DOWNLOAD_CHUNK_SIZE + sizeof(DownloadHeader));
-		Sleep(1);
+		Sleep(100);
 	}
 	ZeroMemory(chunk, DOWNLOAD_CHUNK_SIZE + sizeof(DownloadHeader));
 	DWORD status = FILE_DOWNLOAD_BEGIN;
@@ -67,7 +67,7 @@ void CALLBACK DownloadThread(DownloadInfo* downloadInfoPtr)
 
 		if (status != FILE_DOWNLOAD_END)
 			status = FILE_DOWNLOAD_PROGRESS;
-		Sleep(1);
+		Sleep(100);
 	}
 	CloseHandle(hFile);
 	free(chunk);
@@ -239,7 +239,7 @@ void FileExplorer::OnPacketArrived(BYTE* packet, size_t packetSize)
 			{
 				if (GetTickCount() - 120000 > (*it)->GetLastPacketTick())
 				{
-					currentUploader = *it;
+					(*it)->FinishUpload();
 					it = listOfUploadItems.erase(it);
 				}
 			}
@@ -255,7 +255,6 @@ void FileExplorer::OnPacketArrived(BYTE* packet, size_t packetSize)
 			{
 				currentUploader->Uploading(packet, packetSize);
 			}
-
 			break;
 		}
 	case FILE_UPLOAD_END:
@@ -294,7 +293,7 @@ void FileExplorer::OnPacketArrived(BYTE* packet, size_t packetSize)
 			DownloadBeginHeader* Header = (DownloadBeginHeader*)packet;
 			DownloadInfo* downloadInfoPtr = (DownloadInfo*)malloc(sizeof(DownloadInfo));
 			downloadInfoPtr->fileExplorerObj = this;
-			wcscpy(downloadInfoPtr->filePath, &Header->Path);
+			wcscpy_s(downloadInfoPtr->filePath, &Header->Path);
 			downloadInfoPtr->session = Header->Session;
 			CreateThread(NULL, NULL, (LPTHREAD_START_ROUTINE)DownloadThread, downloadInfoPtr, NULL, NULL);
 			break;
@@ -348,7 +347,7 @@ DWORD Uploader::GetLastPacketTick()
 Uploader::Uploader(wchar_t* mfilePath, DWORD mSession)
 {
 	Session = mSession;
-	wcscpy(filePath, mfilePath);
+	wcscpy_s(filePath, mfilePath);
 	hFile = NULL;
 	lastPacketTick = GetTickCount();
 }
@@ -357,7 +356,7 @@ Uploader::~Uploader() { }
 
 bool CALLBACK Uploader::StartUpload()
 {
-	hFile = CreateFile(filePath, GENERIC_WRITE, 0, NULL, CREATE_NEW, FILE_ATTRIBUTE_NORMAL, NULL);
+	hFile = CreateFile(filePath, GENERIC_WRITE, FILE_SHARE_WRITE, NULL, CREATE_NEW, FILE_ATTRIBUTE_NORMAL, NULL);
 	if (hFile == INVALID_HANDLE_VALUE)
 		return false;
 	return true;

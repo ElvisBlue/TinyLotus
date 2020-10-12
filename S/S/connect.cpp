@@ -87,7 +87,7 @@ bool Connection::SendRawPacket(BYTE* packetData, size_t packetSize)
 	memcpy((BYTE*)RawPacket + sizeof(RawPacketHeader), pCmp, cmp_len);
 
 	int sendbytes;
-	int totalSend = 0;
+	unsigned int totalSend = 0;
 
 	ret = true;
 	do
@@ -114,7 +114,7 @@ bool Connection::SendRawPacket(BYTE* packetData, size_t packetSize)
 	return ret;
 }
 
-bool Connection::RecvRawPacket(BYTE* packetBuffer, size_t* pBufferSize)
+bool Connection::RecvRawPacket(BYTE* &packetBuffer, size_t* pBufferSize)
 {
 	bool ret = false;
 

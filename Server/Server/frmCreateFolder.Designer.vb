@@ -43,13 +43,14 @@ Partial Class frmCreateFolder
         Me.CrystalClearThemeContainer1.Font = New System.Drawing.Font("Verdana", 8.0!)
         Me.CrystalClearThemeContainer1.Image = Nothing
         Me.CrystalClearThemeContainer1.Location = New System.Drawing.Point(0, 0)
-        Me.CrystalClearThemeContainer1.MinimumSize = New System.Drawing.Size(175, 150)
+        Me.CrystalClearThemeContainer1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.CrystalClearThemeContainer1.MinimumSize = New System.Drawing.Size(233, 185)
         Me.CrystalClearThemeContainer1.Movable = True
         Me.CrystalClearThemeContainer1.Name = "CrystalClearThemeContainer1"
         Me.CrystalClearThemeContainer1.NoRounding = False
         Me.CrystalClearThemeContainer1.Rounding = Server.CrystalClearThemeContainer.RoundingType.None
         Me.CrystalClearThemeContainer1.Sizable = False
-        Me.CrystalClearThemeContainer1.Size = New System.Drawing.Size(322, 150)
+        Me.CrystalClearThemeContainer1.Size = New System.Drawing.Size(429, 185)
         Me.CrystalClearThemeContainer1.SmartBounds = True
         Me.CrystalClearThemeContainer1.StartPosition = System.Windows.Forms.FormStartPosition.WindowsDefaultLocation
         Me.CrystalClearThemeContainer1.TabIndex = 0
@@ -62,10 +63,11 @@ Partial Class frmCreateFolder
         Me.cmdCancel.Customization = "5ubm/9LS0v/m5ub/qqqq/wAAAP//////"
         Me.cmdCancel.Font = New System.Drawing.Font("Verdana", 8.0!)
         Me.cmdCancel.Image = Nothing
-        Me.cmdCancel.Location = New System.Drawing.Point(216, 104)
+        Me.cmdCancel.Location = New System.Drawing.Point(288, 128)
+        Me.cmdCancel.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.cmdCancel.Name = "cmdCancel"
         Me.cmdCancel.NoRounding = False
-        Me.cmdCancel.Size = New System.Drawing.Size(80, 25)
+        Me.cmdCancel.Size = New System.Drawing.Size(107, 31)
         Me.cmdCancel.TabIndex = 7
         Me.cmdCancel.Text = "Cancel"
         Me.cmdCancel.Transparent = False
@@ -75,10 +77,11 @@ Partial Class frmCreateFolder
         Me.cmdRename.Customization = "5ubm/9LS0v/m5ub/qqqq/wAAAP//////"
         Me.cmdRename.Font = New System.Drawing.Font("Verdana", 8.0!)
         Me.cmdRename.Image = Nothing
-        Me.cmdRename.Location = New System.Drawing.Point(32, 104)
+        Me.cmdRename.Location = New System.Drawing.Point(43, 128)
+        Me.cmdRename.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.cmdRename.Name = "cmdRename"
         Me.cmdRename.NoRounding = False
-        Me.cmdRename.Size = New System.Drawing.Size(80, 25)
+        Me.cmdRename.Size = New System.Drawing.Size(107, 31)
         Me.cmdRename.TabIndex = 6
         Me.cmdRename.Text = "Create"
         Me.cmdRename.Transparent = False
@@ -86,9 +89,10 @@ Partial Class frmCreateFolder
         'Label1
         '
         Me.Label1.AutoSize = True
-        Me.Label1.Location = New System.Drawing.Point(8, 54)
+        Me.Label1.Location = New System.Drawing.Point(11, 66)
+        Me.Label1.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.Label1.Name = "Label1"
-        Me.Label1.Size = New System.Drawing.Size(83, 13)
+        Me.Label1.Size = New System.Drawing.Size(100, 17)
         Me.Label1.TabIndex = 5
         Me.Label1.Text = "Folder name:"
         '
@@ -97,13 +101,14 @@ Partial Class frmCreateFolder
         Me.txtName.Customization = "AAAA//Dw8P+qqqr/"
         Me.txtName.Font = New System.Drawing.Font("Verdana", 8.0!)
         Me.txtName.Image = Nothing
-        Me.txtName.Location = New System.Drawing.Point(96, 48)
+        Me.txtName.Location = New System.Drawing.Point(128, 59)
+        Me.txtName.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.txtName.MaxLength = 32767
         Me.txtName.Multiline = False
         Me.txtName.Name = "txtName"
         Me.txtName.NoRounding = False
         Me.txtName.ReadOnly = False
-        Me.txtName.Size = New System.Drawing.Size(216, 24)
+        Me.txtName.Size = New System.Drawing.Size(288, 28)
         Me.txtName.TabIndex = 4
         Me.txtName.Text = "New Folder"
         Me.txtName.TextAlign = System.Windows.Forms.HorizontalAlignment.Left
@@ -112,12 +117,13 @@ Partial Class frmCreateFolder
         '
         'frmCreateFolder
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(322, 150)
+        Me.ClientSize = New System.Drawing.Size(429, 185)
         Me.Controls.Add(Me.CrystalClearThemeContainer1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
-        Me.MinimumSize = New System.Drawing.Size(175, 150)
+        Me.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.MinimumSize = New System.Drawing.Size(233, 185)
         Me.Name = "frmCreateFolder"
         Me.Text = "Create new folder"
         Me.TransparencyKey = System.Drawing.Color.Fuchsia

@@ -10,6 +10,8 @@ Public Class clsFileExplorer
     'ERROR code
     Const ERROR_FILE_BROWSER = 1
     Const ERROR_FILE_OPEN = 2
+    Const ERROR_FILE_DOWNLOAD = 3
+    Const ERROR_FILE_UPLOAD = 4
 
     'DOWNLOAD status
     Public Const DOWNLOAD_INIT = 1
@@ -22,6 +24,8 @@ Public Class clsFileExplorer
     Public Const UPLOAD_PROGRESS = 2
     Public Const UPLOAD_FINISH = 3
     Public Const UPLOAD_ERROR = 4
+
+    Public Const UPLOAD_CHUNK_SIZE = &H100000UI
 
     Structure LITE_WIN32_FIND_DATA
         Dim ftCreationTime As Long
@@ -36,8 +40,8 @@ Public Class clsFileExplorer
         Dim Session As UInteger
         Dim path As String
         Dim status As Byte
-        Dim sizeLeft As UInt64
-        Dim totalSize As UInt64
+        Dim sizeUploaded As UInteger
+        Dim totalSize As UInteger
         Dim uploadedPath As String
     End Structure
 
@@ -52,38 +56,72 @@ Public Class clsFileExplorer
             Attr.status = UPLOAD_INIT
             Attr.path = srcFilePath
             Attr.totalSize = FileLen(srcFilePath)
-            Attr.sizeLeft = 0
+            Attr.sizeUploaded = 0
             Attr.uploadedPath = dstFilePath
-            fileObj = New FileStream(srcFilePath, FileMode.Open)
+            Try
+                fileObj = New FileStream(srcFilePath, FileMode.Open)
+            Catch
+                fileObj = Nothing
+            End Try
         End Sub
 
         Public Sub UploadThread()
-
             If Not SendUploadBegin() Then
                 Attr.status = UPLOAD_ERROR
                 Return
             End If
             While Attr.status = UPLOAD_INIT
-                Threading.Thread.Sleep(500)
+                Threading.Thread.Sleep(10)
+                SendUploadChunk()
+                If Attr.totalSize = Attr.sizeUploaded Then
+                    Attr.status = UPLOAD_FINISH
+                End If
             End While
-
+            SendUploadEnd()
         End Sub
 
         Private Function SendUploadBegin() As Boolean
+            If fileObj Is Nothing Then Return False
             Dim packet() As Byte = Nothing
             Dim BinWriter As clsArrayBinaryWritten = New clsArrayBinaryWritten
             BinWriter.BufferAddDword(packet, 2)
             BinWriter.BufferAddDword(packet, Attr.Session)
+            BinWriter.BufferAddDword(packet, (Len(Attr.uploadedPath) + 1) * 2)
+            BinWriter.BufferMerge(packet, System.Text.Encoding.Unicode.GetBytes(Attr.uploadedPath))
+            BinWriter.BufferAddWord(packet, 0) ' Add null terminate
             fileExplorerObj.SendPacket(packet)
             Return True
         End Function
 
         Private Sub SendUploadChunk()
+            Dim chunkSize As UInteger = UPLOAD_CHUNK_SIZE
+            If (Attr.totalSize - Attr.sizeUploaded) < UPLOAD_CHUNK_SIZE Then
+                chunkSize = Attr.totalSize - Attr.sizeUploaded
+            End If
+            Dim readBuffer(chunkSize - 1) As Byte
+            fileObj.Read(readBuffer, 0, chunkSize)
+            Attr.sizeUploaded += chunkSize
 
+            'Now send upload chunk data
+            Dim packet() As Byte = Nothing
+            Dim BinWriter As clsArrayBinaryWritten = New clsArrayBinaryWritten
+            BinWriter.BufferAddDword(packet, 3)
+            BinWriter.BufferAddDword(packet, Attr.Session)
+            BinWriter.BufferAddDword(packet, Attr.totalSize)
+            BinWriter.BufferAddDword(packet, Attr.totalSize - Attr.sizeUploaded)
+            BinWriter.BufferAddDword(packet, chunkSize)
+            BinWriter.BufferMerge(packet, readBuffer)
+            fileExplorerObj.SendPacket(packet)
         End Sub
 
         Private Sub SendUploadEnd()
+            Dim packet() As Byte = Nothing
+            Dim BinWriter As clsArrayBinaryWritten = New clsArrayBinaryWritten
 
+            BinWriter.BufferAddDword(packet, 4)
+            BinWriter.BufferAddDword(packet, Attr.Session)
+            fileExplorerObj.SendPacket(packet)
+            fileObj.Close()
         End Sub
     End Class
 
@@ -194,6 +232,13 @@ Public Class clsFileExplorer
                         currentPath = ""
                         currentFolderItems.Clear()
                         currentFolderBrowserSession = 0
+                    Case ERROR_FILE_UPLOAD
+                        Dim Session As UInteger = BinReader.BufferReadDWORD(packet, 8)
+                        Dim uploadIndex As Integer = GetIndexOfUploadItemBySession(Session)
+                        If uploadIndex <> -1 Then
+                            Dim uploadObj As UploadItem = uploadList(uploadIndex)
+                            uploadObj.Attr.status = UPLOAD_ERROR
+                        End If
                 End Select
         End Select
     End Sub
@@ -344,6 +389,15 @@ Public Class clsFileExplorer
     Private Function GetIndexOfDownloadItemBySession(ByVal Session As UInteger) As Integer
         For i = 0 To downloadList.Count - 1
             If downloadList(i).Attr.Session = Session Then
+                Return i
+            End If
+        Next
+        Return -1
+    End Function
+
+    Private Function GetIndexOfUploadItemBySession(ByVal Session As UInteger) As Integer
+        For i = 0 To uploadList.Count
+            If uploadList(i).Attr.Session = Session Then
                 Return i
             End If
         Next

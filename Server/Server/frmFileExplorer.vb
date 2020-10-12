@@ -2,9 +2,11 @@
 
 Public Class frmFileExplorer
     Public fileExplorerObj As clsFileExplorer = Nothing
+    Private bListViewInit As Boolean = False
 
     Public Sub lv_Init()
         With lvFileExplorer
+            .Clear()
             .View = View.Details
             .GridLines = True
             .FullRowSelect = True
@@ -21,6 +23,7 @@ Public Class frmFileExplorer
         End With
 
         With lvDownload
+            .Clear()
             .View = View.Details
             .GridLines = True
             .FullRowSelect = True
@@ -34,6 +37,7 @@ Public Class frmFileExplorer
         End With
 
         With lvUpload
+            .Clear()
             .View = View.Details
             .GridLines = True
             .FullRowSelect = True
@@ -48,7 +52,9 @@ Public Class frmFileExplorer
     End Sub
 
     Private Sub frmFileExplorer_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
+
         lv_Init()
+
 
         Dim downloadPath As String = fileExplorerObj.GetDownloadPath()
 
@@ -322,6 +328,9 @@ Public Class frmFileExplorer
                 progress = 100 - (Item.Attr.sizeLeft * 100 / Item.Attr.totalSize)
             ElseIf Item.Attr.status = clsFileExplorer.DOWNLOAD_FINISH Then
                 progress = 100
+            ElseIf Item.Attr.status = clsFileExplorer.DOWNLOAD_ERROR Then
+                Utilities.GlobalLog("Error while downloading " + Utilities.TrimPath(Item.Attr.path))
+                listOfDownload.Remove(Item)
             End If
             AddItemToDownloadLv(Utilities.TrimPath(Item.Attr.path), progress)
         Next
@@ -346,9 +355,12 @@ Public Class frmFileExplorer
             If Item.Attr.status = clsFileExplorer.UPLOAD_INIT Then
                 progress = 0
             ElseIf Item.Attr.status = clsFileExplorer.UPLOAD_PROGRESS Then
-                progress = 100 - (Item.Attr.sizeLeft * 100 / Item.Attr.totalSize)
+                progress = (Item.Attr.sizeUploaded * 100 / Item.Attr.totalSize)
             ElseIf Item.Attr.status = clsFileExplorer.UPLOAD_FINISH Then
                 progress = 100
+            ElseIf Item.Attr.status = clsFileExplorer.UPLOAD_ERROR Then
+                Utilities.GlobalLog("Error while uploading " + Utilities.TrimPath(Item.Attr.path))
+                listOfUpload.Remove(Item)
             End If
             AddItemToUploadLv(Utilities.TrimPath(Item.Attr.path), progress)
         Next
@@ -360,7 +372,7 @@ Public Class frmFileExplorer
 
         For i = 0 To uploadList.Count - 1
             lvUpload.Items(i).SubItems(0).Text = TrimPath(uploadList(i).Attr.path)
-            lvUpload.Items(i).SubItems(1).Text = Math.Floor(100 - (uploadList(i).Attr.sizeLeft * 100 / uploadList(i).Attr.totalSize)).ToString + "%"
+            lvUpload.Items(i).SubItems(1).Text = Math.Floor((uploadList(i).Attr.sizeUploaded * 100 / uploadList(i).Attr.totalSize)).ToString + "%"
         Next
     End Sub
 
@@ -389,7 +401,9 @@ Public Class frmFileExplorer
             .RestoreDirectory = True
         End With
         If openFileDlg.ShowDialog() = DialogResult.OK Then
-            MsgBox(Utilities.TrimPath(openFileDlg.FileName))
+            'MsgBox(Utilities.TrimPath(openFileDlg.FileName))
+            uploadedPath += Utilities.TrimPath(openFileDlg.FileName)
+            fileExplorerObj.SendUpload(openFileDlg.FileName, uploadedPath)
         End If
     End Sub
 End Class
