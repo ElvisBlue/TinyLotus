@@ -30,7 +30,7 @@ public:
 	bool	IsConnected();
 	bool	SendRawPacket(BYTE*, size_t);
 	bool	Connect();
-	bool	RecvRawPacket(BYTE*, size_t*);
+	bool	RecvRawPacket(BYTE*&, size_t*);
 	Connection(char*, int);
 	~Connection();
 private:

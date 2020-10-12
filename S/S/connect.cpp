@@ -37,7 +37,7 @@ bool Connection::Connect()
 	if ((s = socket(AF_INET, SOCK_STREAM, 0)) == INVALID_SOCKET)
 		return false;
 
-	struct sockaddr_in server;
+	struct sockaddr_in server = {0};
 	server.sin_addr.s_addr = inet_addr(IP);
     server.sin_family = AF_INET;
     server.sin_port = htons(Port);
@@ -87,7 +87,7 @@ bool Connection::SendRawPacket(BYTE* packetData, size_t packetSize)
 	memcpy((BYTE*)RawPacket + sizeof(RawPacketHeader), pCmp, cmp_len);
 
 	int sendbytes;
-	int totalSend = 0;
+	unsigned int totalSend = 0;
 
 	ret = true;
 	do
@@ -105,6 +105,7 @@ bool Connection::SendRawPacket(BYTE* packetData, size_t packetSize)
 			break;
 		}
 		totalSend += sendbytes;
+		Sleep(1);
 	}
 	while(totalSend < (cmp_len + sizeof(RawPacketHeader)));
 
@@ -114,7 +115,7 @@ bool Connection::SendRawPacket(BYTE* packetData, size_t packetSize)
 	return ret;
 }
 
-bool Connection::RecvRawPacket(BYTE* packetBuffer, size_t* pBufferSize)
+bool Connection::RecvRawPacket(BYTE* &packetBuffer, size_t* pBufferSize)
 {
 	bool ret = false;
 
@@ -122,6 +123,8 @@ bool Connection::RecvRawPacket(BYTE* packetBuffer, size_t* pBufferSize)
 		return false;
 
 	RawPacketHeader* Header = (RawPacketHeader*)malloc(sizeof(RawPacketHeader));
+
+	//Could be error if connection too slow
 	int iResult = recv(s, (char*)Header, sizeof(RawPacketHeader), NULL);
 	if ((iResult != SOCKET_ERROR) && (iResult > 0))
 	{
@@ -129,11 +132,22 @@ bool Connection::RecvRawPacket(BYTE* packetBuffer, size_t* pBufferSize)
 		{
 			//Perform decompress data
 			BYTE* compressedBuffer = (BYTE*)malloc(Header->compressedPacketSize);
-			if (recv(s, (char*)compressedBuffer, Header->compressedPacketSize, NULL) == SOCKET_ERROR)
+
+			int totalSize = Header->compressedPacketSize;
+			int receivedSize = 0;
+			int chunkSize = 0;
+
+			while (receivedSize < totalSize)
 			{
-				free(compressedBuffer);
-				free(Header);
-				return false;
+				chunkSize = recv(s, (char*)compressedBuffer + receivedSize, totalSize - receivedSize, NULL);
+				if (chunkSize == SOCKET_ERROR)
+				{
+					free(compressedBuffer);
+					free(Header);
+					return false;
+				}
+				receivedSize += chunkSize;
+				Sleep(1);
 			}
 
 

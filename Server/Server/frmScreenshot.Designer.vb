@@ -1,0 +1,147 @@
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+Partial Class frmScreenshot
+    Inherits System.Windows.Forms.Form
+
+    'Form overrides dispose to clean up the component list.
+    <System.Diagnostics.DebuggerNonUserCode()> _
+    Protected Overrides Sub Dispose(ByVal disposing As Boolean)
+        Try
+            If disposing AndAlso components IsNot Nothing Then
+                components.Dispose()
+            End If
+        Finally
+            MyBase.Dispose(disposing)
+        End Try
+    End Sub
+
+    'Required by the Windows Form Designer
+    Private components As System.ComponentModel.IContainer
+
+    'NOTE: The following procedure is required by the Windows Form Designer
+    'It can be modified using the Windows Form Designer.  
+    'Do not modify it using the code editor.
+    <System.Diagnostics.DebuggerStepThrough()> _
+    Private Sub InitializeComponent()
+        Me.components = New System.ComponentModel.Container()
+        Me.CrystalClearThemeContainer1 = New Server.CrystalClearThemeContainer()
+        Me.lvImage = New Server.CrystalClearListbox()
+        Me.cmdExit = New Server.CrystalClearButton()
+        Me.cmdTakeScreen = New Server.CrystalClearButton()
+        Me.picScreenshot = New System.Windows.Forms.PictureBox()
+        Me.tmSync = New System.Windows.Forms.Timer(Me.components)
+        Me.CrystalClearThemeContainer1.SuspendLayout()
+        CType(Me.picScreenshot, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.SuspendLayout()
+        '
+        'CrystalClearThemeContainer1
+        '
+        Me.CrystalClearThemeContainer1.BackColor = System.Drawing.Color.FromArgb(CType(CType(230, Byte), Integer), CType(CType(230, Byte), Integer), CType(CType(230, Byte), Integer))
+        Me.CrystalClearThemeContainer1.BorderStyle = System.Windows.Forms.FormBorderStyle.None
+        Me.CrystalClearThemeContainer1.Controls.Add(Me.lvImage)
+        Me.CrystalClearThemeContainer1.Controls.Add(Me.cmdExit)
+        Me.CrystalClearThemeContainer1.Controls.Add(Me.cmdTakeScreen)
+        Me.CrystalClearThemeContainer1.Controls.Add(Me.picScreenshot)
+        Me.CrystalClearThemeContainer1.Customization = "5ubm/9LS0v/m5ub/5ubm/6qqqv8="
+        Me.CrystalClearThemeContainer1.Dock = System.Windows.Forms.DockStyle.Fill
+        Me.CrystalClearThemeContainer1.Font = New System.Drawing.Font("Verdana", 8.0!)
+        Me.CrystalClearThemeContainer1.Image = Nothing
+        Me.CrystalClearThemeContainer1.Location = New System.Drawing.Point(0, 0)
+        Me.CrystalClearThemeContainer1.Margin = New System.Windows.Forms.Padding(2)
+        Me.CrystalClearThemeContainer1.MinimumSize = New System.Drawing.Size(131, 122)
+        Me.CrystalClearThemeContainer1.Movable = True
+        Me.CrystalClearThemeContainer1.Name = "CrystalClearThemeContainer1"
+        Me.CrystalClearThemeContainer1.NoRounding = False
+        Me.CrystalClearThemeContainer1.Rounding = Server.CrystalClearThemeContainer.RoundingType.None
+        Me.CrystalClearThemeContainer1.Sizable = False
+        Me.CrystalClearThemeContainer1.Size = New System.Drawing.Size(972, 612)
+        Me.CrystalClearThemeContainer1.SmartBounds = True
+        Me.CrystalClearThemeContainer1.StartPosition = System.Windows.Forms.FormStartPosition.WindowsDefaultLocation
+        Me.CrystalClearThemeContainer1.TabIndex = 0
+        Me.CrystalClearThemeContainer1.Text = "CrystalClearThemeContainer1"
+        Me.CrystalClearThemeContainer1.TransparencyKey = System.Drawing.Color.Fuchsia
+        Me.CrystalClearThemeContainer1.Transparent = False
+        '
+        'lvImage
+        '
+        Me.lvImage.BackColor = System.Drawing.Color.FromArgb(CType(CType(230, Byte), Integer), CType(CType(230, Byte), Integer), CType(CType(230, Byte), Integer))
+        Me.lvImage.BorderStyle = System.Windows.Forms.BorderStyle.None
+        Me.lvImage.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
+        Me.lvImage.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!)
+        Me.lvImage.ForeColor = System.Drawing.Color.Black
+        Me.lvImage.FormattingEnabled = True
+        Me.lvImage.IntegralHeight = False
+        Me.lvImage.ItemHeight = 21
+        Me.lvImage.ItemImage = Nothing
+        Me.lvImage.Location = New System.Drawing.Point(0, 27)
+        Me.lvImage.Margin = New System.Windows.Forms.Padding(2)
+        Me.lvImage.Name = "lvImage"
+        Me.lvImage.Size = New System.Drawing.Size(231, 548)
+        Me.lvImage.TabIndex = 4
+        '
+        'cmdExit
+        '
+        Me.cmdExit.Customization = "5ubm/9LS0v/m5ub/qqqq/wAAAP//////"
+        Me.cmdExit.Font = New System.Drawing.Font("Verdana", 8.0!)
+        Me.cmdExit.Image = Nothing
+        Me.cmdExit.Location = New System.Drawing.Point(937, 2)
+        Me.cmdExit.Name = "cmdExit"
+        Me.cmdExit.NoRounding = False
+        Me.cmdExit.Size = New System.Drawing.Size(32, 20)
+        Me.cmdExit.TabIndex = 3
+        Me.cmdExit.Text = "X"
+        Me.cmdExit.Transparent = False
+        '
+        'cmdTakeScreen
+        '
+        Me.cmdTakeScreen.Customization = "5ubm/9LS0v/m5ub/qqqq/wAAAP//////"
+        Me.cmdTakeScreen.Font = New System.Drawing.Font("Verdana", 8.0!)
+        Me.cmdTakeScreen.Image = Nothing
+        Me.cmdTakeScreen.Location = New System.Drawing.Point(403, 579)
+        Me.cmdTakeScreen.Margin = New System.Windows.Forms.Padding(2)
+        Me.cmdTakeScreen.Name = "cmdTakeScreen"
+        Me.cmdTakeScreen.NoRounding = False
+        Me.cmdTakeScreen.Size = New System.Drawing.Size(142, 22)
+        Me.cmdTakeScreen.TabIndex = 1
+        Me.cmdTakeScreen.Text = "Take Screenshot"
+        Me.cmdTakeScreen.Transparent = False
+        '
+        'picScreenshot
+        '
+        Me.picScreenshot.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
+        Me.picScreenshot.Location = New System.Drawing.Point(235, 27)
+        Me.picScreenshot.Margin = New System.Windows.Forms.Padding(2)
+        Me.picScreenshot.Name = "picScreenshot"
+        Me.picScreenshot.Size = New System.Drawing.Size(735, 548)
+        Me.picScreenshot.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
+        Me.picScreenshot.TabIndex = 0
+        Me.picScreenshot.TabStop = False
+        '
+        'tmSync
+        '
+        Me.tmSync.Interval = 500
+        '
+        'frmScreenshot
+        '
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
+        Me.ClientSize = New System.Drawing.Size(972, 612)
+        Me.Controls.Add(Me.CrystalClearThemeContainer1)
+        Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
+        Me.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.MinimumSize = New System.Drawing.Size(131, 122)
+        Me.Name = "frmScreenshot"
+        Me.Text = "Screenshot"
+        Me.TransparencyKey = System.Drawing.Color.Fuchsia
+        Me.CrystalClearThemeContainer1.ResumeLayout(False)
+        CType(Me.picScreenshot, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.ResumeLayout(False)
+
+    End Sub
+
+    Friend WithEvents CrystalClearThemeContainer1 As CrystalClearThemeContainer
+    Friend WithEvents cmdTakeScreen As CrystalClearButton
+    Friend WithEvents picScreenshot As PictureBox
+    Friend WithEvents cmdExit As CrystalClearButton
+    Friend WithEvents lvImage As CrystalClearListbox
+    Friend WithEvents tmSync As Timer
+End Class

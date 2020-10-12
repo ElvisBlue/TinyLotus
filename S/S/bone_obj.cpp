@@ -8,7 +8,7 @@ bool BoneObj::SendPacket(BYTE* packetData, size_t packetSize)
 	dataToSent->objID = objID;
 	dataToSent->PacketSize = packetSize;
 	memcpy((BYTE*)dataToSent + sizeof(PacketHeader), packetData, packetSize);
-	ConnObj->SendRawPacket((BYTE*)dataToSent, FullPacketSize);
+	bool ret = ConnObj->SendRawPacket((BYTE*)dataToSent, FullPacketSize);
 	free(dataToSent);
-	return true;
+	return ret;
 }

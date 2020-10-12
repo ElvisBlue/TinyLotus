@@ -10,7 +10,7 @@ namespace Utilities
 {
 	static DWORD DJBHash(char* str) 
 	{
-	   unsigned int hash = 0xCAFEBABE;
+	   unsigned int hash = 5381;
 
 	   for(; *str; str++)
 		  hash = ((hash << 5) + hash) + (*str);

@@ -30,6 +30,7 @@ Partial Class frmmain
         Me.FileExplorerToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.SurveillanceToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.KeyloggerToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ScreenshotToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.PluginsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.CrystalClearThemeContainer1 = New Server.CrystalClearThemeContainer()
         Me.cmdExit = New Server.CrystalClearButton()
@@ -82,7 +83,7 @@ Partial Class frmmain
         '
         'SurveillanceToolStripMenuItem
         '
-        Me.SurveillanceToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.KeyloggerToolStripMenuItem1})
+        Me.SurveillanceToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.KeyloggerToolStripMenuItem1, Me.ScreenshotToolStripMenuItem})
         Me.SurveillanceToolStripMenuItem.Name = "SurveillanceToolStripMenuItem"
         Me.SurveillanceToolStripMenuItem.Size = New System.Drawing.Size(137, 22)
         Me.SurveillanceToolStripMenuItem.Text = "Surveillance"
@@ -90,8 +91,14 @@ Partial Class frmmain
         'KeyloggerToolStripMenuItem1
         '
         Me.KeyloggerToolStripMenuItem1.Name = "KeyloggerToolStripMenuItem1"
-        Me.KeyloggerToolStripMenuItem1.Size = New System.Drawing.Size(127, 22)
+        Me.KeyloggerToolStripMenuItem1.Size = New System.Drawing.Size(180, 22)
         Me.KeyloggerToolStripMenuItem1.Text = "Keylogger"
+        '
+        'ScreenshotToolStripMenuItem
+        '
+        Me.ScreenshotToolStripMenuItem.Name = "ScreenshotToolStripMenuItem"
+        Me.ScreenshotToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.ScreenshotToolStripMenuItem.Text = "Screenshot"
         '
         'PluginsToolStripMenuItem
         '
@@ -288,4 +295,5 @@ Partial Class frmmain
     Friend WithEvents KeyloggerToolStripMenuItem1 As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents CrystalClearThemeContainer1 As Server.CrystalClearThemeContainer
     Public WithEvents txtLog As TextBox
+    Friend WithEvents ScreenshotToolStripMenuItem As ToolStripMenuItem
 End Class

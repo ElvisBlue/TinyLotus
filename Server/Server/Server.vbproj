@@ -18,7 +18,7 @@
     </TargetFrameworkProfile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
-    <PlatformTarget>x86</PlatformTarget>
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <DefineDebug>true</DefineDebug>
@@ -88,6 +88,7 @@
     <Compile Include="clsInfo.vb" />
     <Compile Include="clsKeylogger.vb" />
     <Compile Include="clsListViewComparer.vb" />
+    <Compile Include="clsScreenshot.vb" />
     <Compile Include="frmcmd.Designer.vb">
       <DependentUpon>frmcmd.vb</DependentUpon>
     </Compile>
@@ -129,6 +130,12 @@
       <DependentUpon>frmRenameFile.vb</DependentUpon>
     </Compile>
     <Compile Include="frmRenameFile.vb">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmScreenshot.Designer.vb">
+      <DependentUpon>frmScreenshot.vb</DependentUpon>
+    </Compile>
+    <Compile Include="frmScreenshot.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="mSettings.vb" />
@@ -174,6 +181,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmRenameFile.resx">
       <DependentUpon>frmRenameFile.vb</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmScreenshot.resx">
+      <DependentUpon>frmScreenshot.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="My Project\Resources.resx">
       <Generator>VbMyResourcesResXFileCodeGenerator</Generator>
