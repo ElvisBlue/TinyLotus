@@ -25,7 +25,11 @@ Public Class clsFileExplorer
     Public Const UPLOAD_FINISH = 3
     Public Const UPLOAD_ERROR = 4
 
+<<<<<<< HEAD
     Public Const UPLOAD_CHUNK_SIZE = &H5000UI
+=======
+    Public Const UPLOAD_CHUNK_SIZE = &H100000UI
+>>>>>>> a06d05a7fa82d719aaaff83d5193e6142e80b244
 
     Structure LITE_WIN32_FIND_DATA
         Dim ftCreationTime As Long
@@ -71,7 +75,11 @@ Public Class clsFileExplorer
                 Return
             End If
             While Attr.status = UPLOAD_INIT
+<<<<<<< HEAD
                 Threading.Thread.Sleep(5)
+=======
+                Threading.Thread.Sleep(10)
+>>>>>>> a06d05a7fa82d719aaaff83d5193e6142e80b244
                 SendUploadChunk()
                 If Attr.totalSize = Attr.sizeUploaded Then
                     Attr.status = UPLOAD_FINISH

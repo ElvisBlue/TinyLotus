@@ -70,68 +70,68 @@ Partial Class frmFileExplorer
         Me.ctxMenu.ImageScalingSize = New System.Drawing.Size(20, 20)
         Me.ctxMenu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.RefreshToolStripMenuItem, Me.ToolStripSeparator1, Me.DownloadFileToolStripMenuItem, Me.UploadFileToolStripMenuItem, Me.ToolStripSeparator2, Me.RenameToolStripMenuItem, Me.DeleteToolStripMenuItem, Me.ToolStripSeparator4, Me.CreateFolderToolStripMenuItem, Me.ToolStripSeparator3, Me.ExecuteToolStripMenuItem})
         Me.ctxMenu.Name = "ctxMenu"
-        Me.ctxMenu.Size = New System.Drawing.Size(175, 196)
+        Me.ctxMenu.Size = New System.Drawing.Size(150, 182)
         '
         'RefreshToolStripMenuItem
         '
         Me.RefreshToolStripMenuItem.Name = "RefreshToolStripMenuItem"
-        Me.RefreshToolStripMenuItem.Size = New System.Drawing.Size(174, 24)
+        Me.RefreshToolStripMenuItem.Size = New System.Drawing.Size(149, 22)
         Me.RefreshToolStripMenuItem.Text = "Refresh"
         '
         'ToolStripSeparator1
         '
         Me.ToolStripSeparator1.Name = "ToolStripSeparator1"
-        Me.ToolStripSeparator1.Size = New System.Drawing.Size(171, 6)
+        Me.ToolStripSeparator1.Size = New System.Drawing.Size(146, 6)
         '
         'DownloadFileToolStripMenuItem
         '
         Me.DownloadFileToolStripMenuItem.Name = "DownloadFileToolStripMenuItem"
-        Me.DownloadFileToolStripMenuItem.Size = New System.Drawing.Size(174, 24)
+        Me.DownloadFileToolStripMenuItem.Size = New System.Drawing.Size(149, 22)
         Me.DownloadFileToolStripMenuItem.Text = "Download File"
         '
         'UploadFileToolStripMenuItem
         '
         Me.UploadFileToolStripMenuItem.Name = "UploadFileToolStripMenuItem"
-        Me.UploadFileToolStripMenuItem.Size = New System.Drawing.Size(174, 24)
+        Me.UploadFileToolStripMenuItem.Size = New System.Drawing.Size(149, 22)
         Me.UploadFileToolStripMenuItem.Text = "Upload File"
         '
         'ToolStripSeparator2
         '
         Me.ToolStripSeparator2.Name = "ToolStripSeparator2"
-        Me.ToolStripSeparator2.Size = New System.Drawing.Size(171, 6)
+        Me.ToolStripSeparator2.Size = New System.Drawing.Size(146, 6)
         '
         'RenameToolStripMenuItem
         '
         Me.RenameToolStripMenuItem.Name = "RenameToolStripMenuItem"
-        Me.RenameToolStripMenuItem.Size = New System.Drawing.Size(174, 24)
+        Me.RenameToolStripMenuItem.Size = New System.Drawing.Size(149, 22)
         Me.RenameToolStripMenuItem.Text = "Rename"
         '
         'DeleteToolStripMenuItem
         '
         Me.DeleteToolStripMenuItem.Name = "DeleteToolStripMenuItem"
-        Me.DeleteToolStripMenuItem.Size = New System.Drawing.Size(174, 24)
+        Me.DeleteToolStripMenuItem.Size = New System.Drawing.Size(149, 22)
         Me.DeleteToolStripMenuItem.Text = "Delete"
         '
         'ToolStripSeparator4
         '
         Me.ToolStripSeparator4.Name = "ToolStripSeparator4"
-        Me.ToolStripSeparator4.Size = New System.Drawing.Size(171, 6)
+        Me.ToolStripSeparator4.Size = New System.Drawing.Size(146, 6)
         '
         'CreateFolderToolStripMenuItem
         '
         Me.CreateFolderToolStripMenuItem.Name = "CreateFolderToolStripMenuItem"
-        Me.CreateFolderToolStripMenuItem.Size = New System.Drawing.Size(174, 24)
+        Me.CreateFolderToolStripMenuItem.Size = New System.Drawing.Size(149, 22)
         Me.CreateFolderToolStripMenuItem.Text = "Create Folder"
         '
         'ToolStripSeparator3
         '
         Me.ToolStripSeparator3.Name = "ToolStripSeparator3"
-        Me.ToolStripSeparator3.Size = New System.Drawing.Size(171, 6)
+        Me.ToolStripSeparator3.Size = New System.Drawing.Size(146, 6)
         '
         'ExecuteToolStripMenuItem
         '
         Me.ExecuteToolStripMenuItem.Name = "ExecuteToolStripMenuItem"
-        Me.ExecuteToolStripMenuItem.Size = New System.Drawing.Size(174, 24)
+        Me.ExecuteToolStripMenuItem.Size = New System.Drawing.Size(149, 22)
         Me.ExecuteToolStripMenuItem.Text = "Execute"
         '
         'CrystalClearThemeContainer1
@@ -145,14 +145,13 @@ Partial Class frmFileExplorer
         Me.CrystalClearThemeContainer1.Font = New System.Drawing.Font("Verdana", 8.0!)
         Me.CrystalClearThemeContainer1.Image = Nothing
         Me.CrystalClearThemeContainer1.Location = New System.Drawing.Point(0, 0)
-        Me.CrystalClearThemeContainer1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
-        Me.CrystalClearThemeContainer1.MinimumSize = New System.Drawing.Size(233, 185)
+        Me.CrystalClearThemeContainer1.MinimumSize = New System.Drawing.Size(175, 150)
         Me.CrystalClearThemeContainer1.Movable = True
         Me.CrystalClearThemeContainer1.Name = "CrystalClearThemeContainer1"
         Me.CrystalClearThemeContainer1.NoRounding = False
         Me.CrystalClearThemeContainer1.Rounding = Server.CrystalClearThemeContainer.RoundingType.None
         Me.CrystalClearThemeContainer1.Sizable = False
-        Me.CrystalClearThemeContainer1.Size = New System.Drawing.Size(1001, 524)
+        Me.CrystalClearThemeContainer1.Size = New System.Drawing.Size(751, 426)
         Me.CrystalClearThemeContainer1.SmartBounds = True
         Me.CrystalClearThemeContainer1.StartPosition = System.Windows.Forms.FormStartPosition.WindowsDefaultLocation
         Me.CrystalClearThemeContainer1.TabIndex = 0
@@ -164,11 +163,10 @@ Partial Class frmFileExplorer
         '
         Me.CrystalClearTabControl1.Controls.Add(Me.TabPage1)
         Me.CrystalClearTabControl1.Controls.Add(Me.TabPage2)
-        Me.CrystalClearTabControl1.Location = New System.Drawing.Point(0, 39)
-        Me.CrystalClearTabControl1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.CrystalClearTabControl1.Location = New System.Drawing.Point(0, 32)
         Me.CrystalClearTabControl1.Name = "CrystalClearTabControl1"
         Me.CrystalClearTabControl1.SelectedIndex = 0
-        Me.CrystalClearTabControl1.Size = New System.Drawing.Size(992, 482)
+        Me.CrystalClearTabControl1.Size = New System.Drawing.Size(744, 392)
         Me.CrystalClearTabControl1.TabIndex = 3
         '
         'TabPage1
@@ -178,11 +176,10 @@ Partial Class frmFileExplorer
         Me.TabPage1.Controls.Add(Me.cmdGo)
         Me.TabPage1.Controls.Add(Me.cbDriveList)
         Me.TabPage1.Controls.Add(Me.lvFileExplorer)
-        Me.TabPage1.Location = New System.Drawing.Point(4, 29)
-        Me.TabPage1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.TabPage1.Location = New System.Drawing.Point(4, 25)
         Me.TabPage1.Name = "TabPage1"
-        Me.TabPage1.Padding = New System.Windows.Forms.Padding(4, 4, 4, 4)
-        Me.TabPage1.Size = New System.Drawing.Size(984, 449)
+        Me.TabPage1.Padding = New System.Windows.Forms.Padding(3)
+        Me.TabPage1.Size = New System.Drawing.Size(736, 363)
         Me.TabPage1.TabIndex = 0
         Me.TabPage1.Text = "File Explorer"
         '
@@ -190,10 +187,9 @@ Partial Class frmFileExplorer
         '
         Me.txtPath.BackColor = System.Drawing.Color.FromArgb(CType(CType(230, Byte), Integer), CType(CType(230, Byte), Integer), CType(CType(230, Byte), Integer))
         Me.txtPath.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.txtPath.Location = New System.Drawing.Point(96, 12)
-        Me.txtPath.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.txtPath.Location = New System.Drawing.Point(72, 10)
         Me.txtPath.Name = "txtPath"
-        Me.txtPath.Size = New System.Drawing.Size(810, 24)
+        Me.txtPath.Size = New System.Drawing.Size(608, 20)
         Me.txtPath.TabIndex = 5
         '
         'cmdGo
@@ -201,11 +197,10 @@ Partial Class frmFileExplorer
         Me.cmdGo.Customization = "5ubm/9LS0v/m5ub/qqqq/wAAAP//////"
         Me.cmdGo.Font = New System.Drawing.Font("Verdana", 8.0!)
         Me.cmdGo.Image = Nothing
-        Me.cmdGo.Location = New System.Drawing.Point(917, 10)
-        Me.cmdGo.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.cmdGo.Location = New System.Drawing.Point(688, 8)
         Me.cmdGo.Name = "cmdGo"
         Me.cmdGo.NoRounding = False
-        Me.cmdGo.Size = New System.Drawing.Size(53, 31)
+        Me.cmdGo.Size = New System.Drawing.Size(40, 25)
         Me.cmdGo.TabIndex = 4
         Me.cmdGo.Text = "Go"
         Me.cmdGo.Transparent = False
@@ -214,20 +209,18 @@ Partial Class frmFileExplorer
         '
         Me.cbDriveList.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
         Me.cbDriveList.FormattingEnabled = True
-        Me.cbDriveList.Location = New System.Drawing.Point(11, 10)
-        Me.cbDriveList.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.cbDriveList.Location = New System.Drawing.Point(8, 8)
         Me.cbDriveList.Name = "cbDriveList"
-        Me.cbDriveList.Size = New System.Drawing.Size(73, 24)
+        Me.cbDriveList.Size = New System.Drawing.Size(56, 21)
         Me.cbDriveList.TabIndex = 2
         '
         'lvFileExplorer
         '
         Me.lvFileExplorer.BackColor = System.Drawing.Color.FromArgb(CType(CType(230, Byte), Integer), CType(CType(230, Byte), Integer), CType(CType(230, Byte), Integer))
         Me.lvFileExplorer.HideSelection = False
-        Me.lvFileExplorer.Location = New System.Drawing.Point(11, 49)
-        Me.lvFileExplorer.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.lvFileExplorer.Location = New System.Drawing.Point(8, 40)
         Me.lvFileExplorer.Name = "lvFileExplorer"
-        Me.lvFileExplorer.Size = New System.Drawing.Size(959, 393)
+        Me.lvFileExplorer.Size = New System.Drawing.Size(720, 320)
         Me.lvFileExplorer.TabIndex = 1
         Me.lvFileExplorer.UseCompatibleStateImageBehavior = False
         '
@@ -235,11 +228,10 @@ Partial Class frmFileExplorer
         '
         Me.TabPage2.BackColor = System.Drawing.Color.FromArgb(CType(CType(230, Byte), Integer), CType(CType(230, Byte), Integer), CType(CType(230, Byte), Integer))
         Me.TabPage2.Controls.Add(Me.CrystalClearTabControl2)
-        Me.TabPage2.Location = New System.Drawing.Point(4, 29)
-        Me.TabPage2.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.TabPage2.Location = New System.Drawing.Point(4, 25)
         Me.TabPage2.Name = "TabPage2"
-        Me.TabPage2.Padding = New System.Windows.Forms.Padding(4, 4, 4, 4)
-        Me.TabPage2.Size = New System.Drawing.Size(984, 449)
+        Me.TabPage2.Padding = New System.Windows.Forms.Padding(3)
+        Me.TabPage2.Size = New System.Drawing.Size(736, 363)
         Me.TabPage2.TabIndex = 1
         Me.TabPage2.Text = "File Transfer"
         '
@@ -248,21 +240,19 @@ Partial Class frmFileExplorer
         Me.CrystalClearTabControl2.Controls.Add(Me.TabPage3)
         Me.CrystalClearTabControl2.Controls.Add(Me.TabPage4)
         Me.CrystalClearTabControl2.Location = New System.Drawing.Point(0, 0)
-        Me.CrystalClearTabControl2.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.CrystalClearTabControl2.Name = "CrystalClearTabControl2"
         Me.CrystalClearTabControl2.SelectedIndex = 0
-        Me.CrystalClearTabControl2.Size = New System.Drawing.Size(981, 443)
+        Me.CrystalClearTabControl2.Size = New System.Drawing.Size(736, 360)
         Me.CrystalClearTabControl2.TabIndex = 4
         '
         'TabPage3
         '
         Me.TabPage3.BackColor = System.Drawing.Color.FromArgb(CType(CType(230, Byte), Integer), CType(CType(230, Byte), Integer), CType(CType(230, Byte), Integer))
         Me.TabPage3.Controls.Add(Me.lvDownload)
-        Me.TabPage3.Location = New System.Drawing.Point(4, 29)
-        Me.TabPage3.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.TabPage3.Location = New System.Drawing.Point(4, 25)
         Me.TabPage3.Name = "TabPage3"
-        Me.TabPage3.Padding = New System.Windows.Forms.Padding(4, 4, 4, 4)
-        Me.TabPage3.Size = New System.Drawing.Size(973, 410)
+        Me.TabPage3.Padding = New System.Windows.Forms.Padding(3)
+        Me.TabPage3.Size = New System.Drawing.Size(728, 331)
         Me.TabPage3.TabIndex = 0
         Me.TabPage3.Text = "Download"
         '
@@ -271,9 +261,8 @@ Partial Class frmFileExplorer
         Me.lvDownload.BackColor = System.Drawing.Color.FromArgb(CType(CType(230, Byte), Integer), CType(CType(230, Byte), Integer), CType(CType(230, Byte), Integer))
         Me.lvDownload.HideSelection = False
         Me.lvDownload.Location = New System.Drawing.Point(0, 0)
-        Me.lvDownload.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.lvDownload.Name = "lvDownload"
-        Me.lvDownload.Size = New System.Drawing.Size(969, 403)
+        Me.lvDownload.Size = New System.Drawing.Size(728, 328)
         Me.lvDownload.TabIndex = 3
         Me.lvDownload.UseCompatibleStateImageBehavior = False
         '
@@ -281,11 +270,10 @@ Partial Class frmFileExplorer
         '
         Me.TabPage4.BackColor = System.Drawing.Color.FromArgb(CType(CType(230, Byte), Integer), CType(CType(230, Byte), Integer), CType(CType(230, Byte), Integer))
         Me.TabPage4.Controls.Add(Me.lvUpload)
-        Me.TabPage4.Location = New System.Drawing.Point(4, 29)
-        Me.TabPage4.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.TabPage4.Location = New System.Drawing.Point(4, 25)
         Me.TabPage4.Name = "TabPage4"
-        Me.TabPage4.Padding = New System.Windows.Forms.Padding(4, 4, 4, 4)
-        Me.TabPage4.Size = New System.Drawing.Size(973, 410)
+        Me.TabPage4.Padding = New System.Windows.Forms.Padding(3)
+        Me.TabPage4.Size = New System.Drawing.Size(728, 331)
         Me.TabPage4.TabIndex = 1
         Me.TabPage4.Text = "Upload"
         '
@@ -294,9 +282,8 @@ Partial Class frmFileExplorer
         Me.lvUpload.BackColor = System.Drawing.Color.FromArgb(CType(CType(230, Byte), Integer), CType(CType(230, Byte), Integer), CType(CType(230, Byte), Integer))
         Me.lvUpload.HideSelection = False
         Me.lvUpload.Location = New System.Drawing.Point(0, 0)
-        Me.lvUpload.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.lvUpload.Name = "lvUpload"
-        Me.lvUpload.Size = New System.Drawing.Size(969, 403)
+        Me.lvUpload.Size = New System.Drawing.Size(728, 328)
         Me.lvUpload.TabIndex = 4
         Me.lvUpload.UseCompatibleStateImageBehavior = False
         '
@@ -305,24 +292,22 @@ Partial Class frmFileExplorer
         Me.cmdExit.Customization = "5ubm/9LS0v/m5ub/qqqq/wAAAP//////"
         Me.cmdExit.Font = New System.Drawing.Font("Verdana", 8.0!)
         Me.cmdExit.Image = Nothing
-        Me.cmdExit.Location = New System.Drawing.Point(955, 4)
-        Me.cmdExit.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.cmdExit.Location = New System.Drawing.Point(716, 3)
         Me.cmdExit.Name = "cmdExit"
         Me.cmdExit.NoRounding = False
-        Me.cmdExit.Size = New System.Drawing.Size(43, 25)
+        Me.cmdExit.Size = New System.Drawing.Size(32, 20)
         Me.cmdExit.TabIndex = 2
         Me.cmdExit.Text = "X"
         Me.cmdExit.Transparent = False
         '
         'frmFileExplorer
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(1001, 524)
+        Me.ClientSize = New System.Drawing.Size(751, 426)
         Me.Controls.Add(Me.CrystalClearThemeContainer1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
-        Me.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
-        Me.MinimumSize = New System.Drawing.Size(233, 185)
+        Me.MinimumSize = New System.Drawing.Size(175, 150)
         Me.Name = "frmFileExplorer"
         Me.Text = "File Manager"
         Me.TransparencyKey = System.Drawing.Color.Fuchsia

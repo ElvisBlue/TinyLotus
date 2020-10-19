@@ -67,7 +67,11 @@ void CALLBACK DownloadThread(DownloadInfo* downloadInfoPtr)
 
 		if (status != FILE_DOWNLOAD_END)
 			status = FILE_DOWNLOAD_PROGRESS;
+<<<<<<< HEAD
 		Sleep(5);
+=======
+		Sleep(100);
+>>>>>>> a06d05a7fa82d719aaaff83d5193e6142e80b244
 	}
 	CloseHandle(hFile);
 	free(chunk);
