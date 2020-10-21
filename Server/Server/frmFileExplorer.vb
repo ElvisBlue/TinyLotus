@@ -6,6 +6,7 @@ Public Class frmFileExplorer
 
     Public Sub lv_Init()
         With lvFileExplorer
+            .Items.Clear()
             .Clear()
             .View = View.Details
             .GridLines = True
@@ -23,6 +24,7 @@ Public Class frmFileExplorer
         End With
 
         With lvDownload
+            .Items.Clear()
             .Clear()
             .View = View.Details
             .GridLines = True
@@ -37,6 +39,7 @@ Public Class frmFileExplorer
         End With
 
         With lvUpload
+            .Items.Clear()
             .Clear()
             .View = View.Details
             .GridLines = True
@@ -54,7 +57,7 @@ Public Class frmFileExplorer
     Private Sub frmFileExplorer_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
 
         lv_Init()
-
+        txtPath.Text = ""
 
         Dim downloadPath As String = fileExplorerObj.GetDownloadPath()
 
@@ -302,10 +305,6 @@ Public Class frmFileExplorer
         End If
     End Sub
 
-    Private Sub lvDownload_SelectedIndexChanged(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles lvDownload.SelectedIndexChanged
-
-    End Sub
-
     Private Sub DownloadFileToolStripMenuItem_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles DownloadFileToolStripMenuItem.Click
         If lvFileExplorer.SelectedItems.Count > 0 Then
             If lvFileExplorer.FocusedItem.SubItems(2).Text = "Folder" Then
@@ -405,7 +404,6 @@ Public Class frmFileExplorer
             .RestoreDirectory = True
         End With
         If openFileDlg.ShowDialog() = DialogResult.OK Then
-            'MsgBox(Utilities.TrimPath(openFileDlg.FileName))
             uploadedPath += Utilities.TrimPath(openFileDlg.FileName)
             fileExplorerObj.SendUpload(openFileDlg.FileName, uploadedPath)
         End If

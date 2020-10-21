@@ -75,7 +75,7 @@ Public Class clsInfo
             Case INFO_BOTTAG ' Bot Tag
                 ClientInfo.botTag = System.Text.Encoding.Unicode.GetString(BinReader.BufferReadBuffer(packet, 1, packet.Length - 1))
             Case INFO_BOTUID
-                ClientInfo.botID = Hex(BinReader.BufferReadDWORD(packet, 1))
+                ClientInfo.botID = Hex(BinReader.BufferReadDWORD(packet, 1)).PadLeft(8, "0")
         End Select
     End Sub
 
@@ -132,11 +132,12 @@ Public Class clsInfo
         Return True
     End Function
 
-    Public Function SendGetBotUID() As UInteger
+    Public Function SendGetBotUID() As Boolean
         Dim BinWritter As clsArrayBinaryWritten = New clsArrayBinaryWritten
         Dim packet As Byte() = {}
 
         BinWritter.BufferAddByte(packet, 4)
         SendPacket(packet)
+        Return True
     End Function
 End Class

