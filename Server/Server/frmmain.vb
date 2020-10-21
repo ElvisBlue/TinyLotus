@@ -29,10 +29,10 @@ Public Class frmmain
             'Add column header
             .Columns.Add("Flag", 35)
             .Columns.Add("Bot ID", 100)
-            .Columns.Add("IP Address", 100)
+            .Columns.Add("IP Address", 150)
             .Columns.Add("System", 150)
-            .Columns.Add("User/Computer Name", 150)
-            .Columns.Add("Current Window Title", 300)
+            .Columns.Add("User/Computer Name", 200)
+            .Columns.Add("Current Window Title", 250)
         End With
         Return True
     End Function
@@ -141,16 +141,18 @@ Public Class frmmain
 
     Private Sub CrystalClearButton1_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmdExit.Click
         serverTCP.Stop()
-        serverTCP.Server.Dispose()
 
         For Each client As clsClientObj In clientMgr.GetClientList()
             client.ForceDisconnect()
         Next
 
+        serverTCP.Server.Dispose()
+
         mSettings.WriteSettings()
         End
     End Sub
 
+    Private updateInfoCnt As Integer = 0
     Private Sub tmThread_Tick(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles tmThread.Tick
         'Update status
         If mSettings.ServerSetting.isListening Then
@@ -159,25 +161,45 @@ Public Class frmmain
             lbStatus.Text = "No port listening"
         End If
 
-        'Save select item
-        Try
-            If lvClient.SelectedItems.Count > 0 Then
-                SelectedItemComName = lvClient.FocusedItem.SubItems(4).Text
-            Else
-                SelectedItemComName = ""
-            End If
-        Catch
-            SelectedItemComName = ""
-        End Try
-
         'Update List of Client
-        Dim ClientList As List(Of clsClientObj) = clientMgr.GetClientList()
         clientMgr.RefreshClient()
-        If ClientList.Count <> lvClient.Items.Count Then
-            lvClient.Items.Clear()
+
+        'Send update info
+        updateInfoCnt += 1
+        If updateInfoCnt >= 10 Then
+            SyncClientListView()
+            UpdateClientInfo()
+            updateInfoCnt = 0
+        End If
+
+    End Sub
+
+    Private Sub SyncClientListView()
+        Dim ClientList As List(Of clsClientObj) = clientMgr.GetClientList()
+
+        If ClientList.Count > lvClient.Items.Count Then
+            Dim i As Integer = 0
             For Each ClientObj As clsClientObj In ClientList
-                AddClientToListview(ClientObj)
+                If i < lvClient.Items.Count Then
+                    UpdateClientToListview(ClientObj, i)
+                    i += 1
+                Else
+                    AddClientToListview(ClientObj)
+                End If
             Next
+        ElseIf ClientList.Count < lvClient.Items.Count Then
+            If ClientList.Count = 0 Then
+                lvClient.Items.Clear()
+            Else
+                For Each item As ListViewItem In lvClient.Items
+                    For Each client In ClientList
+                        If client.GetClientInfo().botID <> item.SubItems(1).Text Or
+                        client.GetClientInfo().computerUserName <> item.SubItems(4).Text Then
+                            lvClient.Items.Remove(item)
+                        End If
+                    Next
+                Next
+            End If
         Else
             Dim i As Integer = 0
             For Each ClientObj As clsClientObj In ClientList
@@ -185,15 +207,18 @@ Public Class frmmain
                 i += 1
             Next
         End If
+    End Sub
 
-
+    Private Sub UpdateClientInfo()
+        Dim ClientList As List(Of clsClientObj) = clientMgr.GetClientList()
+        For Each ClientObj As clsClientObj In ClientList
+            ClientObj.UpdateInfo()
+        Next
     End Sub
 
     Private Sub cmdListen_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmdListen.Click
         frmListen.ShowDialog()
     End Sub
-
-    Dim SelectedItemComName As String
 
     Private Sub lvClient_MouseClick(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles lvClient.MouseClick
         If e.Button = Windows.Forms.MouseButtons.Right Then
@@ -206,7 +231,8 @@ Public Class frmmain
     Private Function GetSelectedClient() As clsClientObj
         Dim ClientList As List(Of clsClientObj) = clientMgr.GetClientList()
         For Each ClientObj As clsClientObj In ClientList
-            If ClientObj.GetClientInfo.computerUserName = SelectedItemComName Then
+            If ClientObj.GetClientInfo.computerUserName = lvClient.FocusedItem.SubItems(4).Text _
+            And ClientObj.GetClientInfo.botID = lvClient.FocusedItem.SubItems(1).Text Then
                 Return ClientObj
             End If
         Next

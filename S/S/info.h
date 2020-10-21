@@ -18,6 +18,7 @@ private:
 	DWORD GetUID();
 	bool GetRATInfo(BYTE* dataBuffer, size_t* dataMaxSize);
 	config* conf;
+	DWORD UID;
 };
 
 #endif

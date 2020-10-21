@@ -25,11 +25,7 @@ Public Class clsFileExplorer
     Public Const UPLOAD_FINISH = 3
     Public Const UPLOAD_ERROR = 4
 
-<<<<<<< HEAD
-    Public Const UPLOAD_CHUNK_SIZE = &H5000UI
-=======
-    Public Const UPLOAD_CHUNK_SIZE = &H100000UI
->>>>>>> a06d05a7fa82d719aaaff83d5193e6142e80b244
+    Public Const UPLOAD_CHUNK_SIZE = &H150000UI
 
     Structure LITE_WIN32_FIND_DATA
         Dim ftCreationTime As Long
@@ -75,11 +71,7 @@ Public Class clsFileExplorer
                 Return
             End If
             While Attr.status = UPLOAD_INIT
-<<<<<<< HEAD
                 Threading.Thread.Sleep(5)
-=======
-                Threading.Thread.Sleep(10)
->>>>>>> a06d05a7fa82d719aaaff83d5193e6142e80b244
                 SendUploadChunk()
                 If Attr.totalSize = Attr.sizeUploaded Then
                     Attr.status = UPLOAD_FINISH
@@ -137,8 +129,8 @@ Public Class clsFileExplorer
         Dim Session As UInteger
         Dim path As String
         Dim status As Byte
-        Dim sizeLeft As UInt64
-        Dim totalSize As UInt64
+        Dim sizeLeft As UInteger
+        Dim totalSize As UInteger
         Dim savedPath As String
     End Structure
 
@@ -161,12 +153,15 @@ Public Class clsFileExplorer
 
         Public Sub OnDownloadPacketProgress(ByVal packet() As Byte)
             Dim BinReader As clsArrayBinaryReader = New clsArrayBinaryReader()
-            Dim chunkSize As Integer = BinReader.BufferReadDWORD(packet, 16)
+            Dim chunkSize As UInteger = BinReader.BufferReadDWORD(packet, 16)
 
             Attr.totalSize = BinReader.BufferReadDWORD(packet, 8)
             Attr.sizeLeft = BinReader.BufferReadDWORD(packet, 12)
             If fileObj Is Nothing Then
                 fileObj = New FileStream(Attr.savedPath, FileMode.Append)
+            End If
+            If (packet.Length - 20) <> chunkSize Then
+                Utilities.GlobalLog("Wrong packet chunk and unpacked packet chunk")
             End If
             fileObj.Write(BinReader.BufferReadBuffer(packet, 20, chunkSize), 0, chunkSize)
         End Sub

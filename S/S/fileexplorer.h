@@ -25,7 +25,7 @@
 #define	FILE_ERROR_UPLOAD		4
 
 //Download chunk size
-#define DOWNLOAD_CHUNK_SIZE		0x100000
+#define DOWNLOAD_CHUNK_SIZE		0x150000
 
 #pragma pack(push, 1)
 struct LITE_WIN32_FIND_DATA

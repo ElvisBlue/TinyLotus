@@ -49,9 +49,6 @@ Public Class clsClientObj
         Dim packet As Byte() = Nothing
         Dim BinReader As clsArrayBinaryReader = New clsArrayBinaryReader()
 
-        'Create Thread for updating information
-        Dim updateThread As Threading.Thread = New Thread(AddressOf UpdateInfoThread)
-        updateThread.Start()
 
         'Dispatch packet
         While IsConnected()
@@ -63,7 +60,7 @@ Public Class clsClientObj
                     Dim PacketForObj As Byte() = BinReader.BufferReadBuffer(packet, 8, packet.Length - 8)
                     FeatureObj.OnPacketArrived(PacketForObj)
                 Else
-                    MsgBox("Unknown Obj")
+                    Utilities.GlobalLog("Unknown obj from " & InfoObj.GetClientInfo.computerUserName)
                 End If
             End If
         End While
@@ -71,11 +68,10 @@ Public Class clsClientObj
         Return True
     End Function
 
-    Public Sub UpdateInfoThread()
-        While IsConnected()
+    Public Sub UpdateInfo()
+        If IsConnected() Then
             InfoObj.SendGetWindowTitle()
-            Threading.Thread.Sleep(3000)
-        End While
+        End If
     End Sub
 
     Public Function GetClientInfo() As structClientInfo
@@ -102,7 +98,6 @@ Public Class clsClientObj
                 Return FileExplorerObj
             Case 4
                 Return ScreenshotObj
-
         End Select
         Return Nothing
     End Function
@@ -131,6 +126,7 @@ Public Class clsClientMgr
 
         'Create Thread for new client obj
         Dim StartClientThread As Thread = New Thread(AddressOf ClientThread)
+        StartClientThread.Priority = ThreadPriority.BelowNormal
         StartClientThread.Start(clientObj)
 
         'Finally add to list

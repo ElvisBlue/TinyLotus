@@ -50,26 +50,18 @@ Public Class clsConnection
             End While
             stream.Read(header, 0, 12)
             If BinReader.BufferReadDWORD(header, 0) = TINY_LOTUS_HEADER Then
-                Dim packetSize As Integer = BinReader.BufferReadDWORD(header, 4)
+                Dim packetSize As UInteger = BinReader.BufferReadDWORD(header, 4)
 
                 'OK perform decompress buffer
                 Dim compressedBuffer(packetSize - 1) As Byte
 
-                'While Conn.Available < packetSize
-                'Threading.Thread.Sleep(1)
-                'End While
-
                 Dim totalSize As UInteger = packetSize
                 Dim receivedSize As UInteger = 0
-                Dim bytesread As Integer
+                Dim bytesread As UInteger
                 While receivedSize < totalSize
                     bytesread = stream.Read(compressedBuffer, receivedSize, packetSize - receivedSize)
                     receivedSize += bytesread
                 End While
-
-                'If bytesread < packetSize Then
-                'MsgBox("What do I do?")
-                'End If
 
                 Buffer = ZLibCompressor.DeCompress(compressedBuffer)
                 Return True
@@ -109,40 +101,4 @@ Public Class clsConnection
 
     'Private
     Private Conn As TcpClient
-End Class
-
-'Am I need ConnPool
-Public Class clsConnectionPool
-    'Public
-    Public Sub New(ByVal mConn As TcpClient)
-        Conn = New clsConnection(mConn)
-        IsBusying = False
-    End Sub
-
-    Public Function QueryConnObj() As clsConnection
-        'Wait for Obj
-        While IsBusying = True
-            Threading.Thread.Sleep(10)
-        End While
-
-        'Lock Obj
-        IsBusying = True
-        Return Conn
-    End Function
-
-    Public Function ReturnConnObj() As Boolean
-        'Unlock Obj
-        IsBusying = False
-        Return True
-    End Function
-
-    Public Function ForceQueryConnObj() As clsConnection
-        'Please use for read-only
-        Return Conn
-    End Function
-
-    'Private
-    Private Conn As clsConnection
-    Private IsBusying As Boolean
-
 End Class

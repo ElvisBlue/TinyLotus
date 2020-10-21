@@ -29,8 +29,13 @@ Partial Class frmScreenshot
         Me.cmdTakeScreen = New Server.CrystalClearButton()
         Me.picScreenshot = New System.Windows.Forms.PictureBox()
         Me.tmSync = New System.Windows.Forms.Timer(Me.components)
+        Me.ctxMenu = New System.Windows.Forms.ContextMenuStrip(Me.components)
+        Me.OpenToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.DeleteToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.OpenFolderToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.CrystalClearThemeContainer1.SuspendLayout()
         CType(Me.picScreenshot, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.ctxMenu.SuspendLayout()
         Me.SuspendLayout()
         '
         'CrystalClearThemeContainer1
@@ -118,7 +123,31 @@ Partial Class frmScreenshot
         '
         'tmSync
         '
-        Me.tmSync.Interval = 500
+        Me.tmSync.Interval = 1000
+        '
+        'ctxMenu
+        '
+        Me.ctxMenu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.OpenToolStripMenuItem, Me.DeleteToolStripMenuItem, Me.OpenFolderToolStripMenuItem})
+        Me.ctxMenu.Name = "ctxMenu"
+        Me.ctxMenu.Size = New System.Drawing.Size(181, 92)
+        '
+        'OpenToolStripMenuItem
+        '
+        Me.OpenToolStripMenuItem.Name = "OpenToolStripMenuItem"
+        Me.OpenToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.OpenToolStripMenuItem.Text = "Open"
+        '
+        'DeleteToolStripMenuItem
+        '
+        Me.DeleteToolStripMenuItem.Name = "DeleteToolStripMenuItem"
+        Me.DeleteToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.DeleteToolStripMenuItem.Text = "Delete"
+        '
+        'OpenFolderToolStripMenuItem
+        '
+        Me.OpenFolderToolStripMenuItem.Name = "OpenFolderToolStripMenuItem"
+        Me.OpenFolderToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.OpenFolderToolStripMenuItem.Text = "Open Folder"
         '
         'frmScreenshot
         '
@@ -127,13 +156,14 @@ Partial Class frmScreenshot
         Me.ClientSize = New System.Drawing.Size(972, 612)
         Me.Controls.Add(Me.CrystalClearThemeContainer1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
-        Me.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.Margin = New System.Windows.Forms.Padding(2)
         Me.MinimumSize = New System.Drawing.Size(131, 122)
         Me.Name = "frmScreenshot"
         Me.Text = "Screenshot"
         Me.TransparencyKey = System.Drawing.Color.Fuchsia
         Me.CrystalClearThemeContainer1.ResumeLayout(False)
         CType(Me.picScreenshot, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.ctxMenu.ResumeLayout(False)
         Me.ResumeLayout(False)
 
     End Sub
@@ -144,4 +174,8 @@ Partial Class frmScreenshot
     Friend WithEvents cmdExit As CrystalClearButton
     Friend WithEvents lvImage As CrystalClearListbox
     Friend WithEvents tmSync As Timer
+    Friend WithEvents ctxMenu As ContextMenuStrip
+    Friend WithEvents OpenToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents DeleteToolStripMenuItem As ToolStripMenuItem
+    Friend WithEvents OpenFolderToolStripMenuItem As ToolStripMenuItem
 End Class

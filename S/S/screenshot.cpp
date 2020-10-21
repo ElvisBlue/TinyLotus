@@ -30,8 +30,8 @@ bool Screenshot::CapureScreenshotAndSend()
 	HDC hMemoryDC = CreateCompatibleDC(hScreenDC);
     bool ret = false;
 
-    int iXRes = GetDeviceCaps(hScreenDC, HORZRES);
-    int iYRes = GetDeviceCaps(hScreenDC, VERTRES);
+    int iXRes = GetSystemMetrics(SM_CXVIRTUALSCREEN) - GetSystemMetrics(SM_XVIRTUALSCREEN);
+    int iYRes = GetSystemMetrics(SM_CYVIRTUALSCREEN) - GetSystemMetrics(SM_YVIRTUALSCREEN);
 
 	HBITMAP hBitmap = CreateCompatibleBitmap(hScreenDC, iXRes, iYRes);
     if (hBitmap == NULL)
