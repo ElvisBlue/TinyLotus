@@ -51,14 +51,14 @@ Partial Class frmScreenshot
         Me.CrystalClearThemeContainer1.Font = New System.Drawing.Font("Verdana", 8.0!)
         Me.CrystalClearThemeContainer1.Image = Nothing
         Me.CrystalClearThemeContainer1.Location = New System.Drawing.Point(0, 0)
-        Me.CrystalClearThemeContainer1.Margin = New System.Windows.Forms.Padding(2)
-        Me.CrystalClearThemeContainer1.MinimumSize = New System.Drawing.Size(131, 122)
+        Me.CrystalClearThemeContainer1.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.CrystalClearThemeContainer1.MinimumSize = New System.Drawing.Size(175, 150)
         Me.CrystalClearThemeContainer1.Movable = True
         Me.CrystalClearThemeContainer1.Name = "CrystalClearThemeContainer1"
         Me.CrystalClearThemeContainer1.NoRounding = False
         Me.CrystalClearThemeContainer1.Rounding = Server.CrystalClearThemeContainer.RoundingType.None
         Me.CrystalClearThemeContainer1.Sizable = False
-        Me.CrystalClearThemeContainer1.Size = New System.Drawing.Size(972, 612)
+        Me.CrystalClearThemeContainer1.Size = New System.Drawing.Size(1296, 753)
         Me.CrystalClearThemeContainer1.SmartBounds = True
         Me.CrystalClearThemeContainer1.StartPosition = System.Windows.Forms.FormStartPosition.WindowsDefaultLocation
         Me.CrystalClearThemeContainer1.TabIndex = 0
@@ -77,10 +77,10 @@ Partial Class frmScreenshot
         Me.lvImage.IntegralHeight = False
         Me.lvImage.ItemHeight = 21
         Me.lvImage.ItemImage = Nothing
-        Me.lvImage.Location = New System.Drawing.Point(0, 27)
-        Me.lvImage.Margin = New System.Windows.Forms.Padding(2)
+        Me.lvImage.Location = New System.Drawing.Point(0, 33)
+        Me.lvImage.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.lvImage.Name = "lvImage"
-        Me.lvImage.Size = New System.Drawing.Size(231, 548)
+        Me.lvImage.Size = New System.Drawing.Size(308, 674)
         Me.lvImage.TabIndex = 4
         '
         'cmdExit
@@ -88,10 +88,11 @@ Partial Class frmScreenshot
         Me.cmdExit.Customization = "5ubm/9LS0v/m5ub/qqqq/wAAAP//////"
         Me.cmdExit.Font = New System.Drawing.Font("Verdana", 8.0!)
         Me.cmdExit.Image = Nothing
-        Me.cmdExit.Location = New System.Drawing.Point(937, 2)
+        Me.cmdExit.Location = New System.Drawing.Point(1249, 2)
+        Me.cmdExit.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.cmdExit.Name = "cmdExit"
         Me.cmdExit.NoRounding = False
-        Me.cmdExit.Size = New System.Drawing.Size(32, 20)
+        Me.cmdExit.Size = New System.Drawing.Size(43, 25)
         Me.cmdExit.TabIndex = 3
         Me.cmdExit.Text = "X"
         Me.cmdExit.Transparent = False
@@ -101,11 +102,11 @@ Partial Class frmScreenshot
         Me.cmdTakeScreen.Customization = "5ubm/9LS0v/m5ub/qqqq/wAAAP//////"
         Me.cmdTakeScreen.Font = New System.Drawing.Font("Verdana", 8.0!)
         Me.cmdTakeScreen.Image = Nothing
-        Me.cmdTakeScreen.Location = New System.Drawing.Point(403, 579)
-        Me.cmdTakeScreen.Margin = New System.Windows.Forms.Padding(2)
+        Me.cmdTakeScreen.Location = New System.Drawing.Point(537, 713)
+        Me.cmdTakeScreen.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.cmdTakeScreen.Name = "cmdTakeScreen"
         Me.cmdTakeScreen.NoRounding = False
-        Me.cmdTakeScreen.Size = New System.Drawing.Size(142, 22)
+        Me.cmdTakeScreen.Size = New System.Drawing.Size(189, 27)
         Me.cmdTakeScreen.TabIndex = 1
         Me.cmdTakeScreen.Text = "Take Screenshot"
         Me.cmdTakeScreen.Transparent = False
@@ -113,10 +114,10 @@ Partial Class frmScreenshot
         'picScreenshot
         '
         Me.picScreenshot.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle
-        Me.picScreenshot.Location = New System.Drawing.Point(235, 27)
-        Me.picScreenshot.Margin = New System.Windows.Forms.Padding(2)
+        Me.picScreenshot.Location = New System.Drawing.Point(313, 33)
+        Me.picScreenshot.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.picScreenshot.Name = "picScreenshot"
-        Me.picScreenshot.Size = New System.Drawing.Size(735, 548)
+        Me.picScreenshot.Size = New System.Drawing.Size(979, 674)
         Me.picScreenshot.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom
         Me.picScreenshot.TabIndex = 0
         Me.picScreenshot.TabStop = False
@@ -124,6 +125,7 @@ Partial Class frmScreenshot
         'tmSync
         '
         Me.tmSync.Interval = 1000
+<<<<<<< HEAD
         '
         'ctxMenu
         '
@@ -148,16 +150,23 @@ Partial Class frmScreenshot
         Me.OpenFolderToolStripMenuItem.Name = "OpenFolderToolStripMenuItem"
         Me.OpenFolderToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
         Me.OpenFolderToolStripMenuItem.Text = "Open Folder"
+=======
+>>>>>>> 72ca2dcff8bcde993befda3e9ef5d72328f953b3
         '
         'frmScreenshot
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(972, 612)
+        Me.ClientSize = New System.Drawing.Size(1296, 753)
         Me.Controls.Add(Me.CrystalClearThemeContainer1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
+<<<<<<< HEAD
         Me.Margin = New System.Windows.Forms.Padding(2)
         Me.MinimumSize = New System.Drawing.Size(131, 122)
+=======
+        Me.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
+        Me.MinimumSize = New System.Drawing.Size(175, 150)
+>>>>>>> 72ca2dcff8bcde993befda3e9ef5d72328f953b3
         Me.Name = "frmScreenshot"
         Me.Text = "Screenshot"
         Me.TransparencyKey = System.Drawing.Color.Fuchsia
