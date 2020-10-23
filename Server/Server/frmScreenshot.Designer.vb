@@ -125,7 +125,6 @@ Partial Class frmScreenshot
         'tmSync
         '
         Me.tmSync.Interval = 1000
-<<<<<<< HEAD
         '
         'ctxMenu
         '
@@ -150,8 +149,7 @@ Partial Class frmScreenshot
         Me.OpenFolderToolStripMenuItem.Name = "OpenFolderToolStripMenuItem"
         Me.OpenFolderToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
         Me.OpenFolderToolStripMenuItem.Text = "Open Folder"
-=======
->>>>>>> 72ca2dcff8bcde993befda3e9ef5d72328f953b3
+
         '
         'frmScreenshot
         '
@@ -160,13 +158,10 @@ Partial Class frmScreenshot
         Me.ClientSize = New System.Drawing.Size(1296, 753)
         Me.Controls.Add(Me.CrystalClearThemeContainer1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
-<<<<<<< HEAD
-        Me.Margin = New System.Windows.Forms.Padding(2)
-        Me.MinimumSize = New System.Drawing.Size(131, 122)
-=======
+
         Me.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.MinimumSize = New System.Drawing.Size(175, 150)
->>>>>>> 72ca2dcff8bcde993befda3e9ef5d72328f953b3
+
         Me.Name = "frmScreenshot"
         Me.Text = "Screenshot"
         Me.TransparencyKey = System.Drawing.Color.Fuchsia

@@ -52,8 +52,6 @@ Public Class frmScreenshot
             tmSync.Enabled = False
             Return
         End If
-
-<<<<<<< HEAD
     End Sub
 
     Private Sub OpenToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles OpenToolStripMenuItem.Click
@@ -92,7 +90,5 @@ Public Class frmScreenshot
         If lvImage.SelectedItem <> Nothing Then
             Process.Start(ScreenshotObj.GetScreenshotPath())
         End If
-=======
->>>>>>> 72ca2dcff8bcde993befda3e9ef5d72328f953b3
     End Sub
 End Class
