@@ -17,11 +17,18 @@ Connection::Connection(char* mIP, int mPort)
 
 Connection::~Connection() 
 {
+	CloseConnection();
+}
+
+bool Connection::CloseConnection()
+{
 	if (s != NULL)
 	{
 		closesocket(s);
 		WSACleanup();
+		s = NULL;
 	}
+	return true;
 }
 
 bool Connection::IsConnected()

@@ -105,6 +105,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="objMgr.cpp" />
     <ClCompile Include="screenshot.cpp" />
+    <ClCompile Include="switch.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="bone_obj.h" />
@@ -117,6 +118,7 @@
     <ClInclude Include="main.h" />
     <ClInclude Include="objMgr.h" />
     <ClInclude Include="screenshot.h" />
+    <ClInclude Include="switch.h" />
     <ClInclude Include="Utilities.h" />
   </ItemGroup>
   <ItemGroup>

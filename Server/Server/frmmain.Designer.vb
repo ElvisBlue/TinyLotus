@@ -31,7 +31,12 @@ Partial Class frmmain
         Me.SurveillanceToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.KeyloggerToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.ScreenshotToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.NetworkToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ReverseSocks5ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.PluginsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ClientToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.CloseToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.TerminateToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.CrystalClearThemeContainer1 = New Server.CrystalClearThemeContainer()
         Me.cmdExit = New Server.CrystalClearButton()
         Me.CrystalClearTabControl1 = New Server.CrystalClearTabControl()
@@ -44,11 +49,6 @@ Partial Class frmmain
         Me.TabPage5 = New System.Windows.Forms.TabPage()
         Me.cmdListen = New Server.CrystalClearButton()
         Me.lbStatus = New System.Windows.Forms.Label()
-        Me.ClientToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.CloseToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.TerminateToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.NetworkToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ReverseSocks5ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ctxMenu.SuspendLayout()
         Me.CrystalClearThemeContainer1.SuspendLayout()
         Me.CrystalClearTabControl1.SuspendLayout()
@@ -65,51 +65,83 @@ Partial Class frmmain
         Me.ctxMenu.ImageScalingSize = New System.Drawing.Size(20, 20)
         Me.ctxMenu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItem1, Me.SurveillanceToolStripMenuItem, Me.NetworkToolStripMenuItem, Me.PluginsToolStripMenuItem, Me.ClientToolStripMenuItem})
         Me.ctxMenu.Name = "ContextMenuStrip1"
-        Me.ctxMenu.Size = New System.Drawing.Size(138, 114)
+        Me.ctxMenu.Size = New System.Drawing.Size(158, 124)
         '
         'ToolStripMenuItem1
         '
         Me.ToolStripMenuItem1.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.RemoteCMDToolStripMenuItem1, Me.FileExplorerToolStripMenuItem1})
         Me.ToolStripMenuItem1.Name = "ToolStripMenuItem1"
-        Me.ToolStripMenuItem1.Size = New System.Drawing.Size(137, 22)
+        Me.ToolStripMenuItem1.Size = New System.Drawing.Size(157, 24)
         Me.ToolStripMenuItem1.Text = "System"
         '
         'RemoteCMDToolStripMenuItem1
         '
         Me.RemoteCMDToolStripMenuItem1.Name = "RemoteCMDToolStripMenuItem1"
-        Me.RemoteCMDToolStripMenuItem1.Size = New System.Drawing.Size(145, 22)
+        Me.RemoteCMDToolStripMenuItem1.Size = New System.Drawing.Size(181, 26)
         Me.RemoteCMDToolStripMenuItem1.Text = "Remote CMD"
         '
         'FileExplorerToolStripMenuItem1
         '
         Me.FileExplorerToolStripMenuItem1.Name = "FileExplorerToolStripMenuItem1"
-        Me.FileExplorerToolStripMenuItem1.Size = New System.Drawing.Size(145, 22)
+        Me.FileExplorerToolStripMenuItem1.Size = New System.Drawing.Size(181, 26)
         Me.FileExplorerToolStripMenuItem1.Text = "File Explorer"
         '
         'SurveillanceToolStripMenuItem
         '
         Me.SurveillanceToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.KeyloggerToolStripMenuItem1, Me.ScreenshotToolStripMenuItem})
         Me.SurveillanceToolStripMenuItem.Name = "SurveillanceToolStripMenuItem"
-        Me.SurveillanceToolStripMenuItem.Size = New System.Drawing.Size(137, 22)
+        Me.SurveillanceToolStripMenuItem.Size = New System.Drawing.Size(157, 24)
         Me.SurveillanceToolStripMenuItem.Text = "Surveillance"
         '
         'KeyloggerToolStripMenuItem1
         '
         Me.KeyloggerToolStripMenuItem1.Name = "KeyloggerToolStripMenuItem1"
-        Me.KeyloggerToolStripMenuItem1.Size = New System.Drawing.Size(132, 22)
+        Me.KeyloggerToolStripMenuItem1.Size = New System.Drawing.Size(164, 26)
         Me.KeyloggerToolStripMenuItem1.Text = "Keylogger"
         '
         'ScreenshotToolStripMenuItem
         '
         Me.ScreenshotToolStripMenuItem.Name = "ScreenshotToolStripMenuItem"
-        Me.ScreenshotToolStripMenuItem.Size = New System.Drawing.Size(132, 22)
+        Me.ScreenshotToolStripMenuItem.Size = New System.Drawing.Size(164, 26)
         Me.ScreenshotToolStripMenuItem.Text = "Screenshot"
+        '
+        'NetworkToolStripMenuItem
+        '
+        Me.NetworkToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ReverseSocks5ToolStripMenuItem})
+        Me.NetworkToolStripMenuItem.Name = "NetworkToolStripMenuItem"
+        Me.NetworkToolStripMenuItem.Size = New System.Drawing.Size(157, 24)
+        Me.NetworkToolStripMenuItem.Text = "Network"
+        '
+        'ReverseSocks5ToolStripMenuItem
+        '
+        Me.ReverseSocks5ToolStripMenuItem.Name = "ReverseSocks5ToolStripMenuItem"
+        Me.ReverseSocks5ToolStripMenuItem.Size = New System.Drawing.Size(192, 26)
+        Me.ReverseSocks5ToolStripMenuItem.Text = "Reverse Socks5"
         '
         'PluginsToolStripMenuItem
         '
         Me.PluginsToolStripMenuItem.Name = "PluginsToolStripMenuItem"
-        Me.PluginsToolStripMenuItem.Size = New System.Drawing.Size(137, 22)
+        Me.PluginsToolStripMenuItem.Size = New System.Drawing.Size(157, 24)
         Me.PluginsToolStripMenuItem.Text = "Plugins"
+        '
+        'ClientToolStripMenuItem
+        '
+        Me.ClientToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CloseToolStripMenuItem, Me.TerminateToolStripMenuItem})
+        Me.ClientToolStripMenuItem.Name = "ClientToolStripMenuItem"
+        Me.ClientToolStripMenuItem.Size = New System.Drawing.Size(157, 24)
+        Me.ClientToolStripMenuItem.Text = "Client"
+        '
+        'CloseToolStripMenuItem
+        '
+        Me.CloseToolStripMenuItem.Name = "CloseToolStripMenuItem"
+        Me.CloseToolStripMenuItem.Size = New System.Drawing.Size(158, 26)
+        Me.CloseToolStripMenuItem.Text = "Close"
+        '
+        'TerminateToolStripMenuItem
+        '
+        Me.TerminateToolStripMenuItem.Name = "TerminateToolStripMenuItem"
+        Me.TerminateToolStripMenuItem.Size = New System.Drawing.Size(158, 26)
+        Me.TerminateToolStripMenuItem.Text = "Terminate"
         '
         'CrystalClearThemeContainer1
         '
@@ -124,13 +156,14 @@ Partial Class frmmain
         Me.CrystalClearThemeContainer1.Font = New System.Drawing.Font("Verdana", 8.0!)
         Me.CrystalClearThemeContainer1.Image = Nothing
         Me.CrystalClearThemeContainer1.Location = New System.Drawing.Point(0, 0)
-        Me.CrystalClearThemeContainer1.MinimumSize = New System.Drawing.Size(175, 150)
+        Me.CrystalClearThemeContainer1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.CrystalClearThemeContainer1.MinimumSize = New System.Drawing.Size(233, 185)
         Me.CrystalClearThemeContainer1.Movable = True
         Me.CrystalClearThemeContainer1.Name = "CrystalClearThemeContainer1"
         Me.CrystalClearThemeContainer1.NoRounding = False
         Me.CrystalClearThemeContainer1.Rounding = Server.CrystalClearThemeContainer.RoundingType.None
         Me.CrystalClearThemeContainer1.Sizable = False
-        Me.CrystalClearThemeContainer1.Size = New System.Drawing.Size(971, 494)
+        Me.CrystalClearThemeContainer1.Size = New System.Drawing.Size(1295, 608)
         Me.CrystalClearThemeContainer1.SmartBounds = True
         Me.CrystalClearThemeContainer1.StartPosition = System.Windows.Forms.FormStartPosition.WindowsDefaultLocation
         Me.CrystalClearThemeContainer1.TabIndex = 0
@@ -143,10 +176,11 @@ Partial Class frmmain
         Me.cmdExit.Customization = "5ubm/9LS0v/m5ub/qqqq/wAAAP//////"
         Me.cmdExit.Font = New System.Drawing.Font("Verdana", 8.0!)
         Me.cmdExit.Image = Nothing
-        Me.cmdExit.Location = New System.Drawing.Point(936, 2)
+        Me.cmdExit.Location = New System.Drawing.Point(1248, 2)
+        Me.cmdExit.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.cmdExit.Name = "cmdExit"
         Me.cmdExit.NoRounding = False
-        Me.cmdExit.Size = New System.Drawing.Size(32, 20)
+        Me.cmdExit.Size = New System.Drawing.Size(43, 25)
         Me.cmdExit.TabIndex = 1
         Me.cmdExit.Text = "X"
         Me.cmdExit.Transparent = False
@@ -158,10 +192,11 @@ Partial Class frmmain
         Me.CrystalClearTabControl1.Controls.Add(Me.TabPage3)
         Me.CrystalClearTabControl1.Controls.Add(Me.TabPage4)
         Me.CrystalClearTabControl1.Controls.Add(Me.TabPage5)
-        Me.CrystalClearTabControl1.Location = New System.Drawing.Point(0, 32)
+        Me.CrystalClearTabControl1.Location = New System.Drawing.Point(0, 39)
+        Me.CrystalClearTabControl1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.CrystalClearTabControl1.Name = "CrystalClearTabControl1"
         Me.CrystalClearTabControl1.SelectedIndex = 0
-        Me.CrystalClearTabControl1.Size = New System.Drawing.Size(968, 432)
+        Me.CrystalClearTabControl1.Size = New System.Drawing.Size(1291, 532)
         Me.CrystalClearTabControl1.TabIndex = 0
         '
         'TabPage1
@@ -169,10 +204,11 @@ Partial Class frmmain
         Me.TabPage1.BackColor = System.Drawing.Color.FromArgb(CType(CType(230, Byte), Integer), CType(CType(230, Byte), Integer), CType(CType(230, Byte), Integer))
         Me.TabPage1.Controls.Add(Me.lvClient)
         Me.TabPage1.ImageIndex = 2
-        Me.TabPage1.Location = New System.Drawing.Point(4, 25)
+        Me.TabPage1.Location = New System.Drawing.Point(4, 29)
+        Me.TabPage1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.TabPage1.Name = "TabPage1"
-        Me.TabPage1.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage1.Size = New System.Drawing.Size(960, 403)
+        Me.TabPage1.Padding = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.TabPage1.Size = New System.Drawing.Size(1283, 499)
         Me.TabPage1.TabIndex = 0
         Me.TabPage1.Text = "Connection"
         '
@@ -181,8 +217,9 @@ Partial Class frmmain
         Me.lvClient.BackColor = System.Drawing.Color.FromArgb(CType(CType(230, Byte), Integer), CType(CType(230, Byte), Integer), CType(CType(230, Byte), Integer))
         Me.lvClient.HideSelection = False
         Me.lvClient.Location = New System.Drawing.Point(0, 0)
+        Me.lvClient.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.lvClient.Name = "lvClient"
-        Me.lvClient.Size = New System.Drawing.Size(968, 400)
+        Me.lvClient.Size = New System.Drawing.Size(1289, 491)
         Me.lvClient.TabIndex = 0
         Me.lvClient.UseCompatibleStateImageBehavior = False
         '
@@ -190,19 +227,21 @@ Partial Class frmmain
         '
         Me.TabPage2.BackColor = System.Drawing.Color.FromArgb(CType(CType(230, Byte), Integer), CType(CType(230, Byte), Integer), CType(CType(230, Byte), Integer))
         Me.TabPage2.ImageIndex = 1
-        Me.TabPage2.Location = New System.Drawing.Point(4, 25)
+        Me.TabPage2.Location = New System.Drawing.Point(4, 29)
+        Me.TabPage2.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.TabPage2.Name = "TabPage2"
-        Me.TabPage2.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage2.Size = New System.Drawing.Size(960, 403)
+        Me.TabPage2.Padding = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.TabPage2.Size = New System.Drawing.Size(1283, 499)
         Me.TabPage2.TabIndex = 1
         Me.TabPage2.Text = "Setting"
         '
         'TabPage3
         '
         Me.TabPage3.BackColor = System.Drawing.Color.FromArgb(CType(CType(230, Byte), Integer), CType(CType(230, Byte), Integer), CType(CType(230, Byte), Integer))
-        Me.TabPage3.Location = New System.Drawing.Point(4, 25)
+        Me.TabPage3.Location = New System.Drawing.Point(4, 29)
+        Me.TabPage3.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.TabPage3.Name = "TabPage3"
-        Me.TabPage3.Size = New System.Drawing.Size(960, 403)
+        Me.TabPage3.Size = New System.Drawing.Size(1283, 499)
         Me.TabPage3.TabIndex = 2
         Me.TabPage3.Text = "Builder"
         '
@@ -210,29 +249,31 @@ Partial Class frmmain
         '
         Me.TabPage4.BackColor = System.Drawing.Color.FromArgb(CType(CType(230, Byte), Integer), CType(CType(230, Byte), Integer), CType(CType(230, Byte), Integer))
         Me.TabPage4.Controls.Add(Me.txtLog)
-        Me.TabPage4.Location = New System.Drawing.Point(4, 25)
+        Me.TabPage4.Location = New System.Drawing.Point(4, 29)
+        Me.TabPage4.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.TabPage4.Name = "TabPage4"
-        Me.TabPage4.Size = New System.Drawing.Size(960, 403)
+        Me.TabPage4.Size = New System.Drawing.Size(1283, 499)
         Me.TabPage4.TabIndex = 3
         Me.TabPage4.Text = "Log"
         '
         'txtLog
         '
         Me.txtLog.BackColor = System.Drawing.Color.FromArgb(CType(CType(230, Byte), Integer), CType(CType(230, Byte), Integer), CType(CType(230, Byte), Integer))
-        Me.txtLog.Location = New System.Drawing.Point(6, 2)
-        Me.txtLog.Margin = New System.Windows.Forms.Padding(2)
+        Me.txtLog.Location = New System.Drawing.Point(8, 2)
+        Me.txtLog.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.txtLog.Multiline = True
         Me.txtLog.Name = "txtLog"
         Me.txtLog.ReadOnly = True
-        Me.txtLog.Size = New System.Drawing.Size(954, 401)
+        Me.txtLog.Size = New System.Drawing.Size(1271, 493)
         Me.txtLog.TabIndex = 0
         '
         'TabPage5
         '
         Me.TabPage5.BackColor = System.Drawing.Color.FromArgb(CType(CType(230, Byte), Integer), CType(CType(230, Byte), Integer), CType(CType(230, Byte), Integer))
-        Me.TabPage5.Location = New System.Drawing.Point(4, 25)
+        Me.TabPage5.Location = New System.Drawing.Point(4, 29)
+        Me.TabPage5.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.TabPage5.Name = "TabPage5"
-        Me.TabPage5.Size = New System.Drawing.Size(960, 403)
+        Me.TabPage5.Size = New System.Drawing.Size(1283, 499)
         Me.TabPage5.TabIndex = 4
         Me.TabPage5.Text = "About"
         '
@@ -241,10 +282,11 @@ Partial Class frmmain
         Me.cmdListen.Customization = "5ubm/9LS0v/m5ub/qqqq/wAAAP//////"
         Me.cmdListen.Font = New System.Drawing.Font("Verdana", 8.0!)
         Me.cmdListen.Image = Nothing
-        Me.cmdListen.Location = New System.Drawing.Point(184, 472)
+        Me.cmdListen.Location = New System.Drawing.Point(245, 581)
+        Me.cmdListen.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
         Me.cmdListen.Name = "cmdListen"
         Me.cmdListen.NoRounding = False
-        Me.cmdListen.Size = New System.Drawing.Size(48, 16)
+        Me.cmdListen.Size = New System.Drawing.Size(64, 20)
         Me.cmdListen.TabIndex = 6
         Me.cmdListen.Text = "Listen"
         Me.cmdListen.Transparent = False
@@ -252,53 +294,23 @@ Partial Class frmmain
         'lbStatus
         '
         Me.lbStatus.AutoSize = True
-        Me.lbStatus.Location = New System.Drawing.Point(4, 473)
+        Me.lbStatus.Location = New System.Drawing.Point(5, 582)
+        Me.lbStatus.Margin = New System.Windows.Forms.Padding(4, 0, 4, 0)
         Me.lbStatus.Name = "lbStatus"
-        Me.lbStatus.Size = New System.Drawing.Size(19, 13)
+        Me.lbStatus.Size = New System.Drawing.Size(23, 17)
         Me.lbStatus.TabIndex = 5
         Me.lbStatus.Text = "..."
         '
-        'ClientToolStripMenuItem
-        '
-        Me.ClientToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CloseToolStripMenuItem, Me.TerminateToolStripMenuItem})
-        Me.ClientToolStripMenuItem.Name = "ClientToolStripMenuItem"
-        Me.ClientToolStripMenuItem.Size = New System.Drawing.Size(137, 22)
-        Me.ClientToolStripMenuItem.Text = "Client"
-        '
-        'CloseToolStripMenuItem
-        '
-        Me.CloseToolStripMenuItem.Name = "CloseToolStripMenuItem"
-        Me.CloseToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
-        Me.CloseToolStripMenuItem.Text = "Close"
-        '
-        'TerminateToolStripMenuItem
-        '
-        Me.TerminateToolStripMenuItem.Name = "TerminateToolStripMenuItem"
-        Me.TerminateToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
-        Me.TerminateToolStripMenuItem.Text = "Terminate"
-        '
-        'NetworkToolStripMenuItem
-        '
-        Me.NetworkToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ReverseSocks5ToolStripMenuItem})
-        Me.NetworkToolStripMenuItem.Name = "NetworkToolStripMenuItem"
-        Me.NetworkToolStripMenuItem.Size = New System.Drawing.Size(137, 22)
-        Me.NetworkToolStripMenuItem.Text = "Network"
-        '
-        'ReverseSocks5ToolStripMenuItem
-        '
-        Me.ReverseSocks5ToolStripMenuItem.Name = "ReverseSocks5ToolStripMenuItem"
-        Me.ReverseSocks5ToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
-        Me.ReverseSocks5ToolStripMenuItem.Text = "Reverse Socks5"
-        '
         'frmmain
         '
-        Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
+        Me.AutoScaleDimensions = New System.Drawing.SizeF(8.0!, 16.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
-        Me.ClientSize = New System.Drawing.Size(971, 494)
+        Me.ClientSize = New System.Drawing.Size(1295, 608)
         Me.ControlBox = False
         Me.Controls.Add(Me.CrystalClearThemeContainer1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
-        Me.MinimumSize = New System.Drawing.Size(175, 150)
+        Me.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.MinimumSize = New System.Drawing.Size(233, 185)
         Me.Name = "frmmain"
         Me.Text = "Tiny Lotus 0.1"
         Me.TransparencyKey = System.Drawing.Color.Fuchsia

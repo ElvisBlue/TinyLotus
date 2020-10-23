@@ -5,6 +5,8 @@ RemoteCommand::RemoteCommand(Connection* mConnObj)
 	ConnObj = mConnObj;
 }
 
+RemoteCommand::~RemoteCommand() {}
+
 bool RemoteCommand::CreateCmdProcess()
 {
 	STARTUPINFO sti = { 0 };

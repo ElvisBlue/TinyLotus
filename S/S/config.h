@@ -6,11 +6,9 @@ struct config
 {
 	DWORD	Signature[2];
 	WCHAR	ClientTag[20];
-	char	hostIP[40];
+	char	hostIP[50];
+	char	password[20];
 	int		port;
-	WCHAR	mutex[30];
-	bool	startupWithWindow;
-	char	startupRegistryKeyName[30];
 };
 #pragma pack(pop)
 

