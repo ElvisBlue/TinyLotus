@@ -12,6 +12,7 @@ public:
 	bool SendPasswordPacket();
 	bool IsCloseSignature();
 	bool IsServerAccepted();
+	void SetServerAcceptedState(bool);
 
 private:
 	bool bIsServerAccepted;

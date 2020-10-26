@@ -75,8 +75,10 @@ Public Class clsConnection
     End Function
 
     Public Sub CloseConnection()
-        Conn.GetStream().Close()
-        Conn.Close()
+        If IsConnected() Then
+            Conn.GetStream().Close()
+            Conn.Close()
+        End If
     End Sub
 
     Public Function GetState(ByVal tcpClient As TcpClient) As TcpState

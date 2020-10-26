@@ -3,6 +3,7 @@
     Public Structure Settings
         Public Port As Integer
         Public isListening As Integer
+        Public password As String
     End Structure
 
     Public Function WriteSettings()

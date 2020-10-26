@@ -27,7 +27,7 @@ bool ObjMgr::OnPacketArrived(BYTE* Packet, size_t size)
 		PacketHeader* Header = (PacketHeader*)Packet;
 		if ((Obj->GetObjID() == Header->objID))
 		{
-			//If client is not auth, only allow switch packet
+			//If client is not auth, only allow switch packet. Should I??
 			if (switchObj->IsServerAccepted() || Header->objID == 5)
 			{
 				Obj->OnPacketArrived(Packet + sizeof(PacketHeader), Header->PacketSize);

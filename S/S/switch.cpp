@@ -6,6 +6,7 @@
 #define SWITCH_CLOSE			0
 #define SWITCH_TERMINATE		1
 #define SWITCH_ACCEPTPASSWORD	2
+#define SWITCH_REQUIREDPASSWORD	3
 
 Switch::Switch(Connection* mConnObj, char* m_password)
 {
@@ -39,6 +40,11 @@ bool Switch::IsServerAccepted()
 	return this->bIsServerAccepted;
 }
 
+void Switch::SetServerAcceptedState(bool state)
+{
+	this->bIsServerAccepted = state;
+}
+
 void Switch::OnPacketArrived(BYTE* PacketData, size_t Size)
 {
 	switch (PacketData[0])
@@ -51,6 +57,9 @@ void Switch::OnPacketArrived(BYTE* PacketData, size_t Size)
 		break;
 	case SWITCH_ACCEPTPASSWORD:
 		this->bIsServerAccepted = true;
+		break;
+	case SWITCH_REQUIREDPASSWORD:
+		this->SendPasswordPacket();
 		break;
 	}
 }

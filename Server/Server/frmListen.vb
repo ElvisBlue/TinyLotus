@@ -8,6 +8,7 @@ Public Class frmListen
     End Sub
 
     Private Sub frmListen_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
+        txtPassword.Text = mSettings.ServerSetting.password
         txtPort.Text = mSettings.ServerSetting.Port
     End Sub
 
@@ -23,6 +24,7 @@ Public Class frmListen
         frmmain.serverTCP.BeginAcceptTcpClient(New AsyncCallback(AddressOf frmmain.AcceptClientCallBack), frmmain.serverTCP)
 
         mSettings.ServerSetting.isListening = True
+        mSettings.ServerSetting.password = txtPassword.Text
         Me.Close()
     End Sub
 

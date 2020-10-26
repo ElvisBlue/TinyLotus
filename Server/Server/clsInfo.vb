@@ -27,12 +27,7 @@ Public Class clsInfo
         ClientInfo.windowVersion = ""
 
         ClientInfo.IP = Conn.GetIPAddr()
-
-        SendGetWindowBasicInfo()
-        SendGetWindowVersion()
-        SendGetWindowTitle()
-        SendGetBotTag()
-        SendGetBotUID()
+        ClientInfo.FirstConnectionTime = DateTime.Now
 
     End Sub
 

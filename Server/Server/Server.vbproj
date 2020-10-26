@@ -89,6 +89,7 @@
     <Compile Include="clsKeylogger.vb" />
     <Compile Include="clsListViewComparer.vb" />
     <Compile Include="clsScreenshot.vb" />
+    <Compile Include="clsSwitch.vb" />
     <Compile Include="frmcmd.Designer.vb">
       <DependentUpon>frmcmd.vb</DependentUpon>
     </Compile>

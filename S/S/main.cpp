@@ -55,8 +55,11 @@ bool Update()
 	while(1)
 	{
 		while (!ConnObj->IsConnected() && !SwitchObj->IsCloseSignature())
-			while(!ConnObj->Connect())
+		{
+			SwitchObj->SetServerAcceptedState(false);
+			while (!ConnObj->Connect())
 				Sleep(2000);
+		}
 
 		//The skeleton
 		BYTE* packetData = (BYTE*)malloc(INIT_PACKET_BUFFER_SIZE);
@@ -67,11 +70,11 @@ bool Update()
 			{
 				ObjList->OnPacketArrived(packetData, 0);
 			}
-			Sleep(100);
+			Sleep(5);
 		}
 		free(packetData);
 
-		if (!SwitchObj->IsCloseSignature())
+		if (SwitchObj->IsCloseSignature())
 			break;
 	}
 	return true;
