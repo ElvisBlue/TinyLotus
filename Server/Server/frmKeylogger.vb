@@ -10,7 +10,7 @@ Public Class frmKeylogger
     End Sub
 
     Private Sub GetLogFileToTreeView()
-        Dim keylogPath As String = KeyloggerObj.GetKeylogPath
+        Dim keylogPath As String = KeyloggerObj.GetKeylogPath()
 
         tvLog.Nodes.Clear()
 
@@ -42,9 +42,13 @@ Public Class frmKeylogger
 
     Private Sub tvLog_MouseClick(ByVal sender As Object, ByVal e As System.Windows.Forms.MouseEventArgs) Handles tvLog.MouseClick
         If e.Button = Windows.Forms.MouseButtons.Right Then
-            If tvLog.SelectedNode.Bounds.Contains(e.Location) Then
-                ctxmenu.Show(tvLog, e.Location)
-            End If
+            Try
+                If tvLog.SelectedNode.Bounds.Contains(e.Location) Then
+                    ctxmenu.Show(tvLog, e.Location)
+                End If
+            Catch
+                Return
+            End Try
         End If
     End Sub
 

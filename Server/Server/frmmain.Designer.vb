@@ -44,9 +44,10 @@ Partial Class frmmain
         Me.TabPage1 = New System.Windows.Forms.TabPage()
         Me.lvClient = New System.Windows.Forms.ListView()
         Me.TabPage2 = New System.Windows.Forms.TabPage()
-        Me.GroupBox5 = New System.Windows.Forms.GroupBox()
-        Me.GroupBox4 = New System.Windows.Forms.GroupBox()
         Me.GroupBox3 = New System.Windows.Forms.GroupBox()
+        Me.txtBlockIPAdd = New Server.CrystalClearButton()
+        Me.txtBlockIP = New Server.CrystalClearTextBox()
+        Me.lsBlockIP = New Server.CrystalClearListbox()
         Me.TabPage3 = New System.Windows.Forms.TabPage()
         Me.txtBuildLog = New Server.CrystalClearTextBox()
         Me.cmdBuild = New Server.CrystalClearButton()
@@ -69,11 +70,13 @@ Partial Class frmmain
         Me.picAbout = New System.Windows.Forms.PictureBox()
         Me.cmdListen = New Server.CrystalClearButton()
         Me.lbStatus = New System.Windows.Forms.Label()
+        Me.ImFlag = New System.Windows.Forms.ImageList(Me.components)
         Me.ctxMenu.SuspendLayout()
         Me.CrystalClearThemeContainer1.SuspendLayout()
         Me.CrystalClearTabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
         Me.TabPage2.SuspendLayout()
+        Me.GroupBox3.SuspendLayout()
         Me.TabPage3.SuspendLayout()
         Me.GroupBox2.SuspendLayout()
         Me.GroupBox1.SuspendLayout()
@@ -103,13 +106,13 @@ Partial Class frmmain
         'RemoteCMDToolStripMenuItem1
         '
         Me.RemoteCMDToolStripMenuItem1.Name = "RemoteCMDToolStripMenuItem1"
-        Me.RemoteCMDToolStripMenuItem1.Size = New System.Drawing.Size(145, 22)
-        Me.RemoteCMDToolStripMenuItem1.Text = "Remote CMD"
+        Me.RemoteCMDToolStripMenuItem1.Size = New System.Drawing.Size(144, 22)
+        Me.RemoteCMDToolStripMenuItem1.Text = "Remote Cmd"
         '
         'FileExplorerToolStripMenuItem1
         '
         Me.FileExplorerToolStripMenuItem1.Name = "FileExplorerToolStripMenuItem1"
-        Me.FileExplorerToolStripMenuItem1.Size = New System.Drawing.Size(145, 22)
+        Me.FileExplorerToolStripMenuItem1.Size = New System.Drawing.Size(144, 22)
         Me.FileExplorerToolStripMenuItem1.Text = "File Explorer"
         '
         'SurveillanceToolStripMenuItem
@@ -141,8 +144,8 @@ Partial Class frmmain
         'ReverseSocks5ToolStripMenuItem
         '
         Me.ReverseSocks5ToolStripMenuItem.Name = "ReverseSocks5ToolStripMenuItem"
-        Me.ReverseSocks5ToolStripMenuItem.Size = New System.Drawing.Size(153, 22)
-        Me.ReverseSocks5ToolStripMenuItem.Text = "Reverse Socks5"
+        Me.ReverseSocks5ToolStripMenuItem.Size = New System.Drawing.Size(159, 22)
+        Me.ReverseSocks5ToolStripMenuItem.Text = "Reverse SOCKS5"
         '
         'PluginsToolStripMenuItem
         '
@@ -229,7 +232,7 @@ Partial Class frmmain
         Me.TabPage1.ImageIndex = 2
         Me.TabPage1.Location = New System.Drawing.Point(4, 25)
         Me.TabPage1.Name = "TabPage1"
-        Me.TabPage1.Padding = New System.Windows.Forms.Padding(3, 3, 3, 3)
+        Me.TabPage1.Padding = New System.Windows.Forms.Padding(3)
         Me.TabPage1.Size = New System.Drawing.Size(960, 403)
         Me.TabPage1.TabIndex = 0
         Me.TabPage1.Text = "Connection"
@@ -247,43 +250,72 @@ Partial Class frmmain
         'TabPage2
         '
         Me.TabPage2.BackColor = System.Drawing.Color.FromArgb(CType(CType(230, Byte), Integer), CType(CType(230, Byte), Integer), CType(CType(230, Byte), Integer))
-        Me.TabPage2.Controls.Add(Me.GroupBox5)
-        Me.TabPage2.Controls.Add(Me.GroupBox4)
         Me.TabPage2.Controls.Add(Me.GroupBox3)
         Me.TabPage2.ImageIndex = 1
         Me.TabPage2.Location = New System.Drawing.Point(4, 25)
         Me.TabPage2.Name = "TabPage2"
-        Me.TabPage2.Padding = New System.Windows.Forms.Padding(3, 3, 3, 3)
+        Me.TabPage2.Padding = New System.Windows.Forms.Padding(3)
         Me.TabPage2.Size = New System.Drawing.Size(960, 403)
         Me.TabPage2.TabIndex = 1
         Me.TabPage2.Text = "Setting"
         '
-        'GroupBox5
-        '
-        Me.GroupBox5.Location = New System.Drawing.Point(359, 213)
-        Me.GroupBox5.Name = "GroupBox5"
-        Me.GroupBox5.Size = New System.Drawing.Size(595, 184)
-        Me.GroupBox5.TabIndex = 2
-        Me.GroupBox5.TabStop = False
-        Me.GroupBox5.Text = "Builder Plugin"
-        '
-        'GroupBox4
-        '
-        Me.GroupBox4.Location = New System.Drawing.Point(359, 6)
-        Me.GroupBox4.Name = "GroupBox4"
-        Me.GroupBox4.Size = New System.Drawing.Size(595, 201)
-        Me.GroupBox4.TabIndex = 1
-        Me.GroupBox4.TabStop = False
-        Me.GroupBox4.Text = "Runtime Plugin"
-        '
         'GroupBox3
         '
+        Me.GroupBox3.Controls.Add(Me.txtBlockIPAdd)
+        Me.GroupBox3.Controls.Add(Me.txtBlockIP)
+        Me.GroupBox3.Controls.Add(Me.lsBlockIP)
         Me.GroupBox3.Location = New System.Drawing.Point(8, 6)
         Me.GroupBox3.Name = "GroupBox3"
-        Me.GroupBox3.Size = New System.Drawing.Size(345, 391)
+        Me.GroupBox3.Size = New System.Drawing.Size(261, 391)
         Me.GroupBox3.TabIndex = 0
         Me.GroupBox3.TabStop = False
-        Me.GroupBox3.Text = "Blacklist IP"
+        Me.GroupBox3.Text = "Block IP"
+        '
+        'txtBlockIPAdd
+        '
+        Me.txtBlockIPAdd.Customization = "5ubm/9LS0v/m5ub/qqqq/wAAAP//////"
+        Me.txtBlockIPAdd.Font = New System.Drawing.Font("Verdana", 8.0!)
+        Me.txtBlockIPAdd.Image = Nothing
+        Me.txtBlockIPAdd.Location = New System.Drawing.Point(191, 27)
+        Me.txtBlockIPAdd.Name = "txtBlockIPAdd"
+        Me.txtBlockIPAdd.NoRounding = False
+        Me.txtBlockIPAdd.Size = New System.Drawing.Size(64, 25)
+        Me.txtBlockIPAdd.TabIndex = 2
+        Me.txtBlockIPAdd.Text = "Add"
+        Me.txtBlockIPAdd.Transparent = False
+        '
+        'txtBlockIP
+        '
+        Me.txtBlockIP.Customization = "AAAA//Dw8P+qqqr/"
+        Me.txtBlockIP.Font = New System.Drawing.Font("Verdana", 8.0!)
+        Me.txtBlockIP.Image = Nothing
+        Me.txtBlockIP.Location = New System.Drawing.Point(6, 27)
+        Me.txtBlockIP.MaxLength = 32767
+        Me.txtBlockIP.Multiline = False
+        Me.txtBlockIP.Name = "txtBlockIP"
+        Me.txtBlockIP.NoRounding = False
+        Me.txtBlockIP.ReadOnly = False
+        Me.txtBlockIP.Size = New System.Drawing.Size(179, 24)
+        Me.txtBlockIP.TabIndex = 1
+        Me.txtBlockIP.TextAlign = System.Windows.Forms.HorizontalAlignment.Left
+        Me.txtBlockIP.Transparent = False
+        Me.txtBlockIP.UseSystemPasswordChar = False
+        '
+        'lsBlockIP
+        '
+        Me.lsBlockIP.BackColor = System.Drawing.Color.FromArgb(CType(CType(230, Byte), Integer), CType(CType(230, Byte), Integer), CType(CType(230, Byte), Integer))
+        Me.lsBlockIP.BorderStyle = System.Windows.Forms.BorderStyle.None
+        Me.lsBlockIP.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed
+        Me.lsBlockIP.Font = New System.Drawing.Font("Microsoft Sans Serif", 9.0!)
+        Me.lsBlockIP.ForeColor = System.Drawing.Color.Black
+        Me.lsBlockIP.FormattingEnabled = True
+        Me.lsBlockIP.IntegralHeight = False
+        Me.lsBlockIP.ItemHeight = 21
+        Me.lsBlockIP.ItemImage = Nothing
+        Me.lsBlockIP.Location = New System.Drawing.Point(6, 57)
+        Me.lsBlockIP.Name = "lsBlockIP"
+        Me.lsBlockIP.Size = New System.Drawing.Size(249, 328)
+        Me.lsBlockIP.TabIndex = 0
         '
         'TabPage3
         '
@@ -488,12 +520,12 @@ Partial Class frmmain
         'txtLog
         '
         Me.txtLog.BackColor = System.Drawing.Color.FromArgb(CType(CType(230, Byte), Integer), CType(CType(230, Byte), Integer), CType(CType(230, Byte), Integer))
-        Me.txtLog.Location = New System.Drawing.Point(6, 2)
-        Me.txtLog.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
+        Me.txtLog.Location = New System.Drawing.Point(3, 3)
         Me.txtLog.Multiline = True
         Me.txtLog.Name = "txtLog"
         Me.txtLog.ReadOnly = True
-        Me.txtLog.Size = New System.Drawing.Size(954, 401)
+        Me.txtLog.ScrollBars = System.Windows.Forms.ScrollBars.Vertical
+        Me.txtLog.Size = New System.Drawing.Size(952, 397)
         Me.txtLog.TabIndex = 0
         '
         'TabPage5
@@ -557,6 +589,12 @@ Partial Class frmmain
         Me.lbStatus.TabIndex = 5
         Me.lbStatus.Text = "..."
         '
+        'ImFlag
+        '
+        Me.ImFlag.ColorDepth = System.Windows.Forms.ColorDepth.Depth32Bit
+        Me.ImFlag.ImageSize = New System.Drawing.Size(16, 16)
+        Me.ImFlag.TransparentColor = System.Drawing.Color.Transparent
+        '
         'frmmain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -575,6 +613,7 @@ Partial Class frmmain
         Me.CrystalClearTabControl1.ResumeLayout(False)
         Me.TabPage1.ResumeLayout(False)
         Me.TabPage2.ResumeLayout(False)
+        Me.GroupBox3.ResumeLayout(False)
         Me.TabPage3.ResumeLayout(False)
         Me.GroupBox2.ResumeLayout(False)
         Me.GroupBox2.PerformLayout()
@@ -606,7 +645,6 @@ Partial Class frmmain
     Friend WithEvents SurveillanceToolStripMenuItem As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents KeyloggerToolStripMenuItem1 As System.Windows.Forms.ToolStripMenuItem
     Friend WithEvents CrystalClearThemeContainer1 As Server.CrystalClearThemeContainer
-    Public WithEvents txtLog As TextBox
     Friend WithEvents ScreenshotToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents NetworkToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ReverseSocks5ToolStripMenuItem As ToolStripMenuItem
@@ -629,7 +667,10 @@ Partial Class frmmain
     Friend WithEvents opBuildDll As RadioButton
     Friend WithEvents txtBuildLog As CrystalClearTextBox
     Friend WithEvents cmdBuild As CrystalClearButton
-    Friend WithEvents GroupBox5 As GroupBox
-    Friend WithEvents GroupBox4 As GroupBox
     Friend WithEvents GroupBox3 As GroupBox
+    Friend WithEvents txtLog As TextBox
+    Friend WithEvents txtBlockIPAdd As CrystalClearButton
+    Friend WithEvents txtBlockIP As CrystalClearTextBox
+    Friend WithEvents lsBlockIP As CrystalClearListbox
+    Friend WithEvents ImFlag As ImageList
 End Class

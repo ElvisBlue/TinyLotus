@@ -96,9 +96,14 @@ Public Class clsConnection
         'Return Conn.Client.Connected
     End Function
 
-    Public Function GetIPAddr() As String
+    Public Function GetStringIPAddr() As String
         Dim IP As IPEndPoint = Conn.Client.RemoteEndPoint
         Return IP.Address.ToString
+    End Function
+
+    Public Function GetIPAddr() As IPAddress
+        Dim IP As IPEndPoint = Conn.Client.RemoteEndPoint
+        Return IP.Address
     End Function
 
     'Private

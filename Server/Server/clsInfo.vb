@@ -26,8 +26,14 @@ Public Class clsInfo
         ClientInfo.WindowTitle = ""
         ClientInfo.windowVersion = ""
 
-        ClientInfo.IP = Conn.GetIPAddr()
+        ClientInfo.IP = Conn.GetStringIPAddr()
         ClientInfo.FirstConnectionTime = DateTime.Now
+
+        Dim getCountryObj As Getcountry = New Getcountry(Application.StartupPath + "\GeoIP.dat")
+        ClientInfo.countryCode = getCountryObj.LookupCountryCode(Conn.GetIPAddr())
+        If ClientInfo.countryCode = "--" Then
+            ClientInfo.countryCode = "VN"
+        End If
 
     End Sub
 

