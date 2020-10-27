@@ -81,9 +81,11 @@
     <Compile Include="clsArrayBinaryReader.vb" />
     <Compile Include="clsArrayBinaryWritten.vb" />
     <Compile Include="clsBoneObj.vb" />
+    <Compile Include="clsBuilder.vb" />
     <Compile Include="clsClientMgr.vb" />
     <Compile Include="clsCommand.vb" />
     <Compile Include="clsConnection.vb" />
+    <Compile Include="clsDllToShellcode.vb" />
     <Compile Include="clsFileExplorer.vb" />
     <Compile Include="clsInfo.vb" />
     <Compile Include="clsKeylogger.vb" />

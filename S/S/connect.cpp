@@ -45,7 +45,14 @@ bool Connection::Connect()
 		return false;
 
 	struct sockaddr_in server = {0};
-	server.sin_addr.s_addr = inet_addr(IP);
+	unsigned long ip_addr = inet_addr(IP);
+	if (ip_addr == INADDR_NONE)
+	{
+		struct hostent* host;
+		host = gethostbyname(IP);
+		ip_addr = *((unsigned long*)host->h_addr);
+	}
+	server.sin_addr.s_addr = ip_addr;
     server.sin_family = AF_INET;
     server.sin_port = htons(Port);
 

