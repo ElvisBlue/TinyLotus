@@ -238,7 +238,7 @@ Partial Class frmmain
         Me.TabPage1.ImageIndex = 2
         Me.TabPage1.Location = New System.Drawing.Point(4, 25)
         Me.TabPage1.Name = "TabPage1"
-        Me.TabPage1.Padding = New System.Windows.Forms.Padding(3, 3, 3, 3)
+        Me.TabPage1.Padding = New System.Windows.Forms.Padding(3)
         Me.TabPage1.Size = New System.Drawing.Size(960, 403)
         Me.TabPage1.TabIndex = 0
         Me.TabPage1.Text = "Connection"
@@ -260,7 +260,7 @@ Partial Class frmmain
         Me.TabPage2.ImageIndex = 1
         Me.TabPage2.Location = New System.Drawing.Point(4, 25)
         Me.TabPage2.Name = "TabPage2"
-        Me.TabPage2.Padding = New System.Windows.Forms.Padding(3, 3, 3, 3)
+        Me.TabPage2.Padding = New System.Windows.Forms.Padding(3)
         Me.TabPage2.Size = New System.Drawing.Size(960, 403)
         Me.TabPage2.TabIndex = 1
         Me.TabPage2.Text = "Setting"
@@ -550,13 +550,13 @@ Partial Class frmmain
         Me.txtAbout.Customization = "AAAA//Dw8P+qqqr/"
         Me.txtAbout.Font = New System.Drawing.Font("Verdana", 8.0!)
         Me.txtAbout.Image = Nothing
-        Me.txtAbout.Location = New System.Drawing.Point(639, -15)
+        Me.txtAbout.Location = New System.Drawing.Point(639, 3)
         Me.txtAbout.MaxLength = 32767
         Me.txtAbout.Multiline = True
         Me.txtAbout.Name = "txtAbout"
         Me.txtAbout.NoRounding = False
         Me.txtAbout.ReadOnly = True
-        Me.txtAbout.Size = New System.Drawing.Size(318, 415)
+        Me.txtAbout.Size = New System.Drawing.Size(318, 397)
         Me.txtAbout.TabIndex = 1
         Me.txtAbout.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         Me.txtAbout.Transparent = False

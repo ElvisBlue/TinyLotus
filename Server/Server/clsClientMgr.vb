@@ -163,6 +163,7 @@ Public Class clsClientMgr
             If client.IsAccepted() = False Then
                 'If client is not authen for 1 minute then close client
                 If (DateTime.Now - client.GetClientInfo().FirstConnectionTime).TotalSeconds > 60 Then
+                    client.ForceDisconnect()
                     clientList.Remove(client)
                 End If
             Else
