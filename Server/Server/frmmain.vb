@@ -216,13 +216,11 @@ Public Class frmmain
         ElseIf ClientList.Count < lvClient.Items.Count Then
             If ClientList.Count = 0 Then
                 lvClient.Items.Clear()
-                ImFlag.Images.Clear()
             Else
                 For Each item As ListViewItem In lvClient.Items
                     For Each client In ClientList
                         If client.GetClientInfo().botID <> item.SubItems(1).Text Or
                         client.GetClientInfo().computerUserName <> item.SubItems(4).Text Then
-                            ImFlag.Images.RemoveAt(item.Index)
                             lvClient.Items.Remove(item)
                         End If
                     Next

