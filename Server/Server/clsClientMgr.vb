@@ -54,7 +54,7 @@ Public Class clsClientObj
     Public Function MainThread()
 
         Dim packet As Byte() = Nothing
-        Dim BinReader As clsArrayBinaryReader = New clsArrayBinaryReader()
+        Dim BinReader As clsArrayBinaryReader = mGlobal.GetBinReaderObj()
 
 
         'Dispatch packet

@@ -23,7 +23,7 @@ Public Class clsDllToShellcode
 
     Public Function DllToShellcode(ByVal dllStub As Byte()) As Byte()
         Dim config As Byte() = Nothing
-        Dim BinWritter As clsArrayBinaryWritten = New clsArrayBinaryWritten()
+        Dim BinWritter As clsArrayBinaryWritten = mGlobal.GetBinWritterObj()
         BinWritter.BufferAddByte(config, 0)
         BinWritter.BufferAddDword(config, 0)
         BinWritter.BufferAddDword(config, dllStub.Length)

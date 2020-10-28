@@ -38,6 +38,7 @@ Partial Class frmmain
         Me.ClientToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.CloseToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.TerminateToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
+        Me.ImFlag = New System.Windows.Forms.ImageList(Me.components)
         Me.CrystalClearThemeContainer1 = New Server.CrystalClearThemeContainer()
         Me.cmdExit = New Server.CrystalClearButton()
         Me.CrystalClearTabControl1 = New Server.CrystalClearTabControl()
@@ -70,7 +71,6 @@ Partial Class frmmain
         Me.picAbout = New System.Windows.Forms.PictureBox()
         Me.cmdListen = New Server.CrystalClearButton()
         Me.lbStatus = New System.Windows.Forms.Label()
-        Me.ImFlag = New System.Windows.Forms.ImageList(Me.components)
         Me.ctxMenu.SuspendLayout()
         Me.CrystalClearThemeContainer1.SuspendLayout()
         Me.CrystalClearTabControl1.SuspendLayout()
@@ -172,6 +172,12 @@ Partial Class frmmain
         Me.TerminateToolStripMenuItem.Size = New System.Drawing.Size(126, 22)
         Me.TerminateToolStripMenuItem.Text = "Terminate"
         '
+        'ImFlag
+        '
+        Me.ImFlag.ColorDepth = System.Windows.Forms.ColorDepth.Depth32Bit
+        Me.ImFlag.ImageSize = New System.Drawing.Size(16, 11)
+        Me.ImFlag.TransparentColor = System.Drawing.Color.Transparent
+        '
         'CrystalClearThemeContainer1
         '
         Me.CrystalClearThemeContainer1.BackColor = System.Drawing.Color.FromArgb(CType(CType(230, Byte), Integer), CType(CType(230, Byte), Integer), CType(CType(230, Byte), Integer))
@@ -232,7 +238,7 @@ Partial Class frmmain
         Me.TabPage1.ImageIndex = 2
         Me.TabPage1.Location = New System.Drawing.Point(4, 25)
         Me.TabPage1.Name = "TabPage1"
-        Me.TabPage1.Padding = New System.Windows.Forms.Padding(3)
+        Me.TabPage1.Padding = New System.Windows.Forms.Padding(3, 3, 3, 3)
         Me.TabPage1.Size = New System.Drawing.Size(960, 403)
         Me.TabPage1.TabIndex = 0
         Me.TabPage1.Text = "Connection"
@@ -254,7 +260,7 @@ Partial Class frmmain
         Me.TabPage2.ImageIndex = 1
         Me.TabPage2.Location = New System.Drawing.Point(4, 25)
         Me.TabPage2.Name = "TabPage2"
-        Me.TabPage2.Padding = New System.Windows.Forms.Padding(3)
+        Me.TabPage2.Padding = New System.Windows.Forms.Padding(3, 3, 3, 3)
         Me.TabPage2.Size = New System.Drawing.Size(960, 403)
         Me.TabPage2.TabIndex = 1
         Me.TabPage2.Text = "Setting"
@@ -544,13 +550,13 @@ Partial Class frmmain
         Me.txtAbout.Customization = "AAAA//Dw8P+qqqr/"
         Me.txtAbout.Font = New System.Drawing.Font("Verdana", 8.0!)
         Me.txtAbout.Image = Nothing
-        Me.txtAbout.Location = New System.Drawing.Point(637, 3)
+        Me.txtAbout.Location = New System.Drawing.Point(639, -15)
         Me.txtAbout.MaxLength = 32767
         Me.txtAbout.Multiline = True
         Me.txtAbout.Name = "txtAbout"
         Me.txtAbout.NoRounding = False
         Me.txtAbout.ReadOnly = True
-        Me.txtAbout.Size = New System.Drawing.Size(318, 397)
+        Me.txtAbout.Size = New System.Drawing.Size(318, 415)
         Me.txtAbout.TabIndex = 1
         Me.txtAbout.TextAlign = System.Windows.Forms.HorizontalAlignment.Center
         Me.txtAbout.Transparent = False
@@ -588,12 +594,6 @@ Partial Class frmmain
         Me.lbStatus.Size = New System.Drawing.Size(19, 13)
         Me.lbStatus.TabIndex = 5
         Me.lbStatus.Text = "..."
-        '
-        'ImFlag
-        '
-        Me.ImFlag.ColorDepth = System.Windows.Forms.ColorDepth.Depth32Bit
-        Me.ImFlag.ImageSize = New System.Drawing.Size(16, 16)
-        Me.ImFlag.TransparentColor = System.Drawing.Color.Transparent
         '
         'frmmain
         '

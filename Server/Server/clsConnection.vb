@@ -13,7 +13,7 @@ Public Class clsConnection
     End Sub
 
     Public Function SendRawPacket(ByVal packetData As Byte()) As Boolean
-        Dim binWritter As clsArrayBinaryWritten = New clsArrayBinaryWritten()
+        Dim binWritter As clsArrayBinaryWritten = mGlobal.GetBinWritterObj()
         Dim dataSending As Byte() = Nothing
         binWritter.BufferAddDword(dataSending, TINY_LOTUS_HEADER)
 
@@ -42,7 +42,7 @@ Public Class clsConnection
     Public Function RecvRawPacket(ByRef Buffer As Byte()) As Boolean
         Dim stream As NetworkStream = Conn.GetStream()
         Dim header(11) As Byte
-        Dim BinReader As clsArrayBinaryReader = New clsArrayBinaryReader()
+        Dim BinReader As clsArrayBinaryReader = mGlobal.GetBinReaderObj()
 
         Try
             While Conn.Available < 12

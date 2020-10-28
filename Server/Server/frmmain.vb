@@ -10,6 +10,24 @@ Public Class frmmain
     Public Delegate Sub SafeLog(ByVal text As String)
     Dim version As String = "0.1"
 
+#Region "Flag ImageList"
+    Private countryCodeList As List(Of String)
+    Private Sub InitImgList()
+        countryCodeList = New List(Of String)
+        Dim flagDic As String = Application.StartupPath + "\Flag"
+        Dim di As New IO.DirectoryInfo(flagDic)
+        Dim aryFi As IO.FileInfo() = di.GetFiles("*.png")
+        For Each fi As IO.FileInfo In aryFi
+            ImFlag.Images.Add(Image.FromFile(flagDic + "\" + fi.Name))
+            countryCodeList.Add(fi.Name.Replace(".png", "").ToUpper())
+        Next
+    End Sub
+
+    Private Function GetIndexByCountryCode(ByVal countryCode As String) As Integer
+        Return countryCodeList.IndexOf(countryCode)
+    End Function
+#End Region
+
     Public Sub Log(ByVal txt As String)
         If txtLog.InvokeRequired Then
             Dim d As New SafeLog(AddressOf Log)
@@ -28,13 +46,12 @@ Public Class frmmain
             .MultiSelect = False
             .HideSelection = False
             .SmallImageList = ImFlag
-            '.LargeImageList = ImFlag
 
             'Add column header
             .Columns.Add("Flag", 45)
-            .Columns.Add("Bot ID", 100)
+            .Columns.Add("Bot ID", 80)
             .Columns.Add("IP Address", 150)
-            .Columns.Add("System", 150)
+            .Columns.Add("System", 200)
             .Columns.Add("User/Computer Name", 200)
             .Columns.Add("Current Window Title", 250)
         End With
@@ -97,6 +114,7 @@ Public Class frmmain
     Private Function Global_Init() As Boolean
         SetAbout()
         Setting_Init()
+        InitImgList()
         Client_Listview_Init()
         Timer_Init()
         TCP_Init()
@@ -117,9 +135,7 @@ Public Class frmmain
         data(4) = clientInfo.computerUserName
         data(5) = clientInfo.WindowTitle
         Dim itm As ListViewItem = New ListViewItem(data)
-        Dim img As Image = Image.FromFile(Application.StartupPath + "\Flag\" + clientInfo.countryCode + ".png")
-        ImFlag.Images.Add(img)
-        itm.ImageIndex = ImFlag.Images.Count - 1
+        itm.ImageIndex = GetIndexByCountryCode(clientInfo.countryCode)
         lvClient.Items.Add(itm)
         Return True
     End Function
@@ -135,10 +151,7 @@ Public Class frmmain
         lvClient.Items.Item(index).SubItems.Item(3).Text = clientInfo.windowVersion
         lvClient.Items.Item(index).SubItems.Item(4).Text = clientInfo.computerUserName
         lvClient.Items.Item(index).SubItems.Item(5).Text = clientInfo.WindowTitle
-
-        Dim img As Image = Image.FromFile("Flag\" + clientInfo.countryCode + ".png")
-        ImFlag.Images(index) = img
-        lvClient.Items.Item(index).ImageIndex = index
+        lvClient.Items.Item(index).ImageIndex = GetIndexByCountryCode(clientInfo.countryCode)
 
         Return True
     End Function

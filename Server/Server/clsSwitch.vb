@@ -22,7 +22,7 @@
 
     Public Overrides Sub OnPacketArrived(ByVal packet() As Byte)
         Dim ID As Byte = packet(0)
-        Dim BinReader As clsArrayBinaryReader = New clsArrayBinaryReader()
+        Dim BinReader As clsArrayBinaryReader = mGlobal.GetBinReaderObj()
         Select Case ID
             Case 0 'Case password
                 Dim clientPassword As String = System.Text.Encoding.ASCII.GetString(BinReader.BufferReadBuffer(packet, 1, packet.Length - 1)).Replace(vbNullChar, "")
@@ -47,28 +47,28 @@
 
     Public Function SendClose()
         Dim packet() As Byte = Nothing
-        Dim BinWritter As clsArrayBinaryWritten = New clsArrayBinaryWritten()
+        Dim BinWritter As clsArrayBinaryWritten = mGlobal.GetBinWritterObj()
         BinWritter.BufferAddByte(packet, 0)
         Return SendPacket(packet)
     End Function
 
     Public Function SendTerminate()
         Dim packet() As Byte = Nothing
-        Dim BinWritter As clsArrayBinaryWritten = New clsArrayBinaryWritten()
+        Dim BinWritter As clsArrayBinaryWritten = mGlobal.GetBinWritterObj()
         BinWritter.BufferAddByte(packet, 1)
         Return SendPacket(packet)
     End Function
 
     Public Function SendRequiredPassword()
         Dim packet() As Byte = Nothing
-        Dim BinWritter As clsArrayBinaryWritten = New clsArrayBinaryWritten()
+        Dim BinWritter As clsArrayBinaryWritten = mGlobal.GetBinWritterObj()
         BinWritter.BufferAddByte(packet, 3)
         Return SendPacket(packet)
     End Function
 
     Private Function SendAcceptClient()
         Dim packet() As Byte = Nothing
-        Dim BinWritter As clsArrayBinaryWritten = New clsArrayBinaryWritten()
+        Dim BinWritter As clsArrayBinaryWritten = mGlobal.GetBinWritterObj()
         BinWritter.BufferAddByte(packet, 2)
         Return SendPacket(packet)
     End Function

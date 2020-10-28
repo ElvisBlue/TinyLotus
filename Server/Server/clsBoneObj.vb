@@ -19,7 +19,7 @@
     'Protected
     Protected Function SendPacket(ByVal packetData As Byte()) As Boolean
         Dim SendData() As Byte = {}
-        Dim BinWritter As clsArrayBinaryWritten = New clsArrayBinaryWritten()
+        Dim BinWritter As clsArrayBinaryWritten = mGlobal.GetBinWritterObj()
         BinWritter.BufferAddDword(SendData, ObjID)
         BinWritter.BufferAddDword(SendData, packetData.Length)
         BinWritter.BufferMerge(SendData, packetData)
@@ -33,7 +33,7 @@
         Dim RawPacket() As Byte = {}
 
         If Conn.RecvRawPacket(RawPacket) = True Then
-            Dim BinReader As clsArrayBinaryReader = New clsArrayBinaryReader()
+            Dim BinReader As clsArrayBinaryReader = mGlobal.GetBinReaderObj()
             Dim ID As Integer = BinReader.BufferReadDWORD(RawPacket, 0)
 
             'Should fix this
