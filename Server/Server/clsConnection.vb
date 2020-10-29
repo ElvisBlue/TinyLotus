@@ -66,7 +66,7 @@ Public Class clsConnection
                 Buffer = ZLibCompressor.DeCompress(compressedBuffer)
                 Return True
             Else
-                Utilities.GlobalLog("Wrong header from " & Conn.Client.RemoteEndPoint.AddressFamily.ToString())
+                Utilities.GlobalLog("Wrong header from " & Conn.Client.RemoteEndPoint.ToString())
                 Return False
             End If
         Catch ex As Exception
@@ -76,7 +76,8 @@ Public Class clsConnection
 
     Public Sub CloseConnection()
         If IsConnected() Then
-            Conn.GetStream().Close()
+            Conn.Client.Shutdown(SocketShutdown.Both)
+            Conn.Client.Disconnect(False)
             Conn.Close()
         End If
     End Sub
@@ -94,11 +95,6 @@ Public Class clsConnection
     Public Function IsConnected() As Boolean
         Return If(GetState(Conn) = TcpState.Established, True, False)
         'Return Conn.Client.Connected
-    End Function
-
-    Public Function GetStringIPAddr() As String
-        Dim IP As IPEndPoint = Conn.Client.RemoteEndPoint
-        Return IP.Address.ToString
     End Function
 
     Public Function GetIPAddr() As IPAddress

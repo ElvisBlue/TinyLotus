@@ -26,7 +26,7 @@ Public Class clsInfo
         ClientInfo.WindowTitle = ""
         ClientInfo.windowVersion = ""
 
-        ClientInfo.IP = Conn.GetStringIPAddr()
+        ClientInfo.IP = Conn.GetIPAddr().ToString()
         ClientInfo.FirstConnectionTime = DateTime.Now
 
         Dim getCountryObj As Getcountry = New Getcountry(Application.StartupPath + "\GeoIP.dat")

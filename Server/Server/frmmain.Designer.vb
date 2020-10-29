@@ -46,6 +46,7 @@ Partial Class frmmain
         Me.lvClient = New System.Windows.Forms.ListView()
         Me.TabPage2 = New System.Windows.Forms.TabPage()
         Me.GroupBox3 = New System.Windows.Forms.GroupBox()
+        Me.cmdRemoveBlockIP = New Server.CrystalClearButton()
         Me.txtBlockIPAdd = New Server.CrystalClearButton()
         Me.txtBlockIP = New Server.CrystalClearTextBox()
         Me.lsBlockIP = New Server.CrystalClearListbox()
@@ -267,6 +268,7 @@ Partial Class frmmain
         '
         'GroupBox3
         '
+        Me.GroupBox3.Controls.Add(Me.cmdRemoveBlockIP)
         Me.GroupBox3.Controls.Add(Me.txtBlockIPAdd)
         Me.GroupBox3.Controls.Add(Me.txtBlockIP)
         Me.GroupBox3.Controls.Add(Me.lsBlockIP)
@@ -276,6 +278,19 @@ Partial Class frmmain
         Me.GroupBox3.TabIndex = 0
         Me.GroupBox3.TabStop = False
         Me.GroupBox3.Text = "Block IP"
+        '
+        'cmdRemoveBlockIP
+        '
+        Me.cmdRemoveBlockIP.Customization = "5ubm/9LS0v/m5ub/qqqq/wAAAP//////"
+        Me.cmdRemoveBlockIP.Font = New System.Drawing.Font("Verdana", 8.0!)
+        Me.cmdRemoveBlockIP.Image = Nothing
+        Me.cmdRemoveBlockIP.Location = New System.Drawing.Point(56, 360)
+        Me.cmdRemoveBlockIP.Name = "cmdRemoveBlockIP"
+        Me.cmdRemoveBlockIP.NoRounding = False
+        Me.cmdRemoveBlockIP.Size = New System.Drawing.Size(145, 25)
+        Me.cmdRemoveBlockIP.TabIndex = 3
+        Me.cmdRemoveBlockIP.Text = "Remove Block IP"
+        Me.cmdRemoveBlockIP.Transparent = False
         '
         'txtBlockIPAdd
         '
@@ -320,7 +335,7 @@ Partial Class frmmain
         Me.lsBlockIP.ItemImage = Nothing
         Me.lsBlockIP.Location = New System.Drawing.Point(6, 57)
         Me.lsBlockIP.Name = "lsBlockIP"
-        Me.lsBlockIP.Size = New System.Drawing.Size(249, 328)
+        Me.lsBlockIP.Size = New System.Drawing.Size(249, 292)
         Me.lsBlockIP.TabIndex = 0
         '
         'TabPage3
@@ -673,4 +688,5 @@ Partial Class frmmain
     Friend WithEvents txtBlockIP As CrystalClearTextBox
     Friend WithEvents lsBlockIP As CrystalClearListbox
     Friend WithEvents ImFlag As ImageList
+    Friend WithEvents cmdRemoveBlockIP As CrystalClearButton
 End Class
