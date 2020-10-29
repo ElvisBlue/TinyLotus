@@ -72,6 +72,7 @@ Partial Class frmmain
         Me.picAbout = New System.Windows.Forms.PictureBox()
         Me.cmdListen = New Server.CrystalClearButton()
         Me.lbStatus = New System.Windows.Forms.Label()
+        Me.ForceCloseToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ctxMenu.SuspendLayout()
         Me.CrystalClearThemeContainer1.SuspendLayout()
         Me.CrystalClearTabControl1.SuspendLayout()
@@ -95,13 +96,13 @@ Partial Class frmmain
         Me.ctxMenu.ImageScalingSize = New System.Drawing.Size(20, 20)
         Me.ctxMenu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ToolStripMenuItem1, Me.SurveillanceToolStripMenuItem, Me.NetworkToolStripMenuItem, Me.PluginsToolStripMenuItem, Me.ClientToolStripMenuItem})
         Me.ctxMenu.Name = "ContextMenuStrip1"
-        Me.ctxMenu.Size = New System.Drawing.Size(138, 114)
+        Me.ctxMenu.Size = New System.Drawing.Size(181, 136)
         '
         'ToolStripMenuItem1
         '
         Me.ToolStripMenuItem1.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.RemoteCMDToolStripMenuItem1, Me.FileExplorerToolStripMenuItem1})
         Me.ToolStripMenuItem1.Name = "ToolStripMenuItem1"
-        Me.ToolStripMenuItem1.Size = New System.Drawing.Size(137, 22)
+        Me.ToolStripMenuItem1.Size = New System.Drawing.Size(180, 22)
         Me.ToolStripMenuItem1.Text = "System"
         '
         'RemoteCMDToolStripMenuItem1
@@ -120,7 +121,7 @@ Partial Class frmmain
         '
         Me.SurveillanceToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.KeyloggerToolStripMenuItem1, Me.ScreenshotToolStripMenuItem})
         Me.SurveillanceToolStripMenuItem.Name = "SurveillanceToolStripMenuItem"
-        Me.SurveillanceToolStripMenuItem.Size = New System.Drawing.Size(137, 22)
+        Me.SurveillanceToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
         Me.SurveillanceToolStripMenuItem.Text = "Surveillance"
         '
         'KeyloggerToolStripMenuItem1
@@ -139,7 +140,7 @@ Partial Class frmmain
         '
         Me.NetworkToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ReverseSocks5ToolStripMenuItem})
         Me.NetworkToolStripMenuItem.Name = "NetworkToolStripMenuItem"
-        Me.NetworkToolStripMenuItem.Size = New System.Drawing.Size(137, 22)
+        Me.NetworkToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
         Me.NetworkToolStripMenuItem.Text = "Network"
         '
         'ReverseSocks5ToolStripMenuItem
@@ -151,26 +152,26 @@ Partial Class frmmain
         'PluginsToolStripMenuItem
         '
         Me.PluginsToolStripMenuItem.Name = "PluginsToolStripMenuItem"
-        Me.PluginsToolStripMenuItem.Size = New System.Drawing.Size(137, 22)
+        Me.PluginsToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
         Me.PluginsToolStripMenuItem.Text = "Plugins"
         '
         'ClientToolStripMenuItem
         '
-        Me.ClientToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CloseToolStripMenuItem, Me.TerminateToolStripMenuItem})
+        Me.ClientToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.CloseToolStripMenuItem, Me.ForceCloseToolStripMenuItem, Me.TerminateToolStripMenuItem})
         Me.ClientToolStripMenuItem.Name = "ClientToolStripMenuItem"
-        Me.ClientToolStripMenuItem.Size = New System.Drawing.Size(137, 22)
+        Me.ClientToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
         Me.ClientToolStripMenuItem.Text = "Client"
         '
         'CloseToolStripMenuItem
         '
         Me.CloseToolStripMenuItem.Name = "CloseToolStripMenuItem"
-        Me.CloseToolStripMenuItem.Size = New System.Drawing.Size(126, 22)
+        Me.CloseToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
         Me.CloseToolStripMenuItem.Text = "Close"
         '
         'TerminateToolStripMenuItem
         '
         Me.TerminateToolStripMenuItem.Name = "TerminateToolStripMenuItem"
-        Me.TerminateToolStripMenuItem.Size = New System.Drawing.Size(126, 22)
+        Me.TerminateToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
         Me.TerminateToolStripMenuItem.Text = "Terminate"
         '
         'ImFlag
@@ -610,6 +611,12 @@ Partial Class frmmain
         Me.lbStatus.TabIndex = 5
         Me.lbStatus.Text = "..."
         '
+        'ForceCloseToolStripMenuItem
+        '
+        Me.ForceCloseToolStripMenuItem.Name = "ForceCloseToolStripMenuItem"
+        Me.ForceCloseToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.ForceCloseToolStripMenuItem.Text = "Force Close"
+        '
         'frmmain
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -689,4 +696,5 @@ Partial Class frmmain
     Friend WithEvents lsBlockIP As CrystalClearListbox
     Friend WithEvents ImFlag As ImageList
     Friend WithEvents cmdRemoveBlockIP As CrystalClearButton
+    Friend WithEvents ForceCloseToolStripMenuItem As ToolStripMenuItem
 End Class

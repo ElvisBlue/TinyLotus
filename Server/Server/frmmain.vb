@@ -350,6 +350,17 @@ Public Class frmmain
         switchObj.SendClose()
     End Sub
 
+    Private Sub ForceCloseToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles ForceCloseToolStripMenuItem.Click
+        Dim selectedClient As clsClientObj = GetSelectedClient()
+        If selectedClient Is Nothing Then
+            MsgBox("Can't get selected client", vbCritical, "Error")
+            Return
+        End If
+        Dim switchObj As clsSwitch = selectedClient.GetFeaObjByID(5)
+        switchObj.SendClose()
+        selectedClient.ForceDisconnect()
+    End Sub
+
     Private Sub TerminateToolStripMenuItem_Click(sender As Object, e As EventArgs) Handles TerminateToolStripMenuItem.Click
         Dim selectedClient As clsClientObj = GetSelectedClient()
         If selectedClient Is Nothing Then
@@ -442,4 +453,5 @@ Public Class frmmain
             RemoveBlockIPAddress(lsBlockIP.SelectedItem)
         End If
     End Sub
+
 End Class
