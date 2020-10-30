@@ -31,9 +31,9 @@ Public Class clsInfo
 
         Dim getCountryObj As Getcountry = New Getcountry(Application.StartupPath + "\GeoIP.dat")
         ClientInfo.countryCode = getCountryObj.LookupCountryCode(Conn.GetIPAddr())
-        If ClientInfo.countryCode = "--" Then
-            ClientInfo.countryCode = "US"
-        End If
+        'If ClientInfo.countryCode = "--" Then
+        'ClientInfo.countryCode = "US"
+        'End If
 
     End Sub
 

