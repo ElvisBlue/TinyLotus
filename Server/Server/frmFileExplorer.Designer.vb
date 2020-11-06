@@ -153,7 +153,7 @@ Partial Class frmFileExplorer
         Me.CrystalClearThemeContainer1.Sizable = False
         Me.CrystalClearThemeContainer1.Size = New System.Drawing.Size(751, 426)
         Me.CrystalClearThemeContainer1.SmartBounds = True
-        Me.CrystalClearThemeContainer1.StartPosition = System.Windows.Forms.FormStartPosition.WindowsDefaultLocation
+        Me.CrystalClearThemeContainer1.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
         Me.CrystalClearThemeContainer1.TabIndex = 0
         Me.CrystalClearThemeContainer1.Text = "CrystalClearThemeContainer1"
         Me.CrystalClearThemeContainer1.TransparencyKey = System.Drawing.Color.Fuchsia
@@ -309,6 +309,7 @@ Partial Class frmFileExplorer
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
         Me.MinimumSize = New System.Drawing.Size(175, 150)
         Me.Name = "frmFileExplorer"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
         Me.Text = "File Manager"
         Me.TransparencyKey = System.Drawing.Color.Fuchsia
         Me.ctxMenu.ResumeLayout(False)

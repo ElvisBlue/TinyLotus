@@ -1,9 +1,9 @@
-﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
+﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()>
 Partial Class frmmain
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
-    <System.Diagnostics.DebuggerNonUserCode()> _
+    <System.Diagnostics.DebuggerNonUserCode()>
     Protected Overrides Sub Dispose(ByVal disposing As Boolean)
         Try
             If disposing AndAlso components IsNot Nothing Then
@@ -20,7 +20,7 @@ Partial Class frmmain
     'NOTE: The following procedure is required by the Windows Form Designer
     'It can be modified using the Windows Form Designer.  
     'Do not modify it using the code editor.
-    <System.Diagnostics.DebuggerStepThrough()> _
+    <System.Diagnostics.DebuggerStepThrough()>
     Private Sub InitializeComponent()
         Me.components = New System.ComponentModel.Container()
         Dim resources As System.ComponentModel.ComponentResourceManager = New System.ComponentModel.ComponentResourceManager(GetType(frmmain))
@@ -33,7 +33,6 @@ Partial Class frmmain
         Me.KeyloggerToolStripMenuItem1 = New System.Windows.Forms.ToolStripMenuItem()
         Me.ScreenshotToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.NetworkToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
-        Me.ReverseSocks5ToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.PluginsToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.ClientToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
         Me.CloseToolStripMenuItem = New System.Windows.Forms.ToolStripMenuItem()
@@ -138,16 +137,9 @@ Partial Class frmmain
         '
         'NetworkToolStripMenuItem
         '
-        Me.NetworkToolStripMenuItem.DropDownItems.AddRange(New System.Windows.Forms.ToolStripItem() {Me.ReverseSocks5ToolStripMenuItem})
         Me.NetworkToolStripMenuItem.Name = "NetworkToolStripMenuItem"
         Me.NetworkToolStripMenuItem.Size = New System.Drawing.Size(137, 22)
         Me.NetworkToolStripMenuItem.Text = "Network"
-        '
-        'ReverseSocks5ToolStripMenuItem
-        '
-        Me.ReverseSocks5ToolStripMenuItem.Name = "ReverseSocks5ToolStripMenuItem"
-        Me.ReverseSocks5ToolStripMenuItem.Size = New System.Drawing.Size(159, 22)
-        Me.ReverseSocks5ToolStripMenuItem.Text = "Reverse SOCKS5"
         '
         'PluginsToolStripMenuItem
         '
@@ -246,7 +238,7 @@ Partial Class frmmain
         Me.TabPage1.ImageIndex = 2
         Me.TabPage1.Location = New System.Drawing.Point(4, 25)
         Me.TabPage1.Name = "TabPage1"
-        Me.TabPage1.Padding = New System.Windows.Forms.Padding(3, 3, 3, 3)
+        Me.TabPage1.Padding = New System.Windows.Forms.Padding(3)
         Me.TabPage1.Size = New System.Drawing.Size(960, 403)
         Me.TabPage1.TabIndex = 0
         Me.TabPage1.Text = "Connection"
@@ -268,7 +260,7 @@ Partial Class frmmain
         Me.TabPage2.ImageIndex = 1
         Me.TabPage2.Location = New System.Drawing.Point(4, 25)
         Me.TabPage2.Name = "TabPage2"
-        Me.TabPage2.Padding = New System.Windows.Forms.Padding(3, 3, 3, 3)
+        Me.TabPage2.Padding = New System.Windows.Forms.Padding(3)
         Me.TabPage2.Size = New System.Drawing.Size(960, 403)
         Me.TabPage2.TabIndex = 1
         Me.TabPage2.Text = "Setting"
@@ -669,7 +661,6 @@ Partial Class frmmain
     Friend WithEvents CrystalClearThemeContainer1 As Server.CrystalClearThemeContainer
     Friend WithEvents ScreenshotToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents NetworkToolStripMenuItem As ToolStripMenuItem
-    Friend WithEvents ReverseSocks5ToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents ClientToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents CloseToolStripMenuItem As ToolStripMenuItem
     Friend WithEvents TerminateToolStripMenuItem As ToolStripMenuItem

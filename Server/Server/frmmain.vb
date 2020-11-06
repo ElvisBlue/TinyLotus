@@ -214,23 +214,28 @@ Public Class frmmain
     End Function
 
     Private Function BuilderPlugin_Init()
-        Dim pluginDirectory As String = (Application.StartupPath & "\Plugins\Builder\")
-        Dim dllList As String() = Directory.GetFileSystemEntries(pluginDirectory, "*.dll")
-        Dim builderMgrObj As clsBuilderPluginMgr = mGlobal.GetBuilderPluginMgrObj()
-        For Each dllName As String In dllList
-            Try
-                If (builderMgrObj.LoadPlugin(dllName) = False) Then
-                    Log("Failed to load plugin " & Utilities.TrimPath(dllName))
-                End If
-            Catch ex As Exception
-                Log("Error while loading plugin " & Utilities.TrimPath(dllName))
-            End Try
-        Next
+        Try
+            Dim pluginDirectory As String = (Application.StartupPath & "\Plugins\Builder\")
+            Dim dllList As String() = Directory.GetFileSystemEntries(pluginDirectory, "*.dll")
+            Dim builderMgrObj As clsBuilderPluginMgr = mGlobal.GetBuilderPluginMgrObj()
+            For Each dllName As String In dllList
+                Try
+                    If (builderMgrObj.LoadPlugin(dllName) = False) Then
+                        Log("Failed to load plugin " & Utilities.TrimPath(dllName))
+                    End If
+                Catch ex As Exception
+                    Log("Error while loading plugin " & Utilities.TrimPath(dllName))
+                End Try
+            Next
 
-        cbBuildPlugin.Items.Clear()
-        For Each builderPlugin As clsBuilderPlugin In builderMgrObj.GetBuilderPluginList()
-            cbBuildPlugin.Items.Add(builderPlugin.GetPluginInstance().GetPluginName())
-        Next
+            cbBuildPlugin.Items.Clear()
+            For Each builderPlugin As clsBuilderPlugin In builderMgrObj.GetBuilderPluginList()
+                cbBuildPlugin.Items.Add(builderPlugin.GetPluginInstance().GetPluginName())
+            Next
+        Catch ex As Exception
+            Log("An error while load builder plugin: " & ex.Message)
+            Return False
+        End Try
         Return True
     End Function
     Private Function Global_Init() As Boolean
