@@ -202,8 +202,13 @@ Public Class frmmain
     Private Function TCP_Init()
         serverTCP = New TcpListener(IPAddress.Parse("0.0.0.0"), mSettings.ServerSetting.Port)
         If mSettings.ServerSetting.isListening = True Then
-            serverTCP.Start()
-            serverTCP.BeginAcceptTcpClient(New AsyncCallback(AddressOf AcceptClientCallBack), serverTCP)
+            Try
+                serverTCP.Start()
+                serverTCP.BeginAcceptTcpClient(New AsyncCallback(AddressOf AcceptClientCallBack), serverTCP)
+            Catch ex As Exception
+                Log("Failed to listen: " & ex.Message)
+                mSettings.ServerSetting.isListening = False
+            End Try
         End If
         Return True
     End Function
@@ -447,12 +452,16 @@ Public Class frmmain
         End If
         Dim buildObj As clsBuilder = New clsBuilder()
 
+        Dim filterIndex As Integer = 3
         Dim buildBinary As Byte() = Nothing
         If opBuildDll.Checked Then
+            filterIndex = 1
             buildBinary = buildObj.BuildDLL(txtBuildServer.Text, Convert.ToInt32(txtBuildPort.Text), txtPassword.Text)
         ElseIf opBuildShell.Checked Then
+            filterIndex = 2
             buildBinary = buildObj.BuildShellcode(txtBuildServer.Text, Convert.ToInt32(txtBuildPort.Text), txtPassword.Text)
         ElseIf opBuildCustom.Checked Then
+            filterIndex = 3
             Dim buildPlugin As clsBuilderPlugin = mGlobal.GetBuilderPluginMgrObj().GetBuilderPluginByName(cbBuildPlugin.Text)
             If buildPlugin Is Nothing Then
                 MsgBox("Invalid builder plugin", MsgBoxStyle.Critical, "Error")
@@ -463,7 +472,7 @@ Public Class frmmain
         If buildBinary IsNot Nothing Then
             Dim saveDialog As New SaveFileDialog()
             saveDialog.Filter = "DLL files (*.dll)|*.dll|Bin files(*.bin)|*.bin|All files (*.*)|*.*"
-            saveDialog.FilterIndex = 1
+            saveDialog.FilterIndex = filterIndex
             saveDialog.RestoreDirectory = True
             If saveDialog.ShowDialog() = DialogResult.OK Then
                 Dim fileStream As stream = saveDialog.OpenFile()
