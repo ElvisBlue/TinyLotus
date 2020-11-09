@@ -56,7 +56,7 @@ Partial Class frmcmd
         Me.CrystalClearThemeContainer1.Sizable = False
         Me.CrystalClearThemeContainer1.Size = New System.Drawing.Size(919, 498)
         Me.CrystalClearThemeContainer1.SmartBounds = True
-        Me.CrystalClearThemeContainer1.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
+        Me.CrystalClearThemeContainer1.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
         Me.CrystalClearThemeContainer1.TabIndex = 0
         Me.CrystalClearThemeContainer1.Text = "CrystalClearThemeContainer1"
         Me.CrystalClearThemeContainer1.TransparencyKey = System.Drawing.Color.Fuchsia
@@ -115,7 +115,7 @@ Partial Class frmcmd
         Me.MinimizeBox = False
         Me.MinimumSize = New System.Drawing.Size(233, 185)
         Me.Name = "frmcmd"
-        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
         Me.Text = "Command"
         Me.TransparencyKey = System.Drawing.Color.Fuchsia
         Me.CrystalClearThemeContainer1.ResumeLayout(False)

@@ -60,7 +60,7 @@ Partial Class frmScreenshot
         Me.CrystalClearThemeContainer1.Sizable = False
         Me.CrystalClearThemeContainer1.Size = New System.Drawing.Size(1296, 753)
         Me.CrystalClearThemeContainer1.SmartBounds = True
-        Me.CrystalClearThemeContainer1.StartPosition = System.Windows.Forms.FormStartPosition.WindowsDefaultLocation
+        Me.CrystalClearThemeContainer1.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
         Me.CrystalClearThemeContainer1.TabIndex = 0
         Me.CrystalClearThemeContainer1.Text = "CrystalClearThemeContainer1"
         Me.CrystalClearThemeContainer1.TransparencyKey = System.Drawing.Color.Fuchsia
@@ -89,7 +89,7 @@ Partial Class frmScreenshot
         Me.cmdExit.Font = New System.Drawing.Font("Verdana", 8.0!)
         Me.cmdExit.Image = Nothing
         Me.cmdExit.Location = New System.Drawing.Point(1249, 2)
-        Me.cmdExit.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.cmdExit.Margin = New System.Windows.Forms.Padding(4)
         Me.cmdExit.Name = "cmdExit"
         Me.cmdExit.NoRounding = False
         Me.cmdExit.Size = New System.Drawing.Size(43, 25)
@@ -128,28 +128,28 @@ Partial Class frmScreenshot
         '
         'ctxMenu
         '
+        Me.ctxMenu.ImageScalingSize = New System.Drawing.Size(20, 20)
         Me.ctxMenu.Items.AddRange(New System.Windows.Forms.ToolStripItem() {Me.OpenToolStripMenuItem, Me.DeleteToolStripMenuItem, Me.OpenFolderToolStripMenuItem})
         Me.ctxMenu.Name = "ctxMenu"
-        Me.ctxMenu.Size = New System.Drawing.Size(181, 92)
+        Me.ctxMenu.Size = New System.Drawing.Size(161, 76)
         '
         'OpenToolStripMenuItem
         '
         Me.OpenToolStripMenuItem.Name = "OpenToolStripMenuItem"
-        Me.OpenToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.OpenToolStripMenuItem.Size = New System.Drawing.Size(160, 24)
         Me.OpenToolStripMenuItem.Text = "Open"
         '
         'DeleteToolStripMenuItem
         '
         Me.DeleteToolStripMenuItem.Name = "DeleteToolStripMenuItem"
-        Me.DeleteToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.DeleteToolStripMenuItem.Size = New System.Drawing.Size(160, 24)
         Me.DeleteToolStripMenuItem.Text = "Delete"
         '
         'OpenFolderToolStripMenuItem
         '
         Me.OpenFolderToolStripMenuItem.Name = "OpenFolderToolStripMenuItem"
-        Me.OpenFolderToolStripMenuItem.Size = New System.Drawing.Size(180, 22)
+        Me.OpenFolderToolStripMenuItem.Size = New System.Drawing.Size(160, 24)
         Me.OpenFolderToolStripMenuItem.Text = "Open Folder"
-
         '
         'frmScreenshot
         '
@@ -158,11 +158,10 @@ Partial Class frmScreenshot
         Me.ClientSize = New System.Drawing.Size(1296, 753)
         Me.Controls.Add(Me.CrystalClearThemeContainer1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
-
         Me.Margin = New System.Windows.Forms.Padding(3, 2, 3, 2)
         Me.MinimumSize = New System.Drawing.Size(175, 150)
-
         Me.Name = "frmScreenshot"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
         Me.Text = "Screenshot"
         Me.TransparencyKey = System.Drawing.Color.Fuchsia
         Me.CrystalClearThemeContainer1.ResumeLayout(False)

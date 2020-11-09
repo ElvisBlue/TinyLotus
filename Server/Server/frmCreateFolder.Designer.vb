@@ -43,7 +43,7 @@ Partial Class frmCreateFolder
         Me.CrystalClearThemeContainer1.Font = New System.Drawing.Font("Verdana", 8.0!)
         Me.CrystalClearThemeContainer1.Image = Nothing
         Me.CrystalClearThemeContainer1.Location = New System.Drawing.Point(0, 0)
-        Me.CrystalClearThemeContainer1.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.CrystalClearThemeContainer1.Margin = New System.Windows.Forms.Padding(4)
         Me.CrystalClearThemeContainer1.MinimumSize = New System.Drawing.Size(233, 185)
         Me.CrystalClearThemeContainer1.Movable = True
         Me.CrystalClearThemeContainer1.Name = "CrystalClearThemeContainer1"
@@ -52,7 +52,7 @@ Partial Class frmCreateFolder
         Me.CrystalClearThemeContainer1.Sizable = False
         Me.CrystalClearThemeContainer1.Size = New System.Drawing.Size(429, 185)
         Me.CrystalClearThemeContainer1.SmartBounds = True
-        Me.CrystalClearThemeContainer1.StartPosition = System.Windows.Forms.FormStartPosition.WindowsDefaultLocation
+        Me.CrystalClearThemeContainer1.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
         Me.CrystalClearThemeContainer1.TabIndex = 0
         Me.CrystalClearThemeContainer1.Text = "CrystalClearThemeContainer1"
         Me.CrystalClearThemeContainer1.TransparencyKey = System.Drawing.Color.Fuchsia
@@ -64,7 +64,7 @@ Partial Class frmCreateFolder
         Me.cmdCancel.Font = New System.Drawing.Font("Verdana", 8.0!)
         Me.cmdCancel.Image = Nothing
         Me.cmdCancel.Location = New System.Drawing.Point(288, 128)
-        Me.cmdCancel.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.cmdCancel.Margin = New System.Windows.Forms.Padding(4)
         Me.cmdCancel.Name = "cmdCancel"
         Me.cmdCancel.NoRounding = False
         Me.cmdCancel.Size = New System.Drawing.Size(107, 31)
@@ -78,7 +78,7 @@ Partial Class frmCreateFolder
         Me.cmdRename.Font = New System.Drawing.Font("Verdana", 8.0!)
         Me.cmdRename.Image = Nothing
         Me.cmdRename.Location = New System.Drawing.Point(43, 128)
-        Me.cmdRename.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.cmdRename.Margin = New System.Windows.Forms.Padding(4)
         Me.cmdRename.Name = "cmdRename"
         Me.cmdRename.NoRounding = False
         Me.cmdRename.Size = New System.Drawing.Size(107, 31)
@@ -102,7 +102,7 @@ Partial Class frmCreateFolder
         Me.txtName.Font = New System.Drawing.Font("Verdana", 8.0!)
         Me.txtName.Image = Nothing
         Me.txtName.Location = New System.Drawing.Point(128, 59)
-        Me.txtName.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.txtName.Margin = New System.Windows.Forms.Padding(4)
         Me.txtName.MaxLength = 32767
         Me.txtName.Multiline = False
         Me.txtName.Name = "txtName"
@@ -122,9 +122,10 @@ Partial Class frmCreateFolder
         Me.ClientSize = New System.Drawing.Size(429, 185)
         Me.Controls.Add(Me.CrystalClearThemeContainer1)
         Me.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None
-        Me.Margin = New System.Windows.Forms.Padding(4, 4, 4, 4)
+        Me.Margin = New System.Windows.Forms.Padding(4)
         Me.MinimumSize = New System.Drawing.Size(233, 185)
         Me.Name = "frmCreateFolder"
+        Me.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent
         Me.Text = "Create new folder"
         Me.TransparencyKey = System.Drawing.Color.Fuchsia
         Me.CrystalClearThemeContainer1.ResumeLayout(False)

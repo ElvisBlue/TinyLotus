@@ -61,7 +61,7 @@ bool Screenshot::CapureScreenshotAndSend()
         biBitCount = 16; // ignore 24 case
     else biBitCount = 32;
 
-    DWORD dwBmpSize = (bmpScreen.bmWidth + 7) / (8 * bmpScreen.bmHeight * biBitCount);
+    DWORD dwBmpSize = (bmpScreen.bmWidth + 7) / 8 * bmpScreen.bmHeight * biBitCount;
 	
     //Now create bmp image
     DWORD bmpSize = sizeof(BITMAPFILEHEADER) + (sizeof(BITMAPINFOHEADER) + sizeof(RGBQUAD) * (1 << biBitCount)) + dwBmpSize;
