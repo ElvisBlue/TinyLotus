@@ -3,9 +3,12 @@
 Tiny Lotus is a RAT I code for fun and for knowledge. 
 # Features  
 - Basic computer info grab
+- Remote cmd
 - File Explorer
 - Keylogger
 - Screenshot
+- IP Block
+- Client Manager (Disconnect, Close connection)
 
 # Disclaim
 ```
