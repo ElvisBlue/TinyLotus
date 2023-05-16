@@ -104,6 +104,7 @@
     <ClCompile Include="keylogger.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="objMgr.cpp" />
+    <ClCompile Include="plugin.cpp" />
     <ClCompile Include="screenshot.cpp" />
     <ClCompile Include="switch.cpp" />
   </ItemGroup>
@@ -117,6 +118,7 @@
     <ClInclude Include="keylogger.h" />
     <ClInclude Include="main.h" />
     <ClInclude Include="objMgr.h" />
+    <ClInclude Include="plugin.h" />
     <ClInclude Include="screenshot.h" />
     <ClInclude Include="switch.h" />
     <ClInclude Include="Utilities.h" />

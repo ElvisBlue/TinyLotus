@@ -238,7 +238,7 @@ Partial Class frmmain
         Me.TabPage1.ImageIndex = 2
         Me.TabPage1.Location = New System.Drawing.Point(4, 25)
         Me.TabPage1.Name = "TabPage1"
-        Me.TabPage1.Padding = New System.Windows.Forms.Padding(3)
+        Me.TabPage1.Padding = New System.Windows.Forms.Padding(3, 3, 3, 3)
         Me.TabPage1.Size = New System.Drawing.Size(960, 403)
         Me.TabPage1.TabIndex = 0
         Me.TabPage1.Text = "Connection"
@@ -260,7 +260,7 @@ Partial Class frmmain
         Me.TabPage2.ImageIndex = 1
         Me.TabPage2.Location = New System.Drawing.Point(4, 25)
         Me.TabPage2.Name = "TabPage2"
-        Me.TabPage2.Padding = New System.Windows.Forms.Padding(3)
+        Me.TabPage2.Padding = New System.Windows.Forms.Padding(3, 3, 3, 3)
         Me.TabPage2.Size = New System.Drawing.Size(960, 403)
         Me.TabPage2.TabIndex = 1
         Me.TabPage2.Text = "Setting"

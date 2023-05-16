@@ -1,4 +1,4 @@
-#include <list>
+#include <vector>
 #include <iterator> 
 #include "bone_obj.h"
 #include "Utilities.h"
@@ -85,6 +85,6 @@ public:
 	~FileExplorer();
 	friend void CALLBACK DownloadThread(DownloadInfo*);
 private:
-	std::list <Uploader*>		listOfUploadItems;
+	std::vector <Uploader*>		listOfUploadItems;
 };
 

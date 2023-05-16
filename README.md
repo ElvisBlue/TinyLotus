@@ -1,6 +1,9 @@
 # TinyLotus  
 
-Tiny Lotus is a RAT I code for fun and for knowledge. 
+Tiny Lotus is a RAT (Remote Access Trojan) I code for fun and for knowledge. 
+
+![main](/Img/main.png "main")
+
 # Features  
 - Basic computer info grab
 - Remote cmd

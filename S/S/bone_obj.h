@@ -12,7 +12,7 @@ public:
 protected:
 	bool			SendPacket(BYTE*, size_t);
 
-	int				objID;
+	int				objID = -1;
 	Connection*		ConnObj;
 };
 

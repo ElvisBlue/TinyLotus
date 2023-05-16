@@ -49,9 +49,9 @@ Public Class clsInfo
         Select Case ID
             Case INFO_BASIC 'Basic Information
                 ClientInfo.computerUserName = System.Text.Encoding.Unicode.GetString(BinReader.BufferReadBuffer(packet, 1, packet.Length - 1))
-            Case INFO_CURRENT_WINDOW ' Widow tittle
+            Case INFO_CURRENT_WINDOW ' Window tittle
                 ClientInfo.WindowTitle = System.Text.Encoding.Unicode.GetString(BinReader.BufferReadBuffer(packet, 1, packet.Length - 1))
-            Case INFO_WINDOW_VERSION ' Window version. Would be a lot of if/else
+            Case INFO_WINDOW_VERSION ' Window version
                 ClientInfo.windowVersion = System.Text.Encoding.Unicode.GetString(BinReader.BufferReadBuffer(packet, 1, packet.Length - 1))
             Case INFO_BOTTAG ' Bot Tag
                 ClientInfo.botTag = System.Text.Encoding.Unicode.GetString(BinReader.BufferReadBuffer(packet, 1, packet.Length - 1))

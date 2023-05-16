@@ -234,7 +234,7 @@ void FileExplorer::OnPacketArrived(BYTE* packet, size_t packetSize)
 		{
 			UploadHeader* Header = (UploadHeader*)packet;
 			Uploader* currentUploader = NULL;
-			std::list<Uploader*>::iterator it;
+			std::vector<Uploader*>::iterator it;
 			//Refresh upload list. Revoke idle upload packet
 			for (it = listOfUploadItems.begin(); it != listOfUploadItems.end(); ++it)
 			{
@@ -267,7 +267,7 @@ void FileExplorer::OnPacketArrived(BYTE* packet, size_t packetSize)
 			};
 			UploadEndHeader* Header = (UploadEndHeader*)packet;
 			Uploader* currentUploader = NULL;
-			std::list<Uploader*>::iterator it;
+			std::vector<Uploader*>::iterator it;
 			for (it = listOfUploadItems.begin(); it != listOfUploadItems.end(); ++it)
 				if ((*it)->GetSession() == Header->Session)
 				{
